@@ -133,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        findViewById(R.id.convertToPdfBTNtess).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.convertToPdfBTN).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 MyAsyncTask myAsyncTask = new MyAsyncTask();
