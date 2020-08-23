@@ -4,6 +4,7 @@ import android.net.Uri;
 
 public class MyImage {
     public Uri imageUri;
+    public static int currentImageIndex;
 
     public MyImage(Uri imageUri) {
         this.imageUri = imageUri;

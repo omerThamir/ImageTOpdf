@@ -22,10 +22,13 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
+import android.util.Base64;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -37,11 +40,11 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final int RC_GALLERY = 1;
+    private static final int GALLERY_RC = 1;
     private static final int TAKE_PHOTO_RC = 2;
 
 
-    private RecyclerView recyclerView;
+    private RecyclerView OpenedImagesRecycleView;
     private MyRecyclerAdapter myRecyclerAdapter;
     private List<MyImage> mImageUris;
 
@@ -51,22 +54,30 @@ public class MainActivity extends AppCompatActivity {
             BuildConfig.APPLICATION_ID + ".provider";
 
     private void initRecyclerView() {
-        recyclerView = findViewById(R.id.recyclerView);
+        OpenedImagesRecycleView = findViewById(R.id.OpenedImagesRecycleView);
         mImageUris = new ArrayList<>();
         myRecyclerAdapter = new MyRecyclerAdapter(MainActivity.this, mImageUris);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        recyclerView.setAdapter(myRecyclerAdapter);
+        OpenedImagesRecycleView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        OpenedImagesRecycleView.setAdapter(myRecyclerAdapter);
     }
 
     ImageView imageView;
-
 
     Uri imageUri;
     Bitmap bitmap;
 
 
+    Button openImagesBTN, editImagesBTN, convertToPdfBTN;
+
+    void init() {
+        initRecyclerView();
+        openImagesBTN = findViewById(R.id.openImageBtn);
+        editImagesBTN = findViewById(R.id.EditImagefBTN);
+        convertToPdfBTN = findViewById(R.id.convertToPdfBTN);
+    }
+
     // Request code for selecting a PDF document.
-    private static final int PICK_PDF_FILE = 3;
+    private static final int PICK_PDF_FILE_RC = 3;
 
     private void openFile(Uri pickerInitialUri) {
         Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
@@ -76,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
         // Optionally, specify a URI for the file that should appear in the
         // system file picker when it loads.
         intent.putExtra(DocumentsContract.EXTRA_INITIAL_URI, pickerInitialUri);
-        startActivityForResult(intent, PICK_PDF_FILE);
+        startActivityForResult(intent, PICK_PDF_FILE_RC);
     }
 
 
@@ -86,6 +97,12 @@ public class MainActivity extends AppCompatActivity {
                     , Manifest.permission.WRITE_EXTERNAL_STORAGE,
                     Manifest.permission.CAMERA}, 100);
         }
+    }
+
+    public static byte[] convertBitmapToArrayOfByte(Bitmap bitmap) {
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        return stream.toByteArray();
     }
 
     private ProgressDialog progDailog;
@@ -118,14 +135,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        initRecyclerView();
+        init();
 
         imageView = findViewById(R.id.imageView);
 
         requestRequiredPermissions();
         progDailog = new ProgressDialog(MainActivity.this);
 
-        findViewById(R.id.openImageBtn).setOnClickListener(new View.OnClickListener() {
+        openImagesBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showPictureDialog();
@@ -133,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        findViewById(R.id.convertToPdfBTN).setOnClickListener(new View.OnClickListener() {
+        convertToPdfBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 MyAsyncTask myAsyncTask = new MyAsyncTask();
@@ -146,6 +163,24 @@ public class MainActivity extends AppCompatActivity {
                 myAsyncTask.execute(null, null, null, null);
             }
         });
+
+        editImagesBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent editIntent = new Intent(MainActivity.this, EditImageActivity.class);
+                editIntent.putExtra("ImageUri", mImageUris.get(MyImage.currentImageIndex).imageUri);
+                startActivity(editIntent);
+            }
+        });
+    }
+
+    public String BitMapToString(Bitmap bitmap) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+        byte[] b = baos.toByteArray();
+        String temp = Base64.encodeToString(b, Base64.DEFAULT);
+        return temp;
     }
 
     Uri savedPdfFileUri;
@@ -230,6 +265,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         imagePicker.show();
+
     }
 
     public void PickImageFromGallary() {
@@ -241,7 +277,7 @@ public class MainActivity extends AppCompatActivity {
         intent.setType("image/*");
         intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
         intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent, "Select Picture"), RC_GALLERY);
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), GALLERY_RC);
     }
 
     private void takePictureFromCamera() {
@@ -272,7 +308,7 @@ public class MainActivity extends AppCompatActivity {
 
         try {
             // When an Image is picked
-            if (requestCode == RC_GALLERY && resultCode == RESULT_OK) {
+            if (requestCode == GALLERY_RC && resultCode == RESULT_OK) {
                 // Get the Image from data one image
 
                 if (data.getData() != null) {
@@ -288,6 +324,8 @@ public class MainActivity extends AppCompatActivity {
 
                     mImageUris.add(new MyImage(mImageUri));
                     myRecyclerAdapter.notifyDataSetChanged();
+                    displayImageToEdit(0); // after opening the images select first image to display
+                    return;
                 } else {
                     if (data.getClipData() != null) { // multi selection
                         ClipData mClipData = data.getClipData();
@@ -307,6 +345,8 @@ public class MainActivity extends AppCompatActivity {
                             mImageUris.add(new MyImage(mImageUri));
                         }
                         myRecyclerAdapter.notifyDataSetChanged();
+                        displayImageToEdit(0); // after opening the images select first image to display
+                        return;
                     }
                 }
             }

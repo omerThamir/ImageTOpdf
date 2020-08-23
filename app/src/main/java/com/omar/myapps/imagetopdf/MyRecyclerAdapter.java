@@ -50,6 +50,7 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
             @Override
             public void onClick(View view) {
                 ((MainActivity) mContext).displayImageToEdit(position);
+                MyImage.currentImageIndex = position;
             }
         });
     }
