@@ -68,20 +68,27 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
+        android:gravity="center"
         android:orientation="horizontal">
 
-        <Button
+        <ImageButton
             android:id="@+id/EditDoneBTN"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="done"></Button>
+            android:layout_margin="8dp"
+            android:background="@drawable/rounded_changed_background_for_done_cancel"
+            android:scaleType="center"
+            android:src="@drawable/ic_baseline_done_24"></ImageButton>
 
-        <Button
+
+        <ImageButton
             android:id="@+id/EditCancelBTN"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="cancel"></Button>
+            android:layout_margin="8dp"
+            android:background="@drawable/rounded_changed_background_for_done_cancel"
+            android:scaleType="center"
+            android:src="@drawable/ic_baseline_close_24"></ImageButton>
 
     </LinearLayout>
 

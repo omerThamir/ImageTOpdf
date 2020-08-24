@@ -9,13 +9,13 @@ import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 
 public class EditImageActivity extends AppCompatActivity {
 
-    private Button doneEditBTN, cancelEditButton;
+    private ImageButton doneEditBTN, cancelEditButton;
     private ImageView editImageView;
     Uri imageUri;
     private float[] flipVertical = {1.0f, -1.0f};
@@ -40,17 +40,14 @@ public class EditImageActivity extends AppCompatActivity {
         doneEditBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(EditImageActivity.this, MainActivity.class);
-                startActivity(intent);
-
+                finish();
             }
         });
 
         cancelEditButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(EditImageActivity.this, MainActivity.class);
-                startActivity(intent);
+                finish();
             }
         });
 
