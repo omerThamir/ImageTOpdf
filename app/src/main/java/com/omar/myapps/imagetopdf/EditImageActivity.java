@@ -8,19 +8,18 @@ import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import java.io.IOException;
 
 public class EditImageActivity extends AppCompatActivity {
 
     private Button doneEditBTN, cancelEditButton;
     private ImageView editImageView;
     Uri imageUri;
-
+    private float[] flipVertical = {1.0f, -1.0f};
+    private float[] flipHorizontal = {-1.0f, 1.0f};
 
     private void init() {
         doneEditBTN = findViewById(R.id.EditDoneBTN);
@@ -41,16 +40,17 @@ public class EditImageActivity extends AppCompatActivity {
         doneEditBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(EditImageActivity.this, MainActivity.class));
-                finish();
+                Intent intent = new Intent(EditImageActivity.this, MainActivity.class);
+                startActivity(intent);
+
             }
         });
 
         cancelEditButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(EditImageActivity.this, MainActivity.class));
-                finish();
+                Intent intent = new Intent(EditImageActivity.this, MainActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -67,6 +67,36 @@ public class EditImageActivity extends AppCompatActivity {
                 rotateImage(-90);
             }
         });
+
+        findViewById(R.id.flipVerticalIBN).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                flipImage(flipVertical);
+            }
+        });
+
+        findViewById(R.id.flipHorizontalIBN).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                flipImage(flipHorizontal);
+            }
+        });
+    }
+
+
+    private void flipImage(float flipType[]) {
+        // the 3 lines below used to get bitmap from image view
+        editImageView.invalidate();
+        BitmapDrawable drawable = (BitmapDrawable) editImageView.getDrawable();
+        Bitmap bitmap = drawable.getBitmap();
+
+        Matrix matrix = new Matrix();
+        matrix.preScale(flipType[0], flipType[1]);
+
+        Bitmap rotated = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(),
+                matrix, true);
+
+        editImageView.setImageBitmap(rotated);
     }
 
     private void rotateImage(float degree) {
@@ -93,7 +123,7 @@ public class EditImageActivity extends AppCompatActivity {
             editImageView.setImageURI(imageUri);
         } else {
             startActivity(new Intent(EditImageActivity.this, MainActivity.class));
-            finish();
+            this.finish();
         }
     }
 }

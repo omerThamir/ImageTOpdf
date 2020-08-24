@@ -328,7 +328,6 @@ public class MainActivity extends AppCompatActivity {
                     mImageUris.add(new MyImage(mImageUri));
                     myRecyclerAdapter.notifyDataSetChanged();
                     displayImageToEdit(0); // after opening the images select first image to display
-                    return;
                 } else {
                     if (data.getClipData() != null) { // multi selection
                         ClipData mClipData = data.getClipData();
@@ -349,7 +348,6 @@ public class MainActivity extends AppCompatActivity {
                         }
                         myRecyclerAdapter.notifyDataSetChanged();
                         displayImageToEdit(0); // after opening the images select first image to display
-                        return;
                     }
                 }
             }
