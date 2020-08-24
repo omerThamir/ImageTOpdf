@@ -19,21 +19,50 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/rotateIBNminus90"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:background="@drawable/rounded_changed_background"
+            android:rotationY="180"
+            android:scaleType="center"
+            android:src="@drawable/ic_baseline_rotate_90_degrees_ccw_24"></ImageButton>
+
+
+        <ImageButton
+            android:layout_margin="8dp"
+            android:id="@+id/rotateIBNplus90"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_changed_background"
+            android:scaleType="center"
+            android:src="@drawable/ic_baseline_rotate_90_degrees_ccw_24"></ImageButton>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
         android:orientation="horizontal">
 
         <Button
             android:id="@+id/EditDoneBTN"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="done">
-        </Button>
+            android:text="done"></Button>
 
         <Button
             android:id="@+id/EditCancelBTN"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="cancel">
-        </Button>
+            android:text="cancel"></Button>
 
     </LinearLayout>
 

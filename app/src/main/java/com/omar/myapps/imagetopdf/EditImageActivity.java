@@ -3,16 +3,23 @@ package com.omar.myapps.imagetopdf;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Matrix;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+
+import java.io.IOException;
 
 public class EditImageActivity extends AppCompatActivity {
 
     private Button doneEditBTN, cancelEditButton;
     private ImageView editImageView;
+    Uri imageUri;
 
 
     private void init() {
@@ -47,13 +54,43 @@ public class EditImageActivity extends AppCompatActivity {
             }
         });
 
+        findViewById(R.id.rotateIBNplus90).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                rotateImage(90);
+            }
+        });
+
+        findViewById(R.id.rotateIBNminus90).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                rotateImage(-90);
+            }
+        });
+    }
+
+    private void rotateImage(float degree) {
+
+        // the 3 lines below used to get bitmap from image view
+        editImageView.invalidate();
+        BitmapDrawable drawable = (BitmapDrawable) editImageView.getDrawable();
+        Bitmap bitmap = drawable.getBitmap();
+
+        Matrix matrix = new Matrix();
+        matrix.postRotate(degree);
+
+        Bitmap rotated = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(),
+                matrix, true);
+
+        editImageView.setImageBitmap(rotated);
+
     }
 
     private void displaySentImage() {
         Intent intent = getIntent();
         if (intent.hasExtra("ImageUri")) {
-            Uri uri = intent.getParcelableExtra("ImageUri");
-            editImageView.setImageURI(uri);
+            imageUri = intent.getParcelableExtra("ImageUri");
+            editImageView.setImageURI(imageUri);
         } else {
             startActivity(new Intent(EditImageActivity.this, MainActivity.class));
             finish();
