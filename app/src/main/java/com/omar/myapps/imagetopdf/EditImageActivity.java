@@ -1,25 +1,18 @@
 package com.omar.myapps.imagetopdf;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class EditImageActivity extends AppCompatActivity {
 
     private Button doneEditBTN, cancelEditButton;
     private ImageView editImageView;
-
 
 
     private void init() {
@@ -35,12 +28,10 @@ public class EditImageActivity extends AppCompatActivity {
 
         init();
 
-        Intent intent = getIntent();
-        Uri uri = intent.getParcelableExtra("ImageUri");
-        editImageView.setImageURI(uri);
+        displaySentImage();
 
 
-        editImageView.setOnClickListener(new View.OnClickListener() {
+        doneEditBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(EditImageActivity.this, MainActivity.class));
@@ -56,5 +47,16 @@ public class EditImageActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void displaySentImage() {
+        Intent intent = getIntent();
+        if (intent.hasExtra("ImageUri")) {
+            Uri uri = intent.getParcelableExtra("ImageUri");
+            editImageView.setImageURI(uri);
+        } else {
+            startActivity(new Intent(EditImageActivity.this, MainActivity.class));
+            finish();
+        }
     }
 }
