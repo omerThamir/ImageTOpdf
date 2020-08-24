@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
         mImageUris = new ArrayList<>();
         myRecyclerAdapter = new MyRecyclerAdapter(MainActivity.this, mImageUris);
         OpenedImagesRecycleView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+
         OpenedImagesRecycleView.setAdapter(myRecyclerAdapter);
     }
 
@@ -168,9 +169,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Intent editIntent = new Intent(MainActivity.this, EditImageActivity.class);
-                editIntent.putExtra("ImageUri", mImageUris.get(MyImage.currentImageIndex).imageUri);
-                startActivity(editIntent);
+                if (mImageUris.size() > 0) {
+                    Intent editIntent = new Intent(MainActivity.this, EditImageActivity.class);
+                    editIntent.putExtra("ImageUri", mImageUris.get(MyImage.currentImageIndex).getImageUri());
+                    startActivity(editIntent);
+                }
             }
         });
     }

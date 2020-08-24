@@ -3,7 +3,7 @@ package com.omar.myapps.imagetopdf;
 import android.net.Uri;
 
 public class MyImage {
-    public Uri imageUri;
+    private Uri imageUri;
     public static int currentImageIndex;
 
     public MyImage(Uri imageUri) {
