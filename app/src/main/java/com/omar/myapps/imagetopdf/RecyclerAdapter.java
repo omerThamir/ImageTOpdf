@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 
-public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.ViewHolder> {
+public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
@@ -23,10 +23,10 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
         }
     }
 
-    List<MyImage> mImageUris;
+    List<Image> mImageUris;
     Context mContext;
 
-    public MyRecyclerAdapter(Context context, List<MyImage> ImageUris) {
+    public RecyclerAdapter(Context context, List<Image> ImageUris) {
         mImageUris = ImageUris;
         mContext = context;
     }
@@ -42,18 +42,15 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
-        MyImage myImage = mImageUris.get(position);
-        if (MyImage.isImageProcessed) {
-            holder.imageView.setImageBitmap(myImage.getBitmap());
-            MyImage.isImageProcessed = false;
-        } else {
-            holder.imageView.setImageURI(myImage.getImageUri());
-        }
+        Image myImage = mImageUris.get(position);
+        holder.imageView.setImageBitmap(myImage.getBitmap());
+
+
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ((MainActivity) mContext).displayImageToEdit(position);
-                MyImage.currentImageIndex = (byte) position;
+                Image.currentImageIndex = (byte) position;
             }
         });
     }

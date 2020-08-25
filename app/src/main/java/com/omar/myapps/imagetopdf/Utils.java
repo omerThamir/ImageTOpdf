@@ -25,7 +25,7 @@ public class Utils {
                 matrix, true);
 
         editImageView.setImageBitmap(processingBitmap);
-        MyImage.workingBitmap = Bitmap.createBitmap(processingBitmap, 0, 0, processingBitmap.getWidth(), processingBitmap.getHeight());
+        Image.workingBitmap = Bitmap.createBitmap(processingBitmap, 0, 0, processingBitmap.getWidth(), processingBitmap.getHeight());
     }
 
     public static void rotateImage(float degree, ImageView editImageView) {
@@ -42,7 +42,7 @@ public class Utils {
                 matrix, true);
 
         editImageView.setImageBitmap(processingBitmap);
-        MyImage.workingBitmap = Bitmap.createBitmap(processingBitmap, 0, 0, processingBitmap.getWidth(), processingBitmap.getHeight());
+        Image.workingBitmap = Bitmap.createBitmap(processingBitmap, 0, 0, processingBitmap.getWidth(), processingBitmap.getHeight());
 
     }
 

@@ -46,8 +46,8 @@ public class MainActivity extends AppCompatActivity {
 
 
     private RecyclerView OpenedImagesRecycleView;
-    private MyRecyclerAdapter myRecyclerAdapter;
-    private List<MyImage> mImageUris;
+    private RecyclerAdapter recyclerAdapter;
+    private List<Image> mImageUris;
 
     private List<Bitmap> bitmapList;
 
@@ -59,9 +59,9 @@ public class MainActivity extends AppCompatActivity {
     private void initRecyclerView() {
         OpenedImagesRecycleView = findViewById(R.id.OpenedImagesRecycleView);
         mImageUris = new ArrayList<>();
-        myRecyclerAdapter = new MyRecyclerAdapter(MainActivity.this, mImageUris);
+        recyclerAdapter = new RecyclerAdapter(MainActivity.this, mImageUris);
         OpenedImagesRecycleView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        OpenedImagesRecycleView.setAdapter(myRecyclerAdapter);
+        OpenedImagesRecycleView.setAdapter(recyclerAdapter);
     }
 
 
@@ -185,7 +185,7 @@ public class MainActivity extends AppCompatActivity {
                 openImagesBTN.setVisibility(View.GONE);
                 getSupportActionBar().hide();
 
-                editImageView.setImageBitmap(bitmapList.get(MyImage.currentImageIndex));
+                editImageView.setImageBitmap(bitmapList.get(Image.currentImageIndex));
 
 
                 /*
@@ -202,7 +202,7 @@ public class MainActivity extends AppCompatActivity {
         doneEditBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MyImage.isImageProcessed = true;
+                Image.isImageProcessed = true;
 
                 includeView.setVisibility(View.GONE);
                 getSupportActionBar().show();
@@ -211,15 +211,14 @@ public class MainActivity extends AppCompatActivity {
                 editImagesBTN.setVisibility(View.VISIBLE);
                 convertToPdfBTN.setVisibility(View.VISIBLE);
 
-
                 // updating
-                bitmapList.remove(MyImage.currentImageIndex);
-                bitmapList.add(MyImage.currentImageIndex, MyImage.workingBitmap);
+                bitmapList.remove(Image.currentImageIndex);
+                bitmapList.add(Image.currentImageIndex, Image.workingBitmap);
 
-                mImageUris.remove(MyImage.currentImageIndex);
-                mImageUris.add(MyImage.currentImageIndex, new MyImage(MyImage.workingBitmap));
-                myRecyclerAdapter.notifyDataSetChanged();
-                displayImageToEdit(MyImage.currentImageIndex);
+                mImageUris.remove(Image.currentImageIndex);
+                mImageUris.add(Image.currentImageIndex, new Image(Image.workingBitmap));
+                recyclerAdapter.notifyDataSetChanged();
+                displayImageToEdit(Image.currentImageIndex);
 
             }
         });
@@ -227,7 +226,7 @@ public class MainActivity extends AppCompatActivity {
         cancelEditButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MyImage.isImageProcessed = false;
+                Image.isImageProcessed = false;
 
                 includeView.setVisibility(View.GONE);
 
@@ -406,6 +405,7 @@ public class MainActivity extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         try {
+            Bitmap newBitmap;
             // When an Image is picked
             if (requestCode == GALLERY_RC && resultCode == RESULT_OK) {
                 // Get the Image from data one image
@@ -413,16 +413,18 @@ public class MainActivity extends AppCompatActivity {
                 if (data.getData() != null) {
 
                     Uri mImageUri = data.getData();
-
                     bitmapList = new ArrayList<>();
+
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                        bitmapList.add(ImageDecoder.decodeBitmap(ImageDecoder.createSource(getContentResolver(), mImageUri)));
+                        newBitmap = ImageDecoder.decodeBitmap(ImageDecoder.createSource(getContentResolver(), mImageUri));
+                        bitmapList.add(newBitmap);
                     } else {
-                        bitmapList.add(MediaStore.Images.Media.getBitmap(this.getContentResolver(), mImageUri));
+                        newBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), mImageUri);
+                        bitmapList.add(newBitmap);
                     }
 
-                    mImageUris.add(new MyImage(mImageUri));
-                    myRecyclerAdapter.notifyDataSetChanged();
+                    mImageUris.add(new Image(newBitmap));
+                    recyclerAdapter.notifyDataSetChanged();
                     displayImageToEdit(0); // after opening the images select first image to display
                 } else {
                     if (data.getClipData() != null) { // multi selection
@@ -435,14 +437,15 @@ public class MainActivity extends AppCompatActivity {
                             Uri mImageUri = item.getUri();
 
                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                                bitmapList.add(ImageDecoder.decodeBitmap(ImageDecoder.createSource(getContentResolver(), mImageUri)));
+                                newBitmap = ImageDecoder.decodeBitmap(ImageDecoder.createSource(getContentResolver(), mImageUri));
+                                bitmapList.add(newBitmap);
                             } else {
-                                bitmapList.add(MediaStore.Images.Media.getBitmap(this.getContentResolver(), mImageUri));
+                                newBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), mImageUri);
+                                bitmapList.add(newBitmap);
                             }
-
-                            mImageUris.add(new MyImage(mImageUri));
+                            mImageUris.add(new Image(newBitmap));
                         }
-                        myRecyclerAdapter.notifyDataSetChanged();
+                        recyclerAdapter.notifyDataSetChanged();
                         displayImageToEdit(0); // after opening the images select first image to display
                     }
                 }

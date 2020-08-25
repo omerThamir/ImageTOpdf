@@ -30,17 +30,26 @@
 
     <Button
         android:id="@+id/EditImagefBTN"
-        android:layout_width="match_parent"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:text="edit image"></Button>
+        android:layout_gravity="center"
+        android:layout_margin="5dp"
+        android:background="@drawable/rounded_changed_background"
+
+        android:text="edit image"
+        android:textColor="#DBDDDF"></Button>
 
     <Button
         android:id="@+id/convertToPdfBTN"
-        android:layout_width="match_parent"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:text="convert to pdf"></Button>
+        android:layout_gravity="center"
+        android:layout_margin="5dp"
+        android:background="@drawable/rounded_changed_background"
+        android:text="convert to pdf"
+        android:textColor="#DBDDDF"></Button>
 
     <include
         android:id="@+id/editInclude"
