@@ -23,11 +23,11 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         }
     }
 
-    List<Image> mImageUris;
+    List<MyImage> mMyImageUrises;
     Context mContext;
 
-    public RecyclerAdapter(Context context, List<Image> ImageUris) {
-        mImageUris = ImageUris;
+    public RecyclerAdapter(Context context, List<MyImage> myImageUrises) {
+        mMyImageUrises = myImageUrises;
         mContext = context;
     }
 
@@ -42,22 +42,22 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
-        Image myImage = mImageUris.get(position);
+        MyImage myImage = mMyImageUrises.get(position);
         holder.imageView.setImageBitmap(myImage.getBitmap());
 
 
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((MainActivity) mContext).displayImageToEdit(position);
-                Image.currentImageIndex = (byte) position;
+                ((ProcessingActivity) mContext).displayImageToEdit(position);
+                MyImage.currentImageIndex = (byte) position;
             }
         });
     }
 
     @Override
     public int getItemCount() {
-        return mImageUris.size();
+        return mMyImageUrises.size();
     }
 
 }

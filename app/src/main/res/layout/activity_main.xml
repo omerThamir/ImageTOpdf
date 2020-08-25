@@ -3,33 +3,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#182430"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:padding="5dp"
+        android:text=" convert to pdf "
+        android:textColor="#fff"
+        android:textSize="20dp">
+
+    </TextView>
+
     <Button
-        android:id="@+id/openImageBtn"
-        android:layout_width="match_parent"
+        android:id="@+id/CreateOnePageBtn"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:text="open image"></Button>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/OpenedImagesRecycleView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="5dp" />
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_alignParentBottom="true"
         android:layout_gravity="center"
-        android:layout_weight="1"
-        android:adjustViewBounds="true"
-        android:scaleType="fitCenter"></ImageView>
+        android:layout_margin="5dp"
+        android:background="@drawable/rounded_changed_background"
+        android:text="One Page"
+        android:textColor="#DBDDDF"></Button>
 
     <Button
-        android:id="@+id/EditImagefBTN"
+        android:id="@+id/CreatemultiPagesBtn"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -37,25 +40,8 @@
         android:layout_margin="5dp"
         android:background="@drawable/rounded_changed_background"
 
-        android:text="edit image"
+        android:text="multi Pages"
         android:textColor="#DBDDDF"></Button>
 
-    <Button
-        android:id="@+id/convertToPdfBTN"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_gravity="center"
-        android:layout_margin="5dp"
-        android:background="@drawable/rounded_changed_background"
-        android:text="convert to pdf"
-        android:textColor="#DBDDDF"></Button>
-
-    <include
-        android:id="@+id/editInclude"
-        layout="@layout/edit_image_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"></include>
 
 </LinearLayout>

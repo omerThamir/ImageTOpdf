@@ -3,7 +3,7 @@ package com.omar.myapps.imagetopdf;
 import android.graphics.Bitmap;
 import android.net.Uri;
 
-public class Image {
+public class MyImage {
 
     public static boolean isImageProcessed;
     public static byte currentImageIndex;
@@ -11,7 +11,7 @@ public class Image {
 
     public Bitmap bitmap;
 
-    public Image(Bitmap bitmap) {
+    public MyImage(Bitmap bitmap) {
         this.bitmap = bitmap;
     }
 
