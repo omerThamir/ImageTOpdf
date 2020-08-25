@@ -1,26 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".EditImageActivity">
+    android:orientation="vertical">
 
     <ImageView
         android:id="@+id/editImageView"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/imageEditingButtons"
+        android:layout_alignParentTop="true"
         android:layout_gravity="center"
-        android:layout_weight="1"
         android:adjustViewBounds="true"
-        android:scaleType="fitCenter"></ImageView>
+        android:scaleType="fitCenter">
+    </ImageView>
 
     <LinearLayout
+        android:id="@+id/imageEditingButtons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-
+        android:layout_above="@id/doneCancle"
         android:orientation="horizontal">
 
         <ImageButton
@@ -66,8 +65,10 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/doneCancle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:gravity="center"
         android:orientation="horizontal">
 
@@ -93,4 +94,4 @@
     </LinearLayout>
 
 
-</LinearLayout>
+</RelativeLayout>

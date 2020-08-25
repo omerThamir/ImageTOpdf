@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -42,13 +43,17 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         MyImage myImage = mImageUris.get(position);
-        holder.imageView.setImageURI(myImage.getImageUri());
-
+        if (MyImage.isImageProcessed) {
+            holder.imageView.setImageBitmap(myImage.getBitmap());
+            MyImage.isImageProcessed = false;
+        } else {
+            holder.imageView.setImageURI(myImage.getImageUri());
+        }
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ((MainActivity) mContext).displayImageToEdit(position);
-                MyImage.currentImageIndex = position;
+                MyImage.currentImageIndex = (byte) position;
             }
         });
     }

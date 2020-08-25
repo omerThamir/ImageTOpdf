@@ -25,6 +25,7 @@ import android.provider.MediaStore;
 import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -50,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
 
     private List<Bitmap> bitmapList;
 
+    private View includeView;
+
     private static final String AUTHORITY =
             BuildConfig.APPLICATION_ID + ".provider";
 
@@ -58,15 +61,15 @@ public class MainActivity extends AppCompatActivity {
         mImageUris = new ArrayList<>();
         myRecyclerAdapter = new MyRecyclerAdapter(MainActivity.this, mImageUris);
         OpenedImagesRecycleView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-
         OpenedImagesRecycleView.setAdapter(myRecyclerAdapter);
     }
 
-    ImageView imageView;
+
+    private ImageButton doneEditBTN, cancelEditButton;
+    private ImageView editImageView, imageView;
 
     Uri imageUri;
     Bitmap bitmap;
-
 
     Button openImagesBTN, editImagesBTN, convertToPdfBTN;
 
@@ -75,6 +78,12 @@ public class MainActivity extends AppCompatActivity {
         openImagesBTN = findViewById(R.id.openImageBtn);
         editImagesBTN = findViewById(R.id.EditImagefBTN);
         convertToPdfBTN = findViewById(R.id.convertToPdfBTN);
+
+// edit include instances
+        includeView = findViewById(R.id.editInclude);
+        doneEditBTN = findViewById(R.id.EditDoneBTN);
+        cancelEditButton = findViewById(R.id.EditCancelBTN);
+        editImageView = findViewById(R.id.editImageView);
     }
 
     // Request code for selecting a PDF document.
@@ -168,14 +177,101 @@ public class MainActivity extends AppCompatActivity {
         editImagesBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                includeView.setVisibility(View.VISIBLE);
+                OpenedImagesRecycleView.setVisibility(View.GONE);
+                imageView.setVisibility(View.GONE);
+                editImagesBTN.setVisibility(View.GONE);
+                convertToPdfBTN.setVisibility(View.GONE);
+                openImagesBTN.setVisibility(View.GONE);
+                getSupportActionBar().hide();
 
+                editImageView.setImageBitmap(bitmapList.get(MyImage.currentImageIndex));
+
+
+                /*
                 if (mImageUris.size() > 0) {
                     Intent editIntent = new Intent(MainActivity.this, EditImageActivity.class);
                     editIntent.putExtra("ImageUri", mImageUris.get(MyImage.currentImageIndex).getImageUri());
                     startActivity(editIntent);
                 }
+
+                 */
             }
         });
+
+        doneEditBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MyImage.isImageProcessed = true;
+
+                includeView.setVisibility(View.GONE);
+                getSupportActionBar().show();
+                OpenedImagesRecycleView.setVisibility(View.VISIBLE);
+                imageView.setVisibility(View.VISIBLE);
+                editImagesBTN.setVisibility(View.VISIBLE);
+                convertToPdfBTN.setVisibility(View.VISIBLE);
+
+
+                // updating
+                bitmapList.remove(MyImage.currentImageIndex);
+                bitmapList.add(MyImage.currentImageIndex, MyImage.workingBitmap);
+
+                mImageUris.remove(MyImage.currentImageIndex);
+                mImageUris.add(MyImage.currentImageIndex, new MyImage(MyImage.workingBitmap));
+                myRecyclerAdapter.notifyDataSetChanged();
+                displayImageToEdit(MyImage.currentImageIndex);
+
+            }
+        });
+
+        cancelEditButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MyImage.isImageProcessed = false;
+
+                includeView.setVisibility(View.GONE);
+
+                getSupportActionBar().show();
+                OpenedImagesRecycleView.setVisibility(View.VISIBLE);
+                imageView.setVisibility(View.VISIBLE);
+                editImagesBTN.setVisibility(View.VISIBLE);
+                convertToPdfBTN.setVisibility(View.VISIBLE);
+
+            }
+        });
+
+        findViewById(R.id.rotateIBNplus90).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Utils.rotateImage(90, editImageView);
+            }
+        });
+
+        findViewById(R.id.rotateIBNminus90).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Utils.rotateImage(-90, editImageView);
+            }
+        });
+
+        findViewById(R.id.flipVerticalIBN).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Utils.flipImage(Utils.flipVertical, editImageView);
+            }
+        });
+
+        findViewById(R.id.flipHorizontalIBN).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Utils.flipImage(Utils.flipHorizontal, editImageView);
+            }
+        });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 
     public String BitMapToString(Bitmap bitmap) {
