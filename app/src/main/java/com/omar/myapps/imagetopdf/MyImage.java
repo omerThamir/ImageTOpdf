@@ -11,6 +11,20 @@ public class MyImage {
 
     public Bitmap bitmap;
 
+    public Uri getImgUri() {
+        return imgUri;
+    }
+
+    public void setImgUri(Uri imgUri) {
+        this.imgUri = imgUri;
+    }
+
+    public MyImage(Uri imgUri) {
+        this.imgUri = imgUri;
+    }
+
+    public Uri imgUri;
+
     public MyImage(Bitmap bitmap) {
         this.bitmap = bitmap;
     }
@@ -22,5 +36,6 @@ public class MyImage {
     public void setBitmap(Bitmap bitmap) {
         this.bitmap = bitmap;
     }
+
 
 }

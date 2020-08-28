@@ -65,6 +65,17 @@
             android:scaleType="center"
             android:src="@drawable/ic_baseline_flip_24"></ImageButton>
 
+
+        <ImageButton
+            android:id="@+id/cropImageIBN"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:background="@drawable/rounded_changed_background"
+            android:rotation="90"
+            android:scaleType="center"
+            android:src="@drawable/ic_launcher_foreground"></ImageButton>
+
     </LinearLayout>
 
     <LinearLayout
