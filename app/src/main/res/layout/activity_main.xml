@@ -28,7 +28,18 @@
         android:layout_gravity="center"
         android:layout_margin="5dp"
         android:background="@drawable/rounded_changed_background"
-        android:text="One Page"
+        android:text="One image Page"
+        android:textColor="#DBDDDF"></Button>
+
+    <Button
+        android:id="@+id/Create2imagePerPageBtn"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center"
+        android:layout_margin="5dp"
+        android:background="@drawable/rounded_changed_background"
+        android:text="Tow Image Page"
         android:textColor="#DBDDDF"></Button>
 
     <Button
@@ -40,7 +51,7 @@
         android:layout_margin="5dp"
         android:background="@drawable/rounded_changed_background"
 
-        android:text="multi Pages"
+        android:text="4 image per page"
         android:textColor="#DBDDDF"></Button>
 
 

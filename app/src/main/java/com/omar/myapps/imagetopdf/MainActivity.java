@@ -9,12 +9,13 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button CreateOnePageBtn, CreatemultiPagesBtn;
+    Button CreateOnePageBtn, CreateTowImgePageBtn, CreatemultiPagesBtn;
 
     void init() {
 
         CreateOnePageBtn = findViewById(R.id.CreateOnePageBtn);
         CreatemultiPagesBtn = findViewById(R.id.CreatemultiPagesBtn);
+        CreateTowImgePageBtn = findViewById(R.id.Create2imagePerPageBtn);
     }
 
 
@@ -27,7 +28,20 @@ public class MainActivity extends AppCompatActivity {
         CreateOnePageBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, ProcessingActivity.class));
+                Intent intent = new Intent(MainActivity.this, ProcessingActivity.class);
+                intent.putExtra("image_per_page", 1);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        CreateTowImgePageBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(MainActivity.this, ProcessingActivity.class);
+                intent.putExtra("image_per_page", 2);
+                startActivity(intent);
                 finish();
             }
         });
@@ -35,7 +49,10 @@ public class MainActivity extends AppCompatActivity {
         CreatemultiPagesBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, ProcessingActivity.class));
+
+                Intent intent = new Intent(MainActivity.this, ProcessingActivity.class);
+                intent.putExtra("image_per_page", 4);
+                startActivity(intent);
                 finish();
             }
         });
