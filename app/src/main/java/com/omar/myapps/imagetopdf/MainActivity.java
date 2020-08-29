@@ -29,7 +29,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, ProcessingActivity.class);
-                intent.putExtra("image_per_page", 1);
                 startActivity(intent);
                 finish();
             }

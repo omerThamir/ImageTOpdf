@@ -9,6 +9,22 @@ public class MyImage {
     public static byte currentImageIndex;
     public static Bitmap workingBitmap;
 
+
+    private int ImageID; // for template recycler adapter
+
+    public MyImage(int imageID) {
+        this.ImageID = imageID;
+    }
+
+    public int getImageID() {
+        return ImageID;
+    }
+
+    public  void setImageID(int imageID) {
+        ImageID = imageID;
+    }
+
+
     public Bitmap bitmap;
 
     public Uri getImgUri() {
