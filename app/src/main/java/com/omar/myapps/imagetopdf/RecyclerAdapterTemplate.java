@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -59,9 +60,18 @@ public class RecyclerAdapterTemplate extends RecyclerView.Adapter<RecyclerAdapte
                      *  position == 2 , IMAGE_PER_PAGE = 4
                      */
 
-                    if (position == 0) ((ProcessingActivity) mContext).IMAGE_PER_PAGE = 1;
-                    else if (position == 1) ((ProcessingActivity) mContext).IMAGE_PER_PAGE = 2;
-                    else if (position == 2) ((ProcessingActivity) mContext).IMAGE_PER_PAGE = 4;
+                    if (position == 0) {
+                        ((ProcessingActivity) mContext).IMAGE_PER_PAGE = 1;
+                        Toast.makeText(mContext, "you have selected one IMAGE_PER_PAGE Template", Toast.LENGTH_LONG).show();
+                    } else if (position == 1) {
+                        ((ProcessingActivity) mContext).IMAGE_PER_PAGE = 2;
+                        Toast.makeText(mContext, "you have selected Tow IMAGES_PER_PAGE Template", Toast.LENGTH_LONG).show();
+
+                    } else if (position == 2) {
+                        ((ProcessingActivity) mContext).IMAGE_PER_PAGE = 4;
+                        Toast.makeText(mContext, "you have selected Four IMAGES_PER_PAGE Template", Toast.LENGTH_LONG).show();
+
+                    }
                 }
             }
 

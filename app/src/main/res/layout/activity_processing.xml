@@ -9,10 +9,14 @@
 
     <Button
         android:id="@+id/openImageBtn"
-        android:layout_width="match_parent"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:text="open myImage"></Button>
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:background="@drawable/rounded_changed_background"
+        android:text="open myImage"
+        android:textColor="#DBDDDF"></Button>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/OpenedImagesRecycleView"
@@ -58,9 +62,9 @@
         android:id="@+id/templateRecycleView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone"
         android:layout_gravity="center"
-        android:padding="5dp" />
+        android:padding="5dp"
+        android:visibility="gone" />
 
     <Button
         android:id="@+id/convertToPdfBTN"

@@ -9,15 +9,11 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button CreateOnePageBtn, CreateTowImgePageBtn, CreatemultiPagesBtn;
+    Button openConvertToPdfActivity;
 
     void init() {
-
-        CreateOnePageBtn = findViewById(R.id.CreateOnePageBtn);
-        CreatemultiPagesBtn = findViewById(R.id.CreatemultiPagesBtn);
-        CreateTowImgePageBtn = findViewById(R.id.Create2imagePerPageBtn);
+        openConvertToPdfActivity = findViewById(R.id.openConvertToPdfActivity);
     }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,32 +21,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         init();
-        CreateOnePageBtn.setOnClickListener(new View.OnClickListener() {
+        openConvertToPdfActivity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, ProcessingActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
-
-        CreateTowImgePageBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Intent intent = new Intent(MainActivity.this, ProcessingActivity.class);
-                intent.putExtra("image_per_page", 2);
-                startActivity(intent);
-                finish();
-            }
-        });
-
-        CreatemultiPagesBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Intent intent = new Intent(MainActivity.this, ProcessingActivity.class);
-                intent.putExtra("image_per_page", 4);
                 startActivity(intent);
                 finish();
             }
