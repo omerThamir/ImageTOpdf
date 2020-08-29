@@ -20,7 +20,7 @@ public class MyImage {
         return ImageID;
     }
 
-    public  void setImageID(int imageID) {
+    public void setImageID(int imageID) {
         ImageID = imageID;
     }
 
