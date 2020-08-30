@@ -43,7 +43,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         MyImage myImage = mMyImageUrises.get(position);
-        holder.imageView.setImageURI(myImage.getImgUri());
+        holder.imageView.setImageBitmap(myImage.getBitmap());
 
 
         holder.imageView.setOnClickListener(new View.OnClickListener() {

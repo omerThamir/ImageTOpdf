@@ -72,6 +72,9 @@ public class RecyclerAdapterTemplate extends RecyclerView.Adapter<RecyclerAdapte
                         Toast.makeText(mContext, "you have selected Four IMAGES_PER_PAGE Template", Toast.LENGTH_LONG).show();
 
                     }
+
+                    ((ProcessingActivity)mContext) .convertToPdfBTN.setEnabled(true);
+
                 }
             }
 
