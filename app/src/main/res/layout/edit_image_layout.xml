@@ -1,36 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#182430"
     android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/editImageView"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:layout_gravity="top"
-        android:layout_margin="10dp"
-        android:adjustViewBounds="true"
-        android:background="@drawable/rounded_background_with_no_color"
-        android:padding="2dp"
-        android:scaleType="fitCenter">
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true">
 
-    </ImageView>
+        <ImageView
+            android:id="@+id/editImageView"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:layout_gravity="top"
+            android:layout_margin="10dp"
+            android:adjustViewBounds="true"
+            android:background="@drawable/rounded_background_with_no_color"
+            android:padding="2dp"
+            android:scaleType="fitCenter">
+
+        </ImageView>
+    </LinearLayout>
+
 
     <LinearLayout
         android:id="@+id/imageEditingButtons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@id/doneCancle"
+        android:layout_above="@+id/doneCancle"
         android:gravity="center"
         android:orientation="horizontal">
 
         <ImageButton
             android:id="@+id/rotateIBNminus90"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_margin="8dp"
             android:background="@drawable/rounded_changed_background"
             android:rotationY="180"
@@ -40,8 +46,8 @@
 
         <ImageButton
             android:id="@+id/rotateIBNplus90"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_margin="8dp"
             android:background="@drawable/rounded_changed_background"
             android:scaleType="center"
@@ -50,8 +56,8 @@
 
         <ImageButton
             android:id="@+id/flipHorizontalIBN"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_margin="8dp"
             android:background="@drawable/rounded_changed_background"
             android:scaleType="center"
@@ -59,8 +65,8 @@
 
         <ImageButton
             android:id="@+id/flipVerticalIBN"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_margin="8dp"
             android:background="@drawable/rounded_changed_background"
             android:rotation="90"
@@ -70,13 +76,12 @@
 
         <ImageButton
             android:id="@+id/cropImageIBN"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_margin="8dp"
             android:background="@drawable/rounded_changed_background"
-            android:rotation="90"
             android:scaleType="center"
-            android:src="@drawable/ic_launcher_foreground"></ImageButton>
+            android:src="@drawable/ic_baseline_crop_24"></ImageButton>
 
     </LinearLayout>
 
@@ -84,14 +89,14 @@
         android:id="@+id/doneCancle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
+        android:layout_alignParentBottom="true"
         android:gravity="center"
         android:orientation="horizontal">
 
         <ImageButton
             android:id="@+id/EditDoneBTN"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_margin="8dp"
             android:background="@drawable/rounded_changed_background_for_done_cancel"
             android:scaleType="center"
@@ -100,8 +105,8 @@
 
         <ImageButton
             android:id="@+id/EditCancelBTN"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_margin="8dp"
             android:background="@drawable/rounded_changed_background_for_done_cancel"
             android:scaleType="center"
@@ -110,4 +115,4 @@
     </LinearLayout>
 
 
-</LinearLayout>
+</RelativeLayout>
