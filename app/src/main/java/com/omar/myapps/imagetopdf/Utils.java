@@ -27,6 +27,10 @@ public class Utils {
     public static float[] flipVertical = {1.0f, -1.0f};
     public static float[] flipHorizontal = {-1.0f, 1.0f};
 
+    public static void clearProcessingBitmap() {
+        if (processingBitmap != null) processingBitmap.recycle();
+    }
+
 
     public static void flipImage(float flipType[], ImageView editImageView) {
         if (processingBitmap != null) processingBitmap = null;

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#fff"
+        android:layout_margin="10dp"
+        android:text="this app cannot work without these permissions"
+        android:textSize="18dp">
+
+    </TextView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:orientation="horizontal"
+        android:padding="5dp">
+
+        <Button
+            android:id="@+id/givePermBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="give permisions"></Button>
+
+        <Button
+            android:id="@+id/exitAppBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="exit app"></Button>
+
+
+    </LinearLayout>
+
+</LinearLayout>

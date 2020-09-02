@@ -1,4 +1,4 @@
-package com.omar.myapps.imagetopdf;
+package com.omar.myapps.imagetopdf.Adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,6 +8,10 @@ import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.omar.myapps.imagetopdf.MyImage;
+import com.omar.myapps.imagetopdf.ProcessingActivity;
+import com.omar.myapps.imagetopdf.R;
 
 import java.util.List;
 

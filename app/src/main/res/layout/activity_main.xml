@@ -20,4 +20,13 @@
         android:textColor="#DBDDDF"></Button>
 
 
+    <include
+        android:id="@+id/permissionDeniedInclude"
+        layout="@layout/expalination_permissions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone">
+
+    </include>
+
 </LinearLayout>
