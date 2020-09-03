@@ -7,12 +7,11 @@
     android:background="#182430"
     android:orientation="vertical"
     tools:context=".ProcessingActivity">
-
-
+    
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:background="#182430">
 
         <LinearLayout
@@ -97,6 +96,17 @@
     </ScrollView>
 
 
+    <Button
+        android:id="@+id/showSavingFileBTN"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="5dp"
+        android:background="@drawable/rounded_changed_background"
+        android:text="show saving file"
+        android:textColor="#DBDDDF"></Button>
+
+
     <include
         android:id="@+id/editInclude"
         layout="@layout/edit_image_layout"
@@ -104,16 +114,6 @@
         android:layout_height="wrap_content"
         android:visibility="gone"></include>
 
-    <Button
-        android:id="@+id/showSavingFileBTN"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_gravity="center"
-        android:layout_margin="5dp"
-        android:background="@drawable/rounded_changed_background"
-        android:text="show saving file"
-        android:textColor="#DBDDDF"></Button>
 
 </LinearLayout>
 

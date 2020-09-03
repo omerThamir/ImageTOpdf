@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.view.View;
 import android.widget.Button;
@@ -22,6 +23,8 @@ public class MergePDFActivity extends AppCompatActivity {
     private static final int PICK_PDF_FILE_RC = 1;
     Button openPDF_FilesBtn;
 
+    String rootString = Environment.getRootDirectory().getPath();
+    Uri rootUri = Uri.parse(rootString);
     List<Uri> PDF_list;
 
     private void openPDF_Files() {
@@ -33,7 +36,7 @@ public class MergePDFActivity extends AppCompatActivity {
 
         intent.addCategory(Intent.CATEGORY_OPENABLE);
         intent.setType("application/pdf");
-        intent.putExtra(DocumentsContract.EXTRA_INITIAL_URI, true);
+        intent.putExtra(DocumentsContract.EXTRA_INITIAL_URI, rootUri);
         startActivityForResult(Intent.createChooser(intent, "Select PDF files"), PICK_PDF_FILE_RC);
     }
 
