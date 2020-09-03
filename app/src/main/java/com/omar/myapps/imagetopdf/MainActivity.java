@@ -1,23 +1,27 @@
 package com.omar.myapps.imagetopdf;
 
 import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
     Button openConvertToPdfActivity, givePermBtn;
-    private static final int PERMISSION_RC = 5;
+    private static final int PERMISSION_RC = 1;
+
+    String[] PERMISSIONS = {
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            android.Manifest.permission.WRITE_EXTERNAL_STORAGE
+    };
 
     View permissionDeniedInclude;
 
@@ -34,14 +38,16 @@ public class MainActivity extends AppCompatActivity {
 
         init();
 
-        if (!isStoragePermissionGranted()) {
-            permissionDeniedInclude.setVisibility(View.VISIBLE);
+        if (!hasPermissions(this, PERMISSIONS)) {
+
             openConvertToPdfActivity.setVisibility(View.GONE);
-            // ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSION_RC);
+            permissionDeniedInclude.setVisibility(View.VISIBLE);
         } else {
+
             openConvertToPdfActivity.setVisibility(View.VISIBLE);
             permissionDeniedInclude.setVisibility(View.GONE);
         }
+
 
         openConvertToPdfActivity.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,25 +74,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-    
-
-    public boolean isStoragePermissionGranted() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                    == PackageManager.PERMISSION_GRANTED) {
-                Log.v("TAG", "Permission is granted");
-                return true;
-            } else {
-
-                //   Log.v("TAG", "Permission is revoked");
-                //      ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 6);
-                return false;
-            }
-        } else { //permission is automatically granted on sdk<23 upon installation
-            Log.v("TAG", "Permission is granted");
-            return true;
-        }
-    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
@@ -94,16 +81,23 @@ public class MainActivity extends AppCompatActivity {
 
         switch (requestCode) {
             case PERMISSION_RC:
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    Log.v("TAGe", "Permission: " + permissions[0] + "was " + grantResults[0]);
 
-                    permissionDeniedInclude.setVisibility(View.GONE);
+                if (hasPermissions(getApplicationContext(), permissions)) {
                     openConvertToPdfActivity.setVisibility(View.VISIBLE);
-
-                    //resume tasks needing this permission
-                }// here show dialog
-                break;
+                    permissionDeniedInclude.setVisibility(View.GONE);
+                }
         }
+    }
 
+
+    public boolean hasPermissions(Context context, String... permissions) {
+        if (context != null && permissions != null) {
+            for (String permission : permissions) {
+                if (ActivityCompat.checkSelfPermission(context, permission) != PackageManager.PERMISSION_GRANTED) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }

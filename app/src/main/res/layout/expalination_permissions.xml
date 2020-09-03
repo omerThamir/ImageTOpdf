@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:textColor="#fff"
         android:layout_margin="10dp"
-        android:text="this app cannot work without these permissions"
+        android:text="this app cannot work without these permissions, please allow the system to give these permissions"
         android:textSize="18dp">
 
     </TextView>
