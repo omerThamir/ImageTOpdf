@@ -19,6 +19,17 @@
         android:text="convert image tp pdf"
         android:textColor="#DBDDDF"></Button>
 
+    <Button
+        android:id="@+id/openMergePdfActivity"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:background="@drawable/rounded_changed_background"
+        android:text="Merge pdf"
+        android:textColor="#DBDDDF"></Button>
+
 
     <include
         android:id="@+id/permissionDeniedInclude"

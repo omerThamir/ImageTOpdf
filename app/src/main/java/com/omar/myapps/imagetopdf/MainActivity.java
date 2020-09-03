@@ -15,7 +15,7 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button openConvertToPdfActivity, givePermBtn;
+    Button openConvertToPdfActivity, openMergePdfActivity, givePermBtn;
     private static final int PERMISSION_RC = 1;
 
     String[] PERMISSIONS = {
@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
 
     void init() {
         openConvertToPdfActivity = findViewById(R.id.openConvertToPdfActivity);
+        openMergePdfActivity = findViewById(R.id.openMergePdfActivity);
         permissionDeniedInclude = findViewById(R.id.permissionDeniedInclude);
         givePermBtn = findViewById(R.id.givePermBtn);
     }
@@ -57,6 +58,17 @@ public class MainActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        openMergePdfActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(MainActivity.this, MergePDFActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
 
         givePermBtn.setOnClickListener(new View.OnClickListener() {
             @Override
