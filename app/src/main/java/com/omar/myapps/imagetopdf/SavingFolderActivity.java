@@ -10,12 +10,10 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.util.Log;
 import android.widget.Toast;
 
-import com.omar.myapps.imagetopdf.Adapters.RecyclerAdapter;
 import com.omar.myapps.imagetopdf.Adapters.RecyclerAdapterFile;
-import com.omar.myapps.imagetopdf.R;
+import com.omar.myapps.imagetopdf.Model.MyFile;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -26,7 +24,7 @@ public class SavingFolderActivity extends AppCompatActivity {
     private static final String AUTHORITY =
             BuildConfig.APPLICATION_ID + ".provider";
 
-    private List<com.omar.myapps.imagetopdf.File> fileList = new ArrayList<>();
+    private List<MyFile> fileList = new ArrayList<>();
     RecyclerView savingFileRecycleView;
     RecyclerAdapterFile recyclerAdapterFile;
 
@@ -56,7 +54,7 @@ public class SavingFolderActivity extends AppCompatActivity {
         java.io.File[] files = f.listFiles();
         fileList.clear();
         for (File file : files) {
-            fileList.add(new com.omar.myapps.imagetopdf.File(file.getName(), file.getPath()));
+            fileList.add(new MyFile(file.getName(), file.getPath()));
         }
         recyclerAdapterFile.notifyDataSetChanged();
     }

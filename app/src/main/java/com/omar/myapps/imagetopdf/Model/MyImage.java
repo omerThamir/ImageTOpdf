@@ -1,4 +1,4 @@
-package com.omar.myapps.imagetopdf;
+package com.omar.myapps.imagetopdf.Model;
 
 import android.graphics.Bitmap;
 
@@ -7,7 +7,6 @@ public class MyImage {
     public static boolean isImageProcessed;
     public static byte currentImageIndex;
     public static Bitmap workingBitmap;
-
 
     private int ImageID; // for template recycler adapter
 

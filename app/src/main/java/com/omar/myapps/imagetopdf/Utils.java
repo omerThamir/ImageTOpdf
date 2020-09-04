@@ -1,7 +1,5 @@
 package com.omar.myapps.imagetopdf;
 
-import android.app.Activity;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -16,6 +14,8 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.widget.ImageView;
+
+import com.omar.myapps.imagetopdf.Model.MyImage;
 
 import java.io.File;
 import java.io.FileNotFoundException;

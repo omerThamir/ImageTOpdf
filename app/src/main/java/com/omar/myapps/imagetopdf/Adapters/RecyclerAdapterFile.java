@@ -9,7 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.omar.myapps.imagetopdf.File;
+import com.omar.myapps.imagetopdf.Model.MyFile;
 import com.omar.myapps.imagetopdf.R;
 import com.omar.myapps.imagetopdf.SavingFolderActivity;
 
@@ -27,10 +27,10 @@ public class RecyclerAdapterFile extends RecyclerView.Adapter<RecyclerAdapterFil
         }
     }
 
-    List<File> files;
+    List<MyFile> files;
     Context mContext;
 
-    public RecyclerAdapterFile(Context context, List<File> files) {
+    public RecyclerAdapterFile(Context context, List<MyFile> files) {
         this.files = files;
         mContext = context;
     }
@@ -46,7 +46,7 @@ public class RecyclerAdapterFile extends RecyclerView.Adapter<RecyclerAdapterFil
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerAdapterFile.ViewHolder holder, final int position) {
-        final File file = files.get(position);
+        final MyFile file = files.get(position);
         holder.fileName.setText(file.getName());
         // holder.filePath.setText(file.getFull_path());
 
@@ -54,7 +54,9 @@ public class RecyclerAdapterFile extends RecyclerView.Adapter<RecyclerAdapterFil
         holder.fileName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((SavingFolderActivity) mContext).openPdfFile(file.getFull_path());
+                if (mContext instanceof SavingFolderActivity) {
+                    ((SavingFolderActivity) mContext).openPdfFile(file.getFull_path());
+                }
             }
 
         });

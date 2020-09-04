@@ -6,15 +6,34 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".MergePDFActivity">
+
     <Button
         android:id="@+id/openPDF_FilesBtn"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:background="@drawable/rounded_changed_background"
+        android:text="open files"
+        android:textColor="#DBDDDF">
+    </Button>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/openedPDF_File_RecycleView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:padding="5dp" />
+
+    <Button
+        android:id="@+id/mergePDFBtn"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_gravity="center"
         android:layout_margin="10dp"
         android:background="@drawable/rounded_changed_background"
-        android:text="open files"
+        android:text="merge"
         android:textColor="#DBDDDF"></Button>
 
 

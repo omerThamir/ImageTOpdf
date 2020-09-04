@@ -10,7 +10,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.omar.myapps.imagetopdf.MyImage;
+import com.omar.myapps.imagetopdf.Model.MyImage;
 import com.omar.myapps.imagetopdf.ProcessingActivity;
 import com.omar.myapps.imagetopdf.R;
 
