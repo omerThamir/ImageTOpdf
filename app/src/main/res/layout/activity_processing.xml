@@ -4,15 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#182430"
+    android:background="#EBEDEF"
     android:orientation="vertical"
     tools:context=".ProcessingActivity">
-    
+
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#182430">
+        android:background="#EBEDEF">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -27,14 +27,14 @@
                 android:layout_gravity="center"
                 android:layout_margin="10dp"
                 android:background="@drawable/rounded_changed_background"
-                android:text="open myImage"
+                android:text="open Image (s)"
                 android:textColor="#DBDDDF"></Button>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/OpenedImagesRecycleView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="5dp" />
+                android:padding="3dp" />
 
             <ImageView
                 android:id="@+id/imageView"
@@ -45,7 +45,7 @@
                 android:adjustViewBounds="true"
                 android:background="@drawable/rounded_background_with_no_color"
                 android:maxHeight="400dp"
-                android:padding="2dp"
+                android:padding="3dp"
                 android:scaleType="fitCenter">
 
             </ImageView>

@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#182430"
+    android:background="#EBEDEF"
     android:orientation="vertical">
 
     <LinearLayout
@@ -41,7 +41,9 @@
             android:background="@drawable/rounded_changed_background"
             android:rotationY="180"
             android:scaleType="center"
-            android:src="@drawable/ic_baseline_rotate_90_degrees_ccw_24"></ImageButton>
+            android:src="@drawable/ic_baseline_rotate_90_degrees_ccw_24">
+
+        </ImageButton>
 
 
         <ImageButton
@@ -51,7 +53,9 @@
             android:layout_margin="8dp"
             android:background="@drawable/rounded_changed_background"
             android:scaleType="center"
-            android:src="@drawable/ic_baseline_rotate_90_degrees_ccw_24"></ImageButton>
+            android:src="@drawable/ic_baseline_rotate_90_degrees_ccw_24">
+
+        </ImageButton>
 
 
         <ImageButton
@@ -100,7 +104,8 @@
             android:layout_margin="8dp"
             android:background="@drawable/rounded_changed_background_for_done_cancel"
             android:scaleType="center"
-            android:src="@drawable/ic_baseline_done_24"></ImageButton>
+            android:src="@drawable/ic_baseline_done_24">
+        </ImageButton>
 
 
         <ImageButton

@@ -8,8 +8,8 @@
         android:id="@+id/imageViewOpenlist"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:background="@drawable/rounded_changed_background"
-        android:padding="5dp"
+        android:background="@drawable/rounded_background_with_no_color"
+        android:padding="3dp"
         android:scaleType="fitXY"
         android:src="@mipmap/ic_launcher_round">
 
