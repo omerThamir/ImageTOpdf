@@ -61,6 +61,9 @@ public class SavingFolderActivity extends AppCompatActivity {
 
         File root = new File(fileUri);
         ListDir(root);
+        if(fileList.size()==0){
+            Toast.makeText(this, "there is no saved file yet ", Toast.LENGTH_SHORT).show();
+        }
     }
 
     void ListDir(java.io.File DirectoryFile) {
