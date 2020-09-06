@@ -3,13 +3,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".SavingFolderActivity">
+
+    <ImageButton
+        android:id="@+id/returnToProcACTVBTN"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_margin="40dp"
+        android:background="@drawable/rounded_changed_background"
+        android:src="@drawable/ic_baseline_keyboard_backspace_24">
+
+    </ImageButton>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/savingFileRecycleView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_marginTop="50dp"
         android:padding="5dp" />
 
 </LinearLayout>

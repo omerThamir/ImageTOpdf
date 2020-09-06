@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.view.View;
 import android.widget.Toast;
 
 import com.omar.myapps.imagetopdf.Adapters.RecyclerAdapterFile;
@@ -30,7 +31,7 @@ public class SavingFolderActivity extends AppCompatActivity {
     private void initRecyclerView() {
         savingFileRecycleView = findViewById(R.id.savingFileRecycleView);
 
-        recyclerAdapterFile = new RecyclerAdapterFile(SavingFolderActivity.this, fileList,true);
+        recyclerAdapterFile = new RecyclerAdapterFile(SavingFolderActivity.this, fileList, true);
         savingFileRecycleView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         savingFileRecycleView.setAdapter(recyclerAdapterFile);
     }
@@ -42,6 +43,19 @@ public class SavingFolderActivity extends AppCompatActivity {
 
         initRecyclerView();
 
+        showPDF_FilesOnRecyclerView();
+
+        findViewById(R.id.returnToProcACTVBTN).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(SavingFolderActivity.this, ProcessingActivity.class));
+                finish();
+            }
+        });
+
+    }
+
+    private void showPDF_FilesOnRecyclerView() {
         String fileUri = Environment.getExternalStorageDirectory() +
                 File.separator + "My Pdf" + File.separator;
 
@@ -49,11 +63,13 @@ public class SavingFolderActivity extends AppCompatActivity {
         ListDir(root);
     }
 
-    void ListDir(java.io.File f) {
-        java.io.File[] files = f.listFiles();
+    void ListDir(java.io.File DirectoryFile) {
+        File[] files = DirectoryFile.listFiles();
         fileList.clear();
-        for (File file : files) {
-            fileList.add(new MyFile(file.getName(), file.getPath()));
+        for (File mFile : files) {
+            if (!mFile.isDirectory()) {
+                fileList.add(new MyFile(mFile.getName(), mFile.getPath()));
+            }
         }
         recyclerAdapterFile.notifyDataSetChanged();
     }
@@ -80,4 +96,10 @@ public class SavingFolderActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(SavingFolderActivity.this, ProcessingActivity.class));
+        finish();
+    }
 }
