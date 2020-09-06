@@ -6,15 +6,32 @@
     android:orientation="vertical"
     tools:context=".SavingFolderActivity">
 
-    <ImageButton
-        android:id="@+id/returnToProcACTVBTN"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_margin="40dp"
-        android:background="@drawable/rounded_changed_background"
-        android:src="@drawable/ic_baseline_keyboard_backspace_24">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
-    </ImageButton>
+        <ImageButton
+            android:id="@+id/returnToProcACTVBTN"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_margin="5dp"
+            android:background="@drawable/rounded_changed_background"
+            android:src="@drawable/ic_baseline_keyboard_backspace_24">
+
+        </ImageButton>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="17dp"
+            android:text="Saved Files">
+
+        </TextView>
+
+    </FrameLayout>
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/savingFileRecycleView"
