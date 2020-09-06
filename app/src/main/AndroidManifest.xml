@@ -13,6 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".SavingFolderActivity"></activity>
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -24,13 +25,12 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-
-        <activity android:name=".SavingFolderActivity"></activity>
         <activity android:name=".MergePDFActivity" />
         <activity
             android:name=".ProcessingActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
-        <activity android:name=".MainActivity"
+        <activity
+            android:name=".MainActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

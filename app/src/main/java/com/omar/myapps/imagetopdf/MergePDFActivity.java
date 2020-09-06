@@ -36,7 +36,6 @@ public class MergePDFActivity extends AppCompatActivity {
 
     List<MyFile> mFileList;
 
-
     private Button mergeBtN;
     private static final int PICK_PDF_FILE_RC = 1;
     Button openPDF_FilesBtn;
@@ -48,7 +47,7 @@ public class MergePDFActivity extends AppCompatActivity {
     private void initRecyclerView() {
         mFileList = new ArrayList<>();
         mergeRecycleView = findViewById(R.id.openedPDF_File_RecycleView);
-        recyclerAdapterFile = new RecyclerAdapterFile(MergePDFActivity.this, mFileList);
+        recyclerAdapterFile = new RecyclerAdapterFile(MergePDFActivity.this, mFileList, false);
         mergeRecycleView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         mergeRecycleView.setAdapter(recyclerAdapterFile);
     }
@@ -62,7 +61,7 @@ public class MergePDFActivity extends AppCompatActivity {
         startActivityForResult(Intent.createChooser(intent, "Select PDF files"), PICK_PDF_FILE_RC);
     }
 
-    void init() {
+   private void init() {
         openPDF_FilesBtn = findViewById(R.id.openPDF_FilesBtn);
         PDF_list = new ArrayList<>();
         initRecyclerView();

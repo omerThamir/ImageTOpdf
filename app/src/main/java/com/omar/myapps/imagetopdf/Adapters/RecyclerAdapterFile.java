@@ -29,10 +29,12 @@ public class RecyclerAdapterFile extends RecyclerView.Adapter<RecyclerAdapterFil
 
     List<MyFile> files;
     Context mContext;
+    boolean showSavingFiles;
 
-    public RecyclerAdapterFile(Context context, List<MyFile> files) {
+    public RecyclerAdapterFile(Context context, List<MyFile> files, boolean showSavingFiles) {
         this.files = files;
         mContext = context;
+        this.showSavingFiles = showSavingFiles;
     }
 
     @NonNull
@@ -54,7 +56,7 @@ public class RecyclerAdapterFile extends RecyclerView.Adapter<RecyclerAdapterFil
         holder.fileName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (mContext instanceof SavingFolderActivity) {
+                if (showSavingFiles && mContext instanceof SavingFolderActivity) {
                     ((SavingFolderActivity) mContext).openPdfFile(file.getFull_path());
                 }
             }

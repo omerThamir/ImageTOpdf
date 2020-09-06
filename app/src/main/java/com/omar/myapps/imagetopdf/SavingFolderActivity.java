@@ -20,7 +20,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SavingFolderActivity extends AppCompatActivity {
-
     private static final String AUTHORITY =
             BuildConfig.APPLICATION_ID + ".provider";
 
@@ -31,7 +30,7 @@ public class SavingFolderActivity extends AppCompatActivity {
     private void initRecyclerView() {
         savingFileRecycleView = findViewById(R.id.savingFileRecycleView);
 
-        recyclerAdapterFile = new RecyclerAdapterFile(SavingFolderActivity.this, fileList);
+        recyclerAdapterFile = new RecyclerAdapterFile(SavingFolderActivity.this, fileList,true);
         savingFileRecycleView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         savingFileRecycleView.setAdapter(recyclerAdapterFile);
     }

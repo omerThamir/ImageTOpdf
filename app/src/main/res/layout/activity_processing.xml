@@ -95,6 +95,12 @@
 
     </ScrollView>
 
+    <include
+        android:id="@+id/editInclude"
+        layout="@layout/edit_image_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"></include>
 
     <Button
         android:id="@+id/showSavingFileBTN"
@@ -105,14 +111,6 @@
         android:background="@drawable/rounded_changed_background"
         android:text="show saving file"
         android:textColor="#DBDDDF"></Button>
-
-
-    <include
-        android:id="@+id/editInclude"
-        layout="@layout/edit_image_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="gone"></include>
 
 
 </LinearLayout>
