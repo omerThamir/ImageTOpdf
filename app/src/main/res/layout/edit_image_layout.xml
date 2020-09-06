@@ -5,6 +5,7 @@
     android:id="@+id/imageEditingButtons"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@drawable/rounded_changed_black_background"
     android:gravity="center"
     android:orientation="horizontal">
 
@@ -13,7 +14,7 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_margin="8dp"
-        android:background="@drawable/rounded_changed_background"
+        android:background="@drawable/rounded_changed_black_background"
         android:rotationY="180"
         android:scaleType="center"
         android:src="@drawable/ic_baseline_rotate_90_degrees_ccw_24">
@@ -26,7 +27,7 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_margin="8dp"
-        android:background="@drawable/rounded_changed_background"
+        android:background="@drawable/rounded_changed_black_background"
         android:scaleType="center"
         android:src="@drawable/ic_baseline_rotate_90_degrees_ccw_24">
 
@@ -38,7 +39,7 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_margin="8dp"
-        android:background="@drawable/rounded_changed_background"
+        android:background="@drawable/rounded_changed_black_background"
         android:scaleType="center"
         android:src="@drawable/ic_baseline_flip_24"></ImageButton>
 
@@ -47,7 +48,7 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_margin="8dp"
-        android:background="@drawable/rounded_changed_background"
+        android:background="@drawable/rounded_changed_black_background"
         android:rotation="90"
         android:scaleType="center"
         android:src="@drawable/ic_baseline_flip_24"></ImageButton>
@@ -58,7 +59,7 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_margin="8dp"
-        android:background="@drawable/rounded_changed_background"
+        android:background="@drawable/rounded_changed_black_background"
         android:scaleType="center"
         android:src="@drawable/ic_baseline_crop_24"></ImageButton>
 
