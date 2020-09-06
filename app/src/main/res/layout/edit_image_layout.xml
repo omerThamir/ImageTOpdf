@@ -1,123 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:id="@+id/imageEditingButtons"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#EBEDEF"
-    android:orientation="vertical">
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="horizontal">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true">
+    <ImageButton
+        android:id="@+id/rotateIBNminus90"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_margin="8dp"
+        android:background="@drawable/rounded_changed_background"
+        android:rotationY="180"
+        android:scaleType="center"
+        android:src="@drawable/ic_baseline_rotate_90_degrees_ccw_24">
 
-        <ImageView
-            android:id="@+id/editImageView"
-            android:layout_width="match_parent"
-            android:layout_height="400dp"
-            android:layout_gravity="top"
-            android:layout_margin="10dp"
-            android:adjustViewBounds="true"
-            android:background="@drawable/rounded_background_with_no_color"
-            android:padding="2dp"
-            android:scaleType="fitCenter">
-
-        </ImageView>
-    </LinearLayout>
+    </ImageButton>
 
 
-    <LinearLayout
-        android:id="@+id/imageEditingButtons"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/doneCancle"
-        android:gravity="center"
-        android:orientation="horizontal">
+    <ImageButton
+        android:id="@+id/rotateIBNplus90"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_margin="8dp"
+        android:background="@drawable/rounded_changed_background"
+        android:scaleType="center"
+        android:src="@drawable/ic_baseline_rotate_90_degrees_ccw_24">
 
-        <ImageButton
-            android:id="@+id/rotateIBNminus90"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_margin="8dp"
-            android:background="@drawable/rounded_changed_background"
-            android:rotationY="180"
-            android:scaleType="center"
-            android:src="@drawable/ic_baseline_rotate_90_degrees_ccw_24">
-
-        </ImageButton>
+    </ImageButton>
 
 
-        <ImageButton
-            android:id="@+id/rotateIBNplus90"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_margin="8dp"
-            android:background="@drawable/rounded_changed_background"
-            android:scaleType="center"
-            android:src="@drawable/ic_baseline_rotate_90_degrees_ccw_24">
+    <ImageButton
+        android:id="@+id/flipHorizontalIBN"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_margin="8dp"
+        android:background="@drawable/rounded_changed_background"
+        android:scaleType="center"
+        android:src="@drawable/ic_baseline_flip_24"></ImageButton>
 
-        </ImageButton>
-
-
-        <ImageButton
-            android:id="@+id/flipHorizontalIBN"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_margin="8dp"
-            android:background="@drawable/rounded_changed_background"
-            android:scaleType="center"
-            android:src="@drawable/ic_baseline_flip_24"></ImageButton>
-
-        <ImageButton
-            android:id="@+id/flipVerticalIBN"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_margin="8dp"
-            android:background="@drawable/rounded_changed_background"
-            android:rotation="90"
-            android:scaleType="center"
-            android:src="@drawable/ic_baseline_flip_24"></ImageButton>
+    <ImageButton
+        android:id="@+id/flipVerticalIBN"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_margin="8dp"
+        android:background="@drawable/rounded_changed_background"
+        android:rotation="90"
+        android:scaleType="center"
+        android:src="@drawable/ic_baseline_flip_24"></ImageButton>
 
 
-        <ImageButton
-            android:id="@+id/cropImageIBN"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_margin="8dp"
-            android:background="@drawable/rounded_changed_background"
-            android:scaleType="center"
-            android:src="@drawable/ic_baseline_crop_24"></ImageButton>
+    <ImageButton
+        android:id="@+id/cropImageIBN"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_margin="8dp"
+        android:background="@drawable/rounded_changed_background"
+        android:scaleType="center"
+        android:src="@drawable/ic_baseline_crop_24"></ImageButton>
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/doneCancle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:gravity="center"
-        android:orientation="horizontal">
-
-        <ImageButton
-            android:id="@+id/EditDoneBTN"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_margin="8dp"
-            android:background="@drawable/rounded_changed_background_for_done_cancel"
-            android:scaleType="center"
-            android:src="@drawable/ic_baseline_done_24">
-        </ImageButton>
-
-
-        <ImageButton
-            android:id="@+id/EditCancelBTN"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_margin="8dp"
-            android:background="@drawable/rounded_changed_background_for_done_cancel"
-            android:scaleType="center"
-            android:src="@drawable/ic_baseline_close_24"></ImageButton>
-
-    </LinearLayout>
-
-
-</RelativeLayout>
+</LinearLayout>
