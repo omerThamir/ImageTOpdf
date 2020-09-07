@@ -66,6 +66,7 @@ public class RecyclerAdapterTemplate extends RecyclerView.Adapter<RecyclerAdapte
 
                     if (position == 0) {
                         ((ProcessingActivity) mContext).IMAGE_PER_PAGE = 1;
+                        ((ProcessingActivity) mContext).IMAGE_LOCATION_IN_PAGE = "fit_page";
                         Toast.makeText(mContext, "you have selected one IMAGE_PER_PAGE Template", Toast.LENGTH_LONG).show();
                     } else if (position == 1) {
                         ((ProcessingActivity) mContext).IMAGE_PER_PAGE = 2;
@@ -77,7 +78,7 @@ public class RecyclerAdapterTemplate extends RecyclerView.Adapter<RecyclerAdapte
 
                     }
 
-                    ((ProcessingActivity)mContext) .convertToPdfBTN.setEnabled(true);
+                    ((ProcessingActivity) mContext).convertToPdfBTN.setEnabled(true);
 
                 }
             }
