@@ -8,8 +8,9 @@
         android:id="@+id/imageViewOpenlist"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:background="@drawable/rounded_background_with_no_color"
-        android:padding="3dp"
+        android:background="@drawable/changed_background_for_recycler_view_items"
+
+        android:padding="1dp"
         android:scaleType="fitXY"
         android:src="@mipmap/ic_launcher_round">
 

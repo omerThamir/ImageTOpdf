@@ -5,15 +5,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#EBEDEF"
+    android:background="@drawable/app_background"
     android:orientation="vertical"
     tools:context=".ProcessingActivity">
 
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#EBEDEF">
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -27,7 +26,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_gravity="center"
                 android:layout_margin="10dp"
-                android:background="@drawable/rounded_changed_background"
+                android:background="@drawable/rounded_changed_background_for_main_btn"
                 android:text="open Image (s)"
                 android:textColor="#DBDDDF"></Button>
 
@@ -44,15 +43,14 @@
 
                 <ImageView
                     android:id="@+id/imageView"
-
                     android:layout_width="match_parent"
-                    android:layout_height="350dp"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_margin="10dp"
                     android:layout_marginTop="16dp"
                     android:adjustViewBounds="true"
-                    android:background="@drawable/rounded_background_with_no_color"
-                    android:padding="3dp"
+                    android:background="#090909"
+                    android:padding="1dp"
                     android:scaleType="fitCenter"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -80,6 +78,7 @@
                     layout="@layout/edit_image_layout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
                     app:layout_constraintBottom_toBottomOf="@+id/imageView"
                     app:layout_constraintEnd_toEndOf="@+id/imageView"
                     app:layout_constraintStart_toStartOf="@id/imageView"></include>
@@ -94,7 +93,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_gravity="center"
                 android:layout_margin="5dp"
-                android:background="@drawable/rounded_changed_background"
+                android:background="@drawable/rounded_changed_background_for_main_btn"
                 android:text="select template"
                 android:textColor="#DBDDDF"></Button>
 
@@ -113,8 +112,18 @@
                 android:layout_alignParentBottom="true"
                 android:layout_gravity="center"
                 android:layout_margin="5dp"
-                android:background="@drawable/rounded_changed_background"
+                android:background="@drawable/rounded_changed_background_for_main_btn"
                 android:text="convert to pdf"
+                android:textColor="#DBDDDF"></Button>
+
+            <Button
+                android:id="@+id/showSavingFileBTN"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:background="@drawable/rounded_changed_background_for_main_btn"
+                android:text="show saving file"
                 android:textColor="#DBDDDF"></Button>
 
         </LinearLayout>
@@ -127,16 +136,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:visibility="gone"></include>
-
-    <Button
-        android:id="@+id/showSavingFileBTN"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="5dp"
-        android:background="@drawable/rounded_changed_background"
-        android:text="show saving file"
-        android:textColor="#DBDDDF"></Button>
 
 
 </LinearLayout>

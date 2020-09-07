@@ -19,7 +19,7 @@
         android:layout_toRightOf="@+id/filePathTV"
         android:layout_weight="1"
         android:text="filename"
-        android:textColor="#123"
+        android:textColor="#F5F7F8"
         android:textSize="16dp"></TextView>
 
 

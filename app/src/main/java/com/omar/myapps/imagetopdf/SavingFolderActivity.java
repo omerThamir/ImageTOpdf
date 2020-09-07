@@ -48,8 +48,7 @@ public class SavingFolderActivity extends AppCompatActivity {
         findViewById(R.id.returnToProcACTVBTN).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(SavingFolderActivity.this, ProcessingActivity.class));
-                finish();
+                onBackPressed();
             }
         });
 
@@ -61,7 +60,7 @@ public class SavingFolderActivity extends AppCompatActivity {
 
         File root = new File(fileUri);
         ListDir(root);
-        if(fileList.size()==0){
+        if (fileList.size() == 0) {
             Toast.makeText(this, "there is no saved file yet ", Toast.LENGTH_SHORT).show();
         }
     }
@@ -102,7 +101,6 @@ public class SavingFolderActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(SavingFolderActivity.this, ProcessingActivity.class));
         finish();
     }
 }

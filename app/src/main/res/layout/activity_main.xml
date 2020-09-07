@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#EBEDEF"
+    android:background="@drawable/app_background"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
@@ -14,10 +14,9 @@
         android:layout_alignParentBottom="true"
         android:layout_gravity="center"
         android:layout_margin="10dp"
-        android:background="@drawable/rounded_changed_background"
+        android:background="@drawable/rounded_changed_background_for_main_btn"
         android:text="convert image tp pdf"
-        android:textColor="#EBEDEF">
-    </Button>
+        android:textColor="#EBEDEF"></Button>
 
     <Button
         android:id="@+id/openMergePdfActivity"
@@ -26,7 +25,7 @@
         android:layout_alignParentBottom="true"
         android:layout_gravity="center"
         android:layout_margin="10dp"
-        android:background="@drawable/rounded_changed_background"
+        android:background="@drawable/rounded_changed_background_for_main_btn"
         android:text="Merge pdf"
         android:textColor="#EBEDEF"></Button>
 
