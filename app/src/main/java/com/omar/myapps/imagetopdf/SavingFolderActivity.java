@@ -45,6 +45,8 @@ public class SavingFolderActivity extends AppCompatActivity {
 
         showPDF_FilesOnRecyclerView();
 
+        savingFileRecycleView.scrollToPosition(fileList.size() - 1);
+
         findViewById(R.id.returnToProcACTVBTN).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

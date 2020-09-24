@@ -54,6 +54,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
             @Override
             public void onClick(View view) {
                 ((ProcessingActivity) mContext).displayImageToEdit(position);
+                ((ProcessingActivity) mContext).setFoucusWithScrollView();
                 MyImage.currentImageIndex = (byte) position;
             }
         });

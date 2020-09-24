@@ -13,6 +13,9 @@ import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
 import com.omar.myapps.imagetopdf.Model.MyImage;
@@ -47,6 +50,11 @@ public class Utils {
 
         editImageView.setImageBitmap(processingBitmap);
         MyImage.workingBitmap = Bitmap.createBitmap(processingBitmap, 0, 0, processingBitmap.getWidth(), processingBitmap.getHeight());
+    }
+
+    public static void zoom_in(View v, Context c) {
+        Animation animation = AnimationUtils.loadAnimation(c, R.anim.zoom_in);
+        v.startAnimation(animation);
     }
 
     public static void rotateImage(float degree, ImageView editImageView) {
