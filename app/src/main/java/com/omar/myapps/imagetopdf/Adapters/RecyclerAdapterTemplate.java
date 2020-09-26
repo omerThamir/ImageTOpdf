@@ -67,16 +67,28 @@ public class RecyclerAdapterTemplate extends RecyclerView.Adapter<RecyclerAdapte
                     if (position == 0) {
                         ((ProcessingActivity) mContext).IMAGE_PER_PAGE = 1;
                         ((ProcessingActivity) mContext).IMAGE_LOCATION_IN_PAGE = "fit_page";
-                        Toast.makeText(mContext, "you have selected one IMAGE_PER_PAGE Template", Toast.LENGTH_LONG).show();
-                    } else if (position == 1) {
-                        ((ProcessingActivity) mContext).IMAGE_PER_PAGE = 2;
-                        Toast.makeText(mContext, "you have selected Tow IMAGES_PER_PAGE Template", Toast.LENGTH_LONG).show();
+                  }
+                    else if (position == 1) {
+                        ((ProcessingActivity) mContext).IMAGE_PER_PAGE = 1;
+                        ((ProcessingActivity) mContext).IMAGE_LOCATION_IN_PAGE = "Top_Left";
+                   }
 
-                    } else if (position == 2) {
-                        ((ProcessingActivity) mContext).IMAGE_PER_PAGE = 4;
-                        Toast.makeText(mContext, "you have selected Four IMAGES_PER_PAGE Template", Toast.LENGTH_LONG).show();
+                    if (position == 2) {
+                        ((ProcessingActivity) mContext).IMAGE_PER_PAGE = 1;
+                        ((ProcessingActivity) mContext).IMAGE_LOCATION_IN_PAGE = "Top_Center";
+                   }
 
+                    else if (position == 3) {
+                        ((ProcessingActivity) mContext).IMAGE_PER_PAGE = 1;
+                        ((ProcessingActivity) mContext).IMAGE_LOCATION_IN_PAGE = "Top_Right";
                     }
+
+                    else if (position == 4) {
+                        ((ProcessingActivity) mContext).IMAGE_PER_PAGE = 1;
+                        ((ProcessingActivity) mContext).IMAGE_LOCATION_IN_PAGE = "Mid_Center";
+                  } else if (position == 5) {
+                        ((ProcessingActivity) mContext).IMAGE_PER_PAGE = 4;
+                 }
 
                     ((ProcessingActivity) mContext).convertToPdfBTN.setEnabled(true);
 

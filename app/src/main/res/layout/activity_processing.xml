@@ -62,6 +62,19 @@
 
                 </ImageView>
 
+                <!-- Image Cropper fill the remaining available height -->
+                <com.theartofdev.edmodo.cropper.CropImageView
+                    xmlns:custom="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/cropImageView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                   />
+
                 <ImageButton
                     android:id="@+id/EditImagefBTN"
                     android:layout_width="50dp"
