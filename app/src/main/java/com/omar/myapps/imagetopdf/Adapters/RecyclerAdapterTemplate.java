@@ -37,7 +37,7 @@ public class RecyclerAdapterTemplate extends RecyclerView.Adapter<RecyclerAdapte
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         LayoutInflater mInflater = LayoutInflater.from(mContext);
-        View view = mInflater.inflate(R.layout.list_item_template, parent, false);
+        View view = mInflater.inflate(R.layout.grid_item_list, parent, false);
         return new ViewHolder(view);
     }
 

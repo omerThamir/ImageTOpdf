@@ -13,6 +13,7 @@ import com.omar.myapps.imagetopdf.Model.MyImage;
 import com.omar.myapps.imagetopdf.ProcessingActivity;
 import com.omar.myapps.imagetopdf.R;
 
+
 import java.util.List;
 
 
@@ -45,7 +46,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
         MyImage myImage = mMyImageUrises.get(position);
         holder.imageView.setImageBitmap(myImage.getBitmap());
 
@@ -54,7 +55,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
             @Override
             public void onClick(View view) {
                 ((ProcessingActivity) mContext).displayImageToEdit(position);
-                ((ProcessingActivity) mContext).setFoucusWithScrollView();
+
+                ((ProcessingActivity) mContext).setImageFoucusWithScrollView();
                 MyImage.currentImageIndex = (byte) position;
             }
         });
