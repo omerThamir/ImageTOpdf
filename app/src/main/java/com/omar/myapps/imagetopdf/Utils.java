@@ -57,6 +57,11 @@ public class Utils {
         v.startAnimation(animation);
     }
 
+    public static void zoom_out(View v, Context c) {
+        Animation animation = AnimationUtils.loadAnimation(c, R.anim.zoom_out);
+        v.startAnimation(animation);
+    }
+
     public static void rotateImage(float degree, ImageView editImageView) {
         if (processingBitmap != null) processingBitmap = null;
         // the 3 lines below used to get bitmap from image view

@@ -5,11 +5,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.omar.myapps.imagetopdf.Model.MyImage;
 import com.omar.myapps.imagetopdf.ProcessingActivity;
 import com.omar.myapps.imagetopdf.R;
+import com.omar.myapps.imagetopdf.Utils;
 
 import java.util.List;
 
@@ -63,48 +66,36 @@ public class RecyclerAdapterTemplate extends RecyclerView.Adapter<RecyclerAdapte
                     if (position == 0) {
                         ((ProcessingActivity) mContext).IMAGE_PER_PAGE = 1;
                         ((ProcessingActivity) mContext).IMAGE_LOCATION_IN_PAGE = "fit_page";
-                  }
-                    else if (position == 1) {
+                    } else if (position == 1) {
                         ((ProcessingActivity) mContext).IMAGE_PER_PAGE = 1;
                         ((ProcessingActivity) mContext).IMAGE_LOCATION_IN_PAGE = "Top_Left";
-                   }
+                    }
 
                     if (position == 2) {
                         ((ProcessingActivity) mContext).IMAGE_PER_PAGE = 1;
                         ((ProcessingActivity) mContext).IMAGE_LOCATION_IN_PAGE = "Top_Center";
-                   }
-
-                    else if (position == 3) {
+                    } else if (position == 3) {
                         ((ProcessingActivity) mContext).IMAGE_PER_PAGE = 1;
                         ((ProcessingActivity) mContext).IMAGE_LOCATION_IN_PAGE = "Top_Right";
-                    }
-
-                    else if (position == 4) {
+                    } else if (position == 4) {
                         ((ProcessingActivity) mContext).IMAGE_PER_PAGE = 2;
                         ((ProcessingActivity) mContext).IMAGE_LOCATION_IN_PAGE = "Horizontal";
-                  }
-
-                    else if (position == 5) {
+                    } else if (position == 5) {
                         ((ProcessingActivity) mContext).IMAGE_PER_PAGE = 2;
                         ((ProcessingActivity) mContext).IMAGE_LOCATION_IN_PAGE = "Vertical_Left";
-                    }
-
-                    else if (position == 6) {
+                    } else if (position == 6) {
                         ((ProcessingActivity) mContext).IMAGE_PER_PAGE = 2;
                         ((ProcessingActivity) mContext).IMAGE_LOCATION_IN_PAGE = "Vertical_Center";
-                    }
-
-                    else if (position == 7) {
+                    } else if (position == 7) {
                         ((ProcessingActivity) mContext).IMAGE_PER_PAGE = 2;
                         ((ProcessingActivity) mContext).IMAGE_LOCATION_IN_PAGE = "Vertical_Right";
-                    }
-
-                    else if (position == 8) {
+                    } else if (position == 8) {
                         ((ProcessingActivity) mContext).IMAGE_PER_PAGE = 4;
-                 }
-
+                    }
+                    ((ProcessingActivity) mContext).ImageViewConstraintLayout.setVisibility(View.VISIBLE);
                     ((ProcessingActivity) mContext).convertToPdfBTN.setEnabled(true);
 
+                    Utils.zoom_out(((ProcessingActivity) mContext).templateRecycleView, mContext);
                 }
             }
 
