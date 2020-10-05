@@ -6,13 +6,13 @@
 
     <ImageView
         android:id="@+id/imageViewOpenlist"
-        android:layout_width="100dp"
+        android:layout_width="80dp"
         android:layout_height="100dp"
         android:background="@drawable/changed_background_for_recycler_view_items"
 
         android:padding="1dp"
-        android:scaleType="fitCenter"
-        android:src="@mipmap/ic_launcher_round">
+        android:scaleType="fitXY"
+        android:src="@drawable/four_images">
 
     </ImageView>
 

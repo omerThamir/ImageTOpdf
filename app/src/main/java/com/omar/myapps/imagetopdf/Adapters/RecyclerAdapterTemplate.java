@@ -5,17 +5,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.omar.myapps.imagetopdf.Model.MyImage;
 import com.omar.myapps.imagetopdf.ProcessingActivity;
 import com.omar.myapps.imagetopdf.R;
 
 import java.util.List;
-
 
 public class RecyclerAdapterTemplate extends RecyclerView.Adapter<RecyclerAdapterTemplate.ViewHolder> {
 
@@ -41,7 +37,7 @@ public class RecyclerAdapterTemplate extends RecyclerView.Adapter<RecyclerAdapte
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         LayoutInflater mInflater = LayoutInflater.from(mContext);
-        View view = mInflater.inflate(R.layout.list_item, parent, false);
+        View view = mInflater.inflate(R.layout.list_item_template, parent, false);
         return new ViewHolder(view);
     }
 
@@ -84,9 +80,26 @@ public class RecyclerAdapterTemplate extends RecyclerView.Adapter<RecyclerAdapte
                     }
 
                     else if (position == 4) {
-                        ((ProcessingActivity) mContext).IMAGE_PER_PAGE = 1;
-                        ((ProcessingActivity) mContext).IMAGE_LOCATION_IN_PAGE = "Mid_Center";
-                  } else if (position == 5) {
+                        ((ProcessingActivity) mContext).IMAGE_PER_PAGE = 2;
+                        ((ProcessingActivity) mContext).IMAGE_LOCATION_IN_PAGE = "Horizontal";
+                  }
+
+                    else if (position == 5) {
+                        ((ProcessingActivity) mContext).IMAGE_PER_PAGE = 2;
+                        ((ProcessingActivity) mContext).IMAGE_LOCATION_IN_PAGE = "Vertical_Left";
+                    }
+
+                    else if (position == 6) {
+                        ((ProcessingActivity) mContext).IMAGE_PER_PAGE = 2;
+                        ((ProcessingActivity) mContext).IMAGE_LOCATION_IN_PAGE = "Vertical_Center";
+                    }
+
+                    else if (position == 7) {
+                        ((ProcessingActivity) mContext).IMAGE_PER_PAGE = 2;
+                        ((ProcessingActivity) mContext).IMAGE_LOCATION_IN_PAGE = "Vertical_Right";
+                    }
+
+                    else if (position == 8) {
                         ((ProcessingActivity) mContext).IMAGE_PER_PAGE = 4;
                  }
 

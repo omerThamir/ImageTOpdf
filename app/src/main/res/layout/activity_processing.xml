@@ -108,7 +108,8 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_gravity="center"
-                android:layout_margin="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="5dp"
                 android:background="@drawable/rounded_changed_background_for_main_btn"
                 android:text="select template"
                 android:textColor="#DBDDDF"></Button>
@@ -137,7 +138,8 @@
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_margin="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="10dp"
                 android:background="@drawable/rounded_changed_background_for_main_btn"
                 android:text="show saving file"
                 android:textColor="#DBDDDF"></Button>
