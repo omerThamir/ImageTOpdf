@@ -30,7 +30,7 @@
         <activity android:name=".MergePDFActivity" />
         <activity
             android:name=".ProcessingActivity"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".MainActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
