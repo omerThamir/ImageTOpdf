@@ -31,7 +31,7 @@ public class SavingFolderActivity extends AppCompatActivity {
     private void initRecyclerView() {
         savingFileRecycleView = findViewById(R.id.savingFileRecycleView);
 
-        recyclerAdapterFile = new RecyclerAdapterFile(SavingFolderActivity.this, fileList, true);
+        recyclerAdapterFile = new RecyclerAdapterFile(SavingFolderActivity.this, fileList);
         savingFileRecycleView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         savingFileRecycleView.setAdapter(recyclerAdapterFile);
     }

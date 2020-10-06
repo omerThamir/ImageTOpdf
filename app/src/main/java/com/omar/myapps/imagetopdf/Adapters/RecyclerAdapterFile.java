@@ -29,59 +29,40 @@ public class RecyclerAdapterFile extends RecyclerView.Adapter<RecyclerAdapterFil
 
     List<MyFile> files;
     Context mContext;
-    boolean showSavingFiles;
 
-    int selectedItem;
-
-    public RecyclerAdapterFile(Context context, List<MyFile> files, boolean showSavingFiles) {
+    public RecyclerAdapterFile(Context context, List<MyFile> files) {
         this.files = files;
         mContext = context;
-        this.showSavingFiles = showSavingFiles;
-
-        selectedItem = 0;
     }
 
 
     @NonNull
     @Override
 
-    public RecyclerAdapterFile.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull final ViewGroup parent, int viewType) {
 
         LayoutInflater mInflater = LayoutInflater.from(mContext);
         View item_view = mInflater.inflate(R.layout.list_item_file, parent, false);
 
-        return new RecyclerAdapterFile.ViewHolder(item_view);
+        final ViewHolder result = new ViewHolder(item_view);
+
+        item_view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final MyFile file = files.get(result.getAdapterPosition());
+                if (mContext instanceof SavingFolderActivity) {
+                    ((SavingFolderActivity) mContext).openPdfFile(file.getFull_path());
+                }
+            }
+        });
+
+        return result;
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerAdapterFile.ViewHolder holder, final int position) {
         final MyFile file = files.get(position);
         holder.fileName.setText(file.getName());
-
-        if (selectedItem == position) {
-          //  holder.setBackgroundColor(mContext.getResources().getColor(R.color.colorPrimaryDark));
-        }
-
-
-        holder.fileName.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (showSavingFiles && mContext instanceof SavingFolderActivity) {
-                    ((SavingFolderActivity) mContext).openPdfFile(file.getFull_path());
-
-                    // the 4 lines below used to changed item color
-                    int previousItem = selectedItem;
-                    selectedItem = position;
-
-                    notifyItemChanged(previousItem);
-                    notifyItemChanged(position);
-
-                }
-            }
-
-        });
-
-
     }
 
     @Override

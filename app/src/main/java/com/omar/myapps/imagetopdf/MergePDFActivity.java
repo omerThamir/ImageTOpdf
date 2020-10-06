@@ -47,7 +47,7 @@ public class MergePDFActivity extends AppCompatActivity {
     private void initRecyclerView() {
         mFileList = new ArrayList<>();
         mergeRecycleView = findViewById(R.id.openedPDF_File_RecycleView);
-        recyclerAdapterFile = new RecyclerAdapterFile(MergePDFActivity.this, mFileList, false);
+        recyclerAdapterFile = new RecyclerAdapterFile(MergePDFActivity.this, mFileList);
         mergeRecycleView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         mergeRecycleView.setAdapter(recyclerAdapterFile);
     }
