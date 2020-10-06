@@ -8,8 +8,11 @@
     tools:context=".SavingFolderActivity">
 
     <FrameLayout
+        android:layout_marginTop="30dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#80070707"
+        android:padding="5dp"
         android:orientation="horizontal">
 
         <ImageButton
@@ -40,7 +43,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         android:padding="5dp" />
 
 </LinearLayout>

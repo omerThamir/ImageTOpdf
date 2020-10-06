@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,27 +7,36 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/openConvertToPdfActivity"
-        android:layout_width="250dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_gravity="center"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/rounded_changed_background_for_main_btn"
-        android:text="convert image tp pdf"
-        android:textColor="#EBEDEF"></Button>
+        android:orientation="vertical">
 
-    <Button
-        android:id="@+id/openMergePdfActivity"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_gravity="center"
-        android:layout_margin="10dp"
-        android:background="@drawable/rounded_changed_background_for_main_btn"
-        android:text="Merge pdf"
-        android:textColor="#EBEDEF"></Button>
+        <Button
+            android:id="@+id/openConvertToPdfActivity"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/rounded_changed_background_for_main_btn"
+            android:text="convert image tp pdf"
+            android:textColor="#EBEDEF"></Button>
+
+        <Button
+            android:id="@+id/openMergePdfActivity"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+
+            android:layout_gravity="center"
+            android:layout_margin="20dp"
+            android:background="@drawable/rounded_changed_background_for_main_btn"
+            android:text="Merge pdf"
+            android:textColor="#EBEDEF"></Button>
+
+    </LinearLayout>
+
+
 
 
     <include
@@ -35,8 +44,9 @@
         layout="@layout/expalination_permissions"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="top"
         android:visibility="gone">
 
     </include>
 
-</LinearLayout>
+</FrameLayout>

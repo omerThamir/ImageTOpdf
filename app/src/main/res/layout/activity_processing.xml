@@ -37,7 +37,7 @@
                 android:id="@+id/OpenedImagesRecycleView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="3dp" />
+                android:padding="2dp" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -51,8 +51,7 @@
                     android:layout_height="wrap_content"
                     android:maxHeight="500dp"
                     android:layout_gravity="center"
-                    android:layout_margin="10dp"
-                    android:layout_marginTop="16dp"
+                    android:layout_margin="5dp"
                     android:adjustViewBounds="true"
                     android:background="#090909"
                     android:padding="1dp"
@@ -136,6 +135,16 @@
                 android:background="@drawable/rounded_changed_background_for_main_btn"
                 android:text="convert to pdf"
                 android:textColor="#DBDDDF"></Button>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_marginRight="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_height="1dp"
+                android:background="#000"></View>
+
 
             <Button
                 android:id="@+id/showSavingFileBTN"

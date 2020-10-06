@@ -47,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
 
             openConvertToPdfActivity.setVisibility(View.VISIBLE);
             permissionDeniedInclude.setVisibility(View.GONE);
+
+            Utils.zoom_in(openConvertToPdfActivity,getApplicationContext());
         }
 
 
