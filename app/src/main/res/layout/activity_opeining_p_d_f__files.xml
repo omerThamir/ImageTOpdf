@@ -4,30 +4,38 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/app_background"
     android:orientation="vertical"
-    tools:context=".MergePDFActivity">
+    tools:context=".OpeiningPDF_FilesActivity">
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="5dp"
+        android:text="Select pdf files"
+        android:textColor="#fff"
+        android:textSize="17dp">
+
+    </TextView>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/openedPDF_File_RecycleView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:padding="5dp" />
 
     <Button
-        android:id="@+id/openPDF_FilesBtn"
+        android:id="@+id/selectPDFBtn"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_margin="10dp"
         android:background="@drawable/rounded_changed_background_for_main_btn"
-        android:text="open files"
-        android:textColor="#DBDDDF">
-    </Button>
-
-    <Button
-        android:id="@+id/mergePDFBtn"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_gravity="center"
-        android:layout_margin="10dp"
-        android:background="@drawable/rounded_changed_background_for_main_btn"
-        android:text="merge"
+        android:text="select"
         android:textColor="#DBDDDF"></Button>
-
 
 </LinearLayout>

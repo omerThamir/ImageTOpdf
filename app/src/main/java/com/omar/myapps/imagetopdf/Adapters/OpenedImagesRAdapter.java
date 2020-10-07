@@ -17,7 +17,7 @@ import com.omar.myapps.imagetopdf.R;
 import java.util.List;
 
 
-public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
+public class OpenedImagesRAdapter extends RecyclerView.Adapter<OpenedImagesRAdapter.ViewHolder> {
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
@@ -31,7 +31,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     List<MyImage> mMyImageUrises;
     Context mContext;
 
-    public RecyclerAdapter(Context context, List<MyImage> myImageUrises) {
+    public OpenedImagesRAdapter(Context context, List<MyImage> myImageUrises) {
         mMyImageUrises = myImageUrises;
         mContext = context;
     }

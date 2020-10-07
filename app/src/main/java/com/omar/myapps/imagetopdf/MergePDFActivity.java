@@ -17,7 +17,7 @@ import android.widget.Toast;
 
 import com.itextpdf.text.DocumentException;
 
-import com.omar.myapps.imagetopdf.Adapters.RecyclerAdapterFile;
+import com.omar.myapps.imagetopdf.Adapters.OpendPDF_FilesRAdapter;
 import com.omar.myapps.imagetopdf.Model.MyFile;
 
 import java.io.File;
@@ -27,6 +27,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 
 public class MergePDFActivity extends AppCompatActivity {
 
@@ -41,15 +42,15 @@ public class MergePDFActivity extends AppCompatActivity {
     Button openPDF_FilesBtn;
 
     RecyclerView mergeRecycleView;
-    RecyclerAdapterFile recyclerAdapterFile;
+    OpendPDF_FilesRAdapter opendPDF_filesRAdapter;
 
 
     private void initRecyclerView() {
         mFileList = new ArrayList<>();
         mergeRecycleView = findViewById(R.id.openedPDF_File_RecycleView);
-        recyclerAdapterFile = new RecyclerAdapterFile(MergePDFActivity.this, mFileList);
+        opendPDF_filesRAdapter = new OpendPDF_FilesRAdapter(MergePDFActivity.this, mFileList);
         mergeRecycleView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        mergeRecycleView.setAdapter(recyclerAdapterFile);
+        mergeRecycleView.setAdapter(opendPDF_filesRAdapter);
     }
 
     private void openPDF_Files() {
@@ -61,10 +62,10 @@ public class MergePDFActivity extends AppCompatActivity {
         startActivityForResult(Intent.createChooser(intent, "Select PDF files"), PICK_PDF_FILE_RC);
     }
 
-   private void init() {
+    private void init() {
         openPDF_FilesBtn = findViewById(R.id.openPDF_FilesBtn);
         PDF_list = new ArrayList<>();
-        initRecyclerView();
+       // initRecyclerView();
         mergeBtN = findViewById(R.id.mergePDFBtn);
         createSavingFolder();
 
@@ -105,6 +106,30 @@ public class MergePDFActivity extends AppCompatActivity {
         return pdfFile;
     }
 
+
+    public void Search_Dir(File dir) {
+        String pdfPattern = ".pdf";
+
+        File FileList[] = dir.listFiles();
+
+        if (FileList != null) {
+            for (int i = 0; i < FileList.length; i++) {
+
+                if (FileList[i].isDirectory()) {
+                    Search_Dir(FileList[i]);
+                } else {
+                    if (FileList[i].getName().endsWith(pdfPattern)) {
+                        //here you have that file.
+                        Uri mPdfUri = Uri.fromFile(FileList[i]);
+                        PDF_list.add(mPdfUri);
+                        mFileList.add(new MyFile(mPdfUri.getLastPathSegment(), mPdfUri));
+                    }
+                }
+            }
+            opendPDF_filesRAdapter.notifyDataSetChanged();
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -115,7 +140,12 @@ public class MergePDFActivity extends AppCompatActivity {
         openPDF_FilesBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openPDF_Files();
+
+                startActivity(new Intent(MergePDFActivity.this,OpeiningPDF_FilesActivity.class));
+               // Search_Dir(Environment.getExternalStorageDirectory());
+
+
+                //openPDF_Files();
             }
         });
 
@@ -179,7 +209,7 @@ public class MergePDFActivity extends AppCompatActivity {
                     PDF_list.add(mPdfUri);
 
                     mFileList.add(new MyFile(mPdfUri.getLastPathSegment(), mPdfUri));
-                    recyclerAdapterFile.notifyDataSetChanged();
+                    opendPDF_filesRAdapter.notifyDataSetChanged();
                 } else {
                     if (data.getClipData() != null) { // multi selection
                         ClipData mClipData = data.getClipData();
@@ -192,7 +222,7 @@ public class MergePDFActivity extends AppCompatActivity {
                             mFileList.add(new MyFile(mPdfUri.getLastPathSegment(), mPdfUri));
 
                         }
-                        recyclerAdapterFile.notifyDataSetChanged();
+                        opendPDF_filesRAdapter.notifyDataSetChanged();
                     }
                 }
             }
@@ -200,6 +230,7 @@ public class MergePDFActivity extends AppCompatActivity {
         } catch (Exception e) {
             Toast.makeText(this, "Something went wrong", Toast.LENGTH_LONG).show();
         }
+
 
         super.onActivityResult(requestCode, resultCode, data);
     }

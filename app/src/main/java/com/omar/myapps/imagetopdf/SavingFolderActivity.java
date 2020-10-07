@@ -13,7 +13,7 @@ import android.os.Environment;
 import android.view.View;
 import android.widget.Toast;
 
-import com.omar.myapps.imagetopdf.Adapters.RecyclerAdapterFile;
+import com.omar.myapps.imagetopdf.Adapters.SavedPDF_FilesRAdapter;
 import com.omar.myapps.imagetopdf.Model.MyFile;
 
 import java.io.File;
@@ -26,12 +26,12 @@ public class SavingFolderActivity extends AppCompatActivity {
 
     private List<MyFile> fileList = new ArrayList<>();
     RecyclerView savingFileRecycleView;
-    RecyclerAdapterFile recyclerAdapterFile;
+    SavedPDF_FilesRAdapter recyclerAdapterFile;
 
     private void initRecyclerView() {
         savingFileRecycleView = findViewById(R.id.savingFileRecycleView);
 
-        recyclerAdapterFile = new RecyclerAdapterFile(SavingFolderActivity.this, fileList);
+        recyclerAdapterFile = new SavedPDF_FilesRAdapter(SavingFolderActivity.this, fileList);
         savingFileRecycleView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         savingFileRecycleView.setAdapter(recyclerAdapterFile);
     }

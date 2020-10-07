@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,21 +15,20 @@ import com.omar.myapps.imagetopdf.SavingFolderActivity;
 
 import java.util.List;
 
-public class RecyclerAdapterFile extends RecyclerView.Adapter<RecyclerAdapterFile.ViewHolder> {
+public class SavedPDF_FilesRAdapter extends RecyclerView.Adapter<SavedPDF_FilesRAdapter.ViewHolder> {
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView fileName;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             fileName = itemView.findViewById(R.id.fileNameTV);
-
         }
     }
 
     List<MyFile> files;
     Context mContext;
 
-    public RecyclerAdapterFile(Context context, List<MyFile> files) {
+    public SavedPDF_FilesRAdapter(Context context, List<MyFile> files) {
         this.files = files;
         mContext = context;
     }
@@ -60,7 +58,7 @@ public class RecyclerAdapterFile extends RecyclerView.Adapter<RecyclerAdapterFil
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerAdapterFile.ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull SavedPDF_FilesRAdapter.ViewHolder holder, final int position) {
         final MyFile file = files.get(position);
         holder.fileName.setText(file.getName());
     }
@@ -69,6 +67,5 @@ public class RecyclerAdapterFile extends RecyclerView.Adapter<RecyclerAdapterFil
     public int getItemCount() {
         return files.size();
     }
-
 
 }
