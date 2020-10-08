@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
             permissionDeniedInclude.setVisibility(View.GONE);
 
             Utils.zoom_in(openConvertToPdfActivity,getApplicationContext());
+            Utils.zoom_in(openMergePdfActivity,getApplicationContext());
         }
 
 

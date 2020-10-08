@@ -17,24 +17,22 @@ import com.omar.myapps.imagetopdf.R;
 
 import java.util.List;
 
-public class OpendPDF_FilesRAdapter extends RecyclerView.Adapter<OpendPDF_FilesRAdapter.ViewHolder> {
+public class SelectedPDF_toMergeRAdapter extends RecyclerView.Adapter<SelectedPDF_toMergeRAdapter.ViewHolder> {
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView fileName;
-        ImageView selectedOrNotImageView;
+
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             fileName = itemView.findViewById(R.id.fileNameTV);
-            selectedOrNotImageView = itemView.findViewById(R.id.selectedPDFImageview);
         }
     }
 
-    List<MyFile> files;
-
+    List<MySelectedFiles> files;
     Context mContext;
 
-    public OpendPDF_FilesRAdapter(Context context, List<MyFile> files) {
+    public SelectedPDF_toMergeRAdapter(Context context, List<MySelectedFiles> files) {
         this.files = files;
         mContext = context;
     }
@@ -46,42 +44,15 @@ public class OpendPDF_FilesRAdapter extends RecyclerView.Adapter<OpendPDF_FilesR
     public ViewHolder onCreateViewHolder(@NonNull final ViewGroup parent, int viewType) {
 
         LayoutInflater mInflater = LayoutInflater.from(mContext);
-        View item_view = mInflater.inflate(R.layout.list_item_for_opend_pdf_file, parent, false);
+        View item_view = mInflater.inflate(R.layout.list_item_file, parent, false);
 
         return new ViewHolder(item_view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final OpendPDF_FilesRAdapter.ViewHolder holder, final int position) {
-        final MyFile file = files.get(position);
+    public void onBindViewHolder(@NonNull final SelectedPDF_toMergeRAdapter.ViewHolder holder, final int position) {
+        final MySelectedFiles file = files.get(position);
         holder.fileName.setText(file.getName());
-
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                if (holder.selectedOrNotImageView.getTag().equals("NOT_SELECTED")) {
-                    holder.selectedOrNotImageView.setImageResource(R.drawable.ic_selected_24);
-                    holder.selectedOrNotImageView.setTag("SELECTED");
-
-                    ((MergePDFActivity) mContext).PDF_UriList.add(file.getUri());
-
-                    ((MergePDFActivity) mContext).mSelectedFileList.add(new MySelectedFiles(file.getName()));
-
-                    return;
-                } else {
-                    holder.selectedOrNotImageView.setImageResource(R.drawable.ic_not_selected_24);
-                    holder.selectedOrNotImageView.setTag("NOT_SELECTED");
-                    //  ((SavingFolderActivity) mContext).openPdfFile(file.getFull_path());
-                    ((MergePDFActivity) mContext).PDF_UriList.remove(file.getUri());
-
-                    ((MergePDFActivity) mContext).mSelectedFileList.remove(new MySelectedFiles(file.getName()));
-
-                    return;
-                }
-
-            }
-        });
 
 
     }

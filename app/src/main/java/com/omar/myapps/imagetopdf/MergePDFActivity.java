@@ -11,14 +11,15 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
-import android.provider.DocumentsContract;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.itextpdf.text.DocumentException;
 
 import com.omar.myapps.imagetopdf.Adapters.OpendPDF_FilesRAdapter;
+import com.omar.myapps.imagetopdf.Adapters.SelectedPDF_toMergeRAdapter;
 import com.omar.myapps.imagetopdf.Model.MyFile;
 
 import java.io.File;
@@ -41,6 +42,7 @@ import com.itextpdf.text.pdf.PdfContentByte;
 import com.itextpdf.text.pdf.PdfImportedPage;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.PdfWriter;
+import com.omar.myapps.imagetopdf.Model.MySelectedFiles;
 
 
 public class MergePDFActivity extends AppCompatActivity {
@@ -51,13 +53,16 @@ public class MergePDFActivity extends AppCompatActivity {
 
     List<MyFile> mFileList;
 
+    public List<MySelectedFiles> mSelectedFileList;
+
     private static final int PICK_PDF_FILE_RC = 1;
 
 
-    RecyclerView mergeRecycleView;
+    RecyclerView mergeRecycleView, selectedPDFtoMergeRecyclerView;
     OpendPDF_FilesRAdapter opendPDF_filesRAdapter;
 
     View openingPDF_FilesLayout;
+
 
     private void initRecyclerView() {
         mFileList = new ArrayList<>();
@@ -67,25 +72,31 @@ public class MergePDFActivity extends AppCompatActivity {
         mergeRecycleView.setAdapter(opendPDF_filesRAdapter);
     }
 
+    SelectedPDF_toMergeRAdapter selectedPDF_toMergeRAdapter;
 
-    private Button mergeBtN;
-
-    Button openPDF_FilesBtn;
-
-
-    private void openPDF_Files() {
-        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
-        intent.addCategory(Intent.CATEGORY_OPENABLE);
-        intent.setType("application/pdf");
-        intent.putExtra(DocumentsContract.EXTRA_INITIAL_URI, rootUri);
-        startActivityForResult(Intent.createChooser(intent, "Select PDF files"), PICK_PDF_FILE_RC);
+    private void initSelectedPdfRecyclerView() {
+        mSelectedFileList = new ArrayList<>();
+        selectedPDFtoMergeRecyclerView = findViewById(R.id.selectedPDFtoMergeRecyclerView);
+        selectedPDF_toMergeRAdapter = new SelectedPDF_toMergeRAdapter(MergePDFActivity.this, mSelectedFileList);
+        selectedPDFtoMergeRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        selectedPDFtoMergeRecyclerView.setAdapter(selectedPDF_toMergeRAdapter);
     }
+
+
+    private Button mergeBtN, openPDF_FilesBtn, ShowMergePDFBtn;
+
+    private LinearLayout selectedPdfsMergeLayout;
 
     private void init() {
         openPDF_FilesBtn = findViewById(R.id.openPDF_FilesBtn);
+        ShowMergePDFBtn = findViewById(R.id.ShowMergePDFBtn);
+        selectedPdfsMergeLayout = findViewById(R.id.selectedPdfsMergeLayout);
+
         PDF_UriList = new ArrayList<>();
+
         initRecyclerView();
+        initSelectedPdfRecyclerView();
+
         mergeBtN = findViewById(R.id.mergePDFBtn);
         createSavingFolder();
         openingPDF_FilesLayout = findViewById(R.id.opening_pdf_files_layout);
@@ -193,6 +204,8 @@ public class MergePDFActivity extends AppCompatActivity {
                 openingPDF_FilesLayout.setVisibility(View.VISIBLE);
                 openPDF_FilesBtn.setVisibility(View.GONE);
                 mergeBtN.setVisibility(View.GONE);
+                ShowMergePDFBtn.setVisibility(View.GONE);
+                opendPDF_filesRAdapter.notifyDataSetChanged();
                 //openPDF_Files();
             }
         });
@@ -209,7 +222,7 @@ public class MergePDFActivity extends AppCompatActivity {
 
         });
 
-        findViewById(R.id.ShowMergePDFBtn).setOnClickListener(new View.OnClickListener() {
+        ShowMergePDFBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showMegedFiles();
@@ -226,6 +239,10 @@ public class MergePDFActivity extends AppCompatActivity {
                     openingPDF_FilesLayout.setVisibility(View.GONE);
                     openPDF_FilesBtn.setVisibility(View.GONE);
                     mergeBtN.setVisibility(View.VISIBLE);
+                    ShowMergePDFBtn.setVisibility(View.VISIBLE);
+
+                    selectedPdfsMergeLayout.setVisibility(View.VISIBLE);
+                    selectedPDF_toMergeRAdapter.notifyDataSetChanged();
                 }
             }
         });
@@ -235,7 +252,7 @@ public class MergePDFActivity extends AppCompatActivity {
             public void onClick(View view) {
                 openingPDF_FilesLayout.setVisibility(View.GONE);
                 openPDF_FilesBtn.setVisibility(View.VISIBLE);
-                mergeBtN.setVisibility(View.VISIBLE);
+                ShowMergePDFBtn.setVisibility(View.VISIBLE);
                 PDF_UriList.clear();
             }
         });
@@ -274,7 +291,7 @@ public class MergePDFActivity extends AppCompatActivity {
         PdfWriter pdfWriter = PdfWriter.getInstance(document, outputStream);
         document.open();
         PdfContentByte pdfContentByte = pdfWriter.getDirectContent();
-        
+
         document.setMargins(3, 3, 3, 3);
 
         for (InputStream inputStream : list) {
