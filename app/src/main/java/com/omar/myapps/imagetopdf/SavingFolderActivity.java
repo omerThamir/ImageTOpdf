@@ -11,6 +11,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.omar.myapps.imagetopdf.Adapters.SavedPDF_FilesRAdapter;
@@ -28,6 +29,8 @@ public class SavingFolderActivity extends AppCompatActivity {
     RecyclerView savingFileRecycleView;
     SavedPDF_FilesRAdapter recyclerAdapterFile;
 
+    TextView savedOrMergedFileTV;
+
     private void initRecyclerView() {
         savingFileRecycleView = findViewById(R.id.savingFileRecycleView);
 
@@ -42,8 +45,12 @@ public class SavingFolderActivity extends AppCompatActivity {
         setContentView(R.layout.activity_saving_folder);
 
         initRecyclerView();
+        savedOrMergedFileTV = findViewById(R.id.savedOrMergedFileTV);
 
-        showPDF_FilesOnRecyclerView();
+        String FolderToOpen = getIntent().getStringExtra("FolderName");
+        showPDF_FilesOnRecyclerView(FolderToOpen);
+
+        savedOrMergedFileTV.setText(FolderToOpen + " files");
 
         savingFileRecycleView.scrollToPosition(fileList.size() - 1);
 
@@ -56,9 +63,9 @@ public class SavingFolderActivity extends AppCompatActivity {
 
     }
 
-    private void showPDF_FilesOnRecyclerView() {
+    private void showPDF_FilesOnRecyclerView(String FolderName) {
         String fileUri = Environment.getExternalStorageDirectory() +
-                File.separator + "My Pdf" + File.separator;
+                File.separator + "My Pdf" + File.separator + FolderName + File.separator;
 
         File root = new File(fileUri);
         ListDir(root);

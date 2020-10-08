@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/app_background"
     android:orientation="vertical"
-    tools:context=".OpeiningPDF_FilesActivity">
+    tools:context=".MergePDFActivity">
 
 
     <TextView
@@ -28,14 +28,30 @@
         android:layout_weight="1"
         android:padding="5dp" />
 
-    <Button
-        android:id="@+id/selectPDFBtn"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="10dp"
-        android:background="@drawable/rounded_changed_background_for_main_btn"
-        android:text="select"
-        android:textColor="#DBDDDF"></Button>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/selectPDFBtn"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_margin="10dp"
+            android:background="@drawable/rounded_changed_background_for_main_btn"
+            android:text="select"
+            android:textColor="#DBDDDF"></Button>
+
+        <Button
+            android:id="@+id/cancelPDFSelectionBtn"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_margin="10dp"
+            android:background="@drawable/rounded_changed_background_for_main_btn"
+            android:text="cancel"
+            android:textColor="#DBDDDF"></Button>
+    </FrameLayout>
+
 
 </LinearLayout>

@@ -13,7 +13,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".OpeiningPDF_FilesActivity"></activity>
 
         <provider
             android:name="androidx.core.content.FileProvider"

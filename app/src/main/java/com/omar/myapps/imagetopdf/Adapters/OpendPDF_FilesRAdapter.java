@@ -6,14 +6,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.omar.myapps.imagetopdf.MergePDFActivity;
 import com.omar.myapps.imagetopdf.Model.MyFile;
 import com.omar.myapps.imagetopdf.R;
-import com.omar.myapps.imagetopdf.SavingFolderActivity;
 
 import java.util.List;
 
@@ -63,11 +62,16 @@ public class OpendPDF_FilesRAdapter extends RecyclerView.Adapter<OpendPDF_FilesR
                 if (holder.selectedOrNotImageView.getTag().equals("NOT_SELECTED")) {
                     holder.selectedOrNotImageView.setImageResource(R.drawable.ic_selected_24);
                     holder.selectedOrNotImageView.setTag("SELECTED");
+
+                    ((MergePDFActivity) mContext).PDF_UriList.add(file.getUri());
+
                     return;
                 } else {
                     holder.selectedOrNotImageView.setImageResource(R.drawable.ic_not_selected_24);
                     holder.selectedOrNotImageView.setTag("NOT_SELECTED");
                     //  ((SavingFolderActivity) mContext).openPdfFile(file.getFull_path());
+                    ((MergePDFActivity) mContext).PDF_UriList.remove(file.getUri());
+
                     return;
                 }
 
