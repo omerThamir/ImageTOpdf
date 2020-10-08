@@ -65,10 +65,14 @@ public class MergePDFActivity extends AppCompatActivity {
 
 
     private void initRecyclerView() {
-        mFileList = new ArrayList<>();
         mergeRecycleView = findViewById(R.id.openedPDF_File_RecycleView);
-        opendPDF_filesRAdapter = new OpendPDF_FilesRAdapter(MergePDFActivity.this, mFileList);
         mergeRecycleView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+
+    }
+
+    private void reInitRecyclerView() {
+        mFileList = new ArrayList<>();
+        opendPDF_filesRAdapter = new OpendPDF_FilesRAdapter(MergePDFActivity.this, mFileList);
         mergeRecycleView.setAdapter(opendPDF_filesRAdapter);
     }
 
@@ -95,6 +99,8 @@ public class MergePDFActivity extends AppCompatActivity {
         PDF_UriList = new ArrayList<>();
 
         initRecyclerView();
+        reInitRecyclerView();
+
         initSelectedPdfRecyclerView();
 
         mergeBtN = findViewById(R.id.mergePDFBtn);
@@ -164,6 +170,22 @@ public class MergePDFActivity extends AppCompatActivity {
         }
     }
 
+    class AsyncTaskForOpenPDS extends AsyncTask<Object, String, Object> {
+
+        @Override
+        protected Object doInBackground(Object... objects) {
+            Search_Dir(Environment.getExternalStorageDirectory());
+            return objects;
+        }
+
+        @Override
+        protected void onPostExecute(Object o) {
+            progDailog.dismiss();
+            opendPDF_filesRAdapter.notifyDataSetChanged();
+        }
+    }
+
+
     public void Search_Dir(File dir) {
         String pdfPattern = ".pdf";
 
@@ -183,7 +205,7 @@ public class MergePDFActivity extends AppCompatActivity {
                     }
                 }
             }
-            opendPDF_filesRAdapter.notifyDataSetChanged();
+            //   opendPDF_filesRAdapter.notifyDataSetChanged(); this was here before using async task
         }
     }
 
@@ -198,15 +220,20 @@ public class MergePDFActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                //  startActivity(new Intent(MergePDFActivity.this,OpeiningPDF_FilesActivity.class));
-                Search_Dir(Environment.getExternalStorageDirectory());
+                if (opendPDF_filesRAdapter != null) {
+                    reInitRecyclerView();
+                }
 
                 openingPDF_FilesLayout.setVisibility(View.VISIBLE);
                 openPDF_FilesBtn.setVisibility(View.GONE);
                 mergeBtN.setVisibility(View.GONE);
                 ShowMergePDFBtn.setVisibility(View.GONE);
-                opendPDF_filesRAdapter.notifyDataSetChanged();
-                //openPDF_Files();
+
+                AsyncTaskForOpenPDS asyncTaskForOpenPDS = new AsyncTaskForOpenPDS();
+                initProgDailog();
+                asyncTaskForOpenPDS.execute(null, null);
+
+
             }
         });
 
