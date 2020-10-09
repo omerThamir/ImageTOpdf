@@ -12,7 +12,10 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.NoActionBar">
+        android:theme="@style/Theme.AppCompat.NoActionBar"
+
+        android:requestLegacyExternalStorage="true">  <!-- This opts you into the legacy storage model, and your existing external storage code will work. -->
+
 
         <provider
             android:name="androidx.core.content.FileProvider"
