@@ -10,7 +10,6 @@ import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.ImageDecoder;
@@ -76,7 +75,7 @@ public class ProcessingActivity extends AppCompatActivity {
     private SelectTemplateRAdapter recyclerAdapterTemplate;
     private List<MyImage> mMyImageIds;
 
-    private List<Bitmap> bitmapList;
+    public List<Bitmap> bitmapList;
 
     private List<Uri> uriList;
 
@@ -139,7 +138,9 @@ public class ProcessingActivity extends AppCompatActivity {
 
         scrollView = findViewById(R.id.scrollView);
         cropImageView = findViewById(R.id.cropImageView);
+
         uriList = new ArrayList<>();
+        bitmapList = new ArrayList<>();
 
         ImageViewConstraintLayout = findViewById(R.id.constraintLayout);
 
@@ -382,7 +383,7 @@ public class ProcessingActivity extends AppCompatActivity {
         String timeStamp = new SimpleDateFormat("YYYYmmDD").format(new Date());
 
         String pdfFileName = "PDF_" + timeStamp + "_";
-    
+
         File pdfFile = null;
 
         try {
@@ -947,7 +948,7 @@ public class ProcessingActivity extends AppCompatActivity {
                     uriList.add(mImageUri);
 
                     newBitmap = convertUriToBitmap(mImageUri);
-                    bitmapList = new ArrayList<>();
+
                     bitmapList.add(newBitmap);
 
                     mMyImageUrises.add(new MyImage(newBitmap));
@@ -962,7 +963,7 @@ public class ProcessingActivity extends AppCompatActivity {
                 } else {
                     if (data.getClipData() != null) { // multi selection
                         ClipData mClipData = data.getClipData();
-                        bitmapList = new ArrayList<>();
+
                         for (int i = 0; i < mClipData.getItemCount(); i++) {
 
                             ClipData.Item item = mClipData.getItemAt(i);

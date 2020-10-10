@@ -57,50 +57,93 @@ public class SelectTemplateRAdapter extends RecyclerView.Adapter<SelectTemplateR
                     ((ProcessingActivity) mContext).selectNOfImagePerPage.setVisibility(View.VISIBLE);
                     ((ProcessingActivity) mContext).templateRecycleView.setVisibility(View.GONE);
 
-                    /**
-                     *  position == 0 , IMAGE_PER_PAGE = 1
-                     *  position == 1 , IMAGE_PER_PAGE = 2
-                     *  position == 2 , IMAGE_PER_PAGE = 4
-                     */
+
+
+                    /** *************************************************************************************
+                     *                                                                                      *
+                     *        1 img fit                   1 img top left              1 img top_center      *
+                     *        1 img top right             2 img horizontal            2 img vertical left   *
+                     *        2 img vertical center       2 img vertical right        4 img                 *
+                     *                                                                                      *
+                     * **************************************************************************************
+                      */
 
                     if (position == 0) {
-                        ((ProcessingActivity) mContext).IMAGE_PER_PAGE = 1;
-                        ((ProcessingActivity) mContext).IMAGE_LOCATION_IN_PAGE = "fit_page";
+
+                        setNofImagePerPageAndlocation(1, "fit_page");
+
                     } else if (position == 1) {
-                        ((ProcessingActivity) mContext).IMAGE_PER_PAGE = 1;
-                        ((ProcessingActivity) mContext).IMAGE_LOCATION_IN_PAGE = "Top_Left";
+                        setNofImagePerPageAndlocation(1, "Top_Left");
                     }
 
                     if (position == 2) {
-                        ((ProcessingActivity) mContext).IMAGE_PER_PAGE = 1;
-                        ((ProcessingActivity) mContext).IMAGE_LOCATION_IN_PAGE = "Top_Center";
+                        setNofImagePerPageAndlocation(1, "Top_Center");
                     } else if (position == 3) {
-                        ((ProcessingActivity) mContext).IMAGE_PER_PAGE = 1;
-                        ((ProcessingActivity) mContext).IMAGE_LOCATION_IN_PAGE = "Top_Right";
+                        setNofImagePerPageAndlocation(1, "Top_Right");
+
+
                     } else if (position == 4) {
-                        ((ProcessingActivity) mContext).IMAGE_PER_PAGE = 2;
-                        ((ProcessingActivity) mContext).IMAGE_LOCATION_IN_PAGE = "Horizontal";
+                        if (((ProcessingActivity) mContext).bitmapList.size() < 2) {
+                            setNofImagePerPageAndlocation(1, "Top_Left");
+                        } else {
+                            setNofImagePerPageAndlocation(2, "Horizontal");
+
+                        }
                     } else if (position == 5) {
-                        ((ProcessingActivity) mContext).IMAGE_PER_PAGE = 2;
-                        ((ProcessingActivity) mContext).IMAGE_LOCATION_IN_PAGE = "Vertical_Left";
+
+                        if (((ProcessingActivity) mContext).bitmapList.size() < 2) {
+                            setNofImagePerPageAndlocation(1, "Top_Left");
+                            ;
+                        } else {
+                            setNofImagePerPageAndlocation(2, "Vertical_Left");
+                        }
                     } else if (position == 6) {
-                        ((ProcessingActivity) mContext).IMAGE_PER_PAGE = 2;
-                        ((ProcessingActivity) mContext).IMAGE_LOCATION_IN_PAGE = "Vertical_Center";
+
+                        if (((ProcessingActivity) mContext).bitmapList.size() < 2) {
+                            setNofImagePerPageAndlocation(1, "Top_Center");
+
+                        } else {
+                            setNofImagePerPageAndlocation(2, "Vertical_Center");
+                        }
+
                     } else if (position == 7) {
-                        ((ProcessingActivity) mContext).IMAGE_PER_PAGE = 2;
-                        ((ProcessingActivity) mContext).IMAGE_LOCATION_IN_PAGE = "Vertical_Right";
+
+                        if (((ProcessingActivity) mContext).bitmapList.size() < 2) {
+                            setNofImagePerPageAndlocation(1, "Top_Right");
+                        } else {
+                            setNofImagePerPageAndlocation(2, "Vertical_Right");
+                        }
+
                     } else if (position == 8) {
-                        ((ProcessingActivity) mContext).IMAGE_PER_PAGE = 4;
+
+                        if (((ProcessingActivity) mContext).bitmapList.size() < 2) {
+                            setNofImagePerPageAndlocation(1, "Top_Left");
+                        } else if (((ProcessingActivity) mContext).bitmapList.size() == 2) {
+                            setNofImagePerPageAndlocation(2, "Horizontal");
+                        } else {
+
+                            ((ProcessingActivity) mContext).IMAGE_PER_PAGE = 4;
+
+                        }
                     }
-                    ((ProcessingActivity) mContext).ImageViewConstraintLayout.setVisibility(View.VISIBLE);
-                    ((ProcessingActivity) mContext).convertToPdfBTN.setEnabled(true);
 
                     Utils.zoom_out(((ProcessingActivity) mContext).templateRecycleView, mContext);
+                    showWorkPlace();
                 }
             }
 
         });
 
+    }
+
+    private void showWorkPlace() {
+        ((ProcessingActivity) mContext).ImageViewConstraintLayout.setVisibility(View.VISIBLE);
+        ((ProcessingActivity) mContext).convertToPdfBTN.setEnabled(true);
+    }
+
+    private void setNofImagePerPageAndlocation(int i, String imageLocationInPage) {
+        ((ProcessingActivity) mContext).IMAGE_PER_PAGE = i;
+        ((ProcessingActivity) mContext).IMAGE_LOCATION_IN_PAGE = imageLocationInPage;
     }
 
     @Override
