@@ -3,17 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:background="@drawable/rounded_black_background"
     android:layout_margin="5dp">
 
     <ImageView
         android:id="@+id/imageViewOpenlist"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:background="@drawable/changed_background_for_recycler_view_items"
-
         android:padding="1dp"
         android:scaleType="fitCenter"
         android:src="@mipmap/ic_launcher_round"
+        android:background="@drawable/rounded_changed_black_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -43,59 +43,78 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-
-                <ImageView
-                    android:id="@+id/imageView"
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardview"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
+                    android:layout_centerHorizontal="true"
                     android:layout_margin="5dp"
-                    android:adjustViewBounds="true"
-                    android:background="#090909"
+                    android:background="@drawable/rounded_black_background"
+                    android:elevation="12dp"
+                    android:innerRadius="40dp"
                     android:maxHeight="500dp"
-                    android:padding="1dp"
-                    android:scaleType="fitCenter"
+                    android:shape="oval"
+                    android:thicknessRatio="4"
+                    app:cardCornerRadius="50dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
-                </ImageView>
 
-                <!-- Image Cropper fill the remaining available height -->
-                <com.theartofdev.edmodo.cropper.CropImageView xmlns:custom="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/cropImageView"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:visibility="gone"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    <ImageView
+                        android:id="@+id/imageView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
 
-                <ImageButton
-                    android:id="@+id/EditImagefBTN"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_gravity="center"
-                    android:layout_margin="5dp"
-                    android:background="@drawable/rounded_changed_black_background"
-                    android:src="@drawable/ic_baseline_edit_24"
-                    android:textColor="#DBDDDF"
-                    app:layout_constraintEnd_toEndOf="@+id/imageView"
-                    app:layout_constraintStart_toStartOf="@id/imageView"
-                    app:layout_constraintTop_toTopOf="@+id/imageView"></ImageButton>
+                        android:adjustViewBounds="true"
+                        android:padding="1dp"
+                        android:scaleType="fitCenter">
+
+                    </ImageView>
+
+                    <!-- Image Cropper fill the remaining available height -->
+                    <com.theartofdev.edmodo.cropper.CropImageView xmlns:custom="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/cropImageView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:visibility="gone"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageButton
+                        android:id="@+id/EditImagefBTN"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center_horizontal|top"
+                        android:layout_margin="5dp"
+                        android:background="@drawable/rounded_changed_black_background"
+                        android:src="@drawable/ic_baseline_edit_24"
+                        android:textColor="#DBDDDF"
+                        app:layout_constraintEnd_toEndOf="@+id/imageView"
+                        app:layout_constraintStart_toStartOf="@id/imageView"
+                        app:layout_constraintTop_toTopOf="@+id/imageView">
+
+                    </ImageButton>
 
 
-                <include
-                    android:id="@+id/edit_image_layout"
-                    layout="@layout/edit_image_layout"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/imageView"
-                    app:layout_constraintEnd_toEndOf="@+id/imageView"
-                    app:layout_constraintStart_toStartOf="@id/imageView"></include>
+                    <include
+                        android:id="@+id/edit_image_layout"
+                        layout="@layout/edit_image_layout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal|bottom"
+                        android:layout_marginBottom="5dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/imageView"
+                        app:layout_constraintEnd_toEndOf="@+id/cardview"
+                        app:layout_constraintStart_toStartOf="@id/cardview">
+
+                    </include>
+
+                </androidx.cardview.widget.CardView>
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -158,12 +177,14 @@
                     android:id="@+id/convertToPdfBTN"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="5dp"
 
                     android:layout_marginBottom="5dp"
                     android:background="@drawable/rounded_changed_background_for_main_btn"
                     android:text="convert to pdf"
-                    android:textColor="#DBDDDF"></Button>
+                    android:textColor="#DBDDDF">
+
+                </Button>
             </LinearLayout>
 
 
@@ -176,7 +197,9 @@
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/rounded_changed_background_for_main_btn"
                 android:text="show saving file"
-                android:textColor="#DBDDDF"></Button>
+                android:textColor="#DBDDDF">
+
+            </Button>
 
         </LinearLayout>
 
