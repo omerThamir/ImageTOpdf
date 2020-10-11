@@ -5,6 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,10 +23,12 @@ public class OpenedImagesRAdapter extends RecyclerView.Adapter<OpenedImagesRAdap
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
+        TextView imageIndexTextView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.imageViewOpenlist);
+            imageIndexTextView = itemView.findViewById(R.id.imageIndexTV);
         }
     }
 
@@ -49,6 +53,7 @@ public class OpenedImagesRAdapter extends RecyclerView.Adapter<OpenedImagesRAdap
     public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
         MyImage myImage = mMyImageUrises.get(position);
         holder.imageView.setImageBitmap(myImage.getBitmap());
+        holder.imageIndexTextView.setText(position + 1 + "");
 
 
         holder.imageView.setOnClickListener(new View.OnClickListener() {
@@ -58,6 +63,7 @@ public class OpenedImagesRAdapter extends RecyclerView.Adapter<OpenedImagesRAdap
 
                 ((ProcessingActivity) mContext).setImageFoucusWithScrollView();
                 MyImage.currentImageIndex = (byte) position;
+
             }
         });
 

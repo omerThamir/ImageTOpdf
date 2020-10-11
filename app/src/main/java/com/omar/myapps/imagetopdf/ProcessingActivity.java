@@ -1,7 +1,9 @@
 package com.omar.myapps.imagetopdf;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -19,7 +21,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
-import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
@@ -34,6 +35,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -73,7 +75,8 @@ public class ProcessingActivity extends AppCompatActivity {
 
     public RecyclerView templateRecycleView;
     private SelectTemplateRAdapter recyclerAdapterTemplate;
-    private List<MyImage> mMyImageIds;
+
+    private List<MyImage> mMyImageIds;  // this for select template adapter
 
     public List<Bitmap> bitmapList;
 
@@ -119,7 +122,8 @@ public class ProcessingActivity extends AppCompatActivity {
         edit_image_layout = findViewById(R.id.edit_image_layout);
     }
 
-    private ImageView imageView, editImagesBTN;
+    private ImageView imageView, editImagesBTN,
+            selectTemplateImgView;
 
 
     public Button openImagesBTN, selectNOfImagePerPage, convertToPdfBTN, showSavingFileBTN;
@@ -131,6 +135,9 @@ public class ProcessingActivity extends AppCompatActivity {
         openImagesBTN = findViewById(R.id.openImageBtn);
         editImagesBTN = findViewById(R.id.EditImagefBTN);
         convertToPdfBTN = findViewById(R.id.convertToPdfBTN);
+
+        selectTemplateImgView = findViewById(R.id.selectTemplateImgView);
+
         editImagesBTN.setVisibility(View.GONE);
 
         selectNOfImagePerPage = findViewById(R.id.selectTemplateBTN);
@@ -145,6 +152,37 @@ public class ProcessingActivity extends AppCompatActivity {
         ImageViewConstraintLayout = findViewById(R.id.constraintLayout);
 
     }
+
+    ItemTouchHelper.Callback ithCallback = new ItemTouchHelper.Callback() {
+        @Override
+        public int getMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
+            return makeFlag(ItemTouchHelper.ACTION_STATE_DRAG,
+                    ItemTouchHelper.DOWN | ItemTouchHelper.UP | ItemTouchHelper.START | ItemTouchHelper.END);
+        }
+
+        @Override
+        public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+            // get the viewHolder's and target's positions in your adapter data, swap them
+            Collections.swap(mMyImageUrises, viewHolder.getAdapterPosition(), target.getAdapterPosition());
+
+            //swap bitmap list to do processing on them
+            Collections.swap(bitmapList, viewHolder.getAdapterPosition(), target.getAdapterPosition());
+
+            //swap uri list to do processing on them
+            Collections.swap(uriList, viewHolder.getAdapterPosition(), target.getAdapterPosition());
+
+
+            // and notify the adapter that its data set has changed
+            //    recyclerAdapter.notifyItemMoved(viewHolder.getAdapterPosition(), target.getAdapterPosition());
+            recyclerAdapter.notifyDataSetChanged();
+            return true;
+        }
+
+        @Override
+        public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+
+        }
+    };
 
 
     private void updateStuffAfterEditingImage() {
@@ -180,6 +218,11 @@ public class ProcessingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_processing);
 
         init();
+
+        // Create an `ItemTouchHelper` and attach it to the `RecyclerView`
+        ItemTouchHelper ith = new ItemTouchHelper(ithCallback);
+        ith.attachToRecyclerView(OpenedImagesRecycleView);
+
 
         edit_image_layout.setVisibility(View.GONE);
 
@@ -954,6 +997,7 @@ public class ProcessingActivity extends AppCompatActivity {
                     mMyImageUrises.add(new MyImage(newBitmap));
                     recyclerAdapter.notifyDataSetChanged();
                     displayImageToEdit(0); // after opening the images select first image to display
+
                     openImagesBTN.setVisibility(View.GONE);
 
                     editImagesBTN.setEnabled(true);
@@ -978,6 +1022,7 @@ public class ProcessingActivity extends AppCompatActivity {
                         }
                         recyclerAdapter.notifyDataSetChanged();
                         displayImageToEdit(0); // after opening the images select first image to display
+
                         openImagesBTN.setVisibility(View.GONE);
 
                         editImagesBTN.setEnabled(true);
@@ -1157,6 +1202,7 @@ public class ProcessingActivity extends AppCompatActivity {
     private void setTemplateRV_FoucusWithScrollView(View targetView) {
         targetView.getParent().requestChildFocus(targetView, targetView);
     }
+
 
 
 }

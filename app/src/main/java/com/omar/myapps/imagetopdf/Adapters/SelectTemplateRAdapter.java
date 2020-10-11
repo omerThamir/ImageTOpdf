@@ -129,6 +129,7 @@ public class SelectTemplateRAdapter extends RecyclerView.Adapter<SelectTemplateR
 
                     Utils.zoom_out(((ProcessingActivity) mContext).templateRecycleView, mContext);
                     showWorkPlace();
+
                 }
             }
 
