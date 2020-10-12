@@ -60,11 +60,22 @@
         android:id="@+id/ShowMergePDFBtn"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:layout_gravity="center"
         android:layout_margin="5dp"
         android:background="@drawable/rounded_changed_background_for_main_btn"
         android:text="show merged files"
+        android:textColor="#DBDDDF">
+
+    </Button>
+
+    <Button
+        android:id="@+id/newProjectBtn"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="5dp"
+        android:background="@drawable/rounded_changed_background_for_main_btn"
+        android:text="new Project"
         android:textColor="#DBDDDF">
 
     </Button>

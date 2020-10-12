@@ -32,7 +32,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
@@ -47,16 +46,11 @@ import com.omar.myapps.imagetopdf.Model.MySelectedFiles;
 
 public class MergePDFActivity extends AppCompatActivity {
 
-    String rootString = Environment.getRootDirectory().getPath();
-    Uri rootUri = Uri.parse(rootString);
     public List<Uri> PDF_UriList = new ArrayList<>();
 
     List<MyFile> mFileList;
 
     public List<MySelectedFiles> mSelectedFileList;
-
-    private static final int PICK_PDF_FILE_RC = 1;
-
 
     RecyclerView mergeRecycleView, selectedPDFtoMergeRecyclerView;
     OpendPDF_FilesRAdapter opendPDF_filesRAdapter;
@@ -87,13 +81,16 @@ public class MergePDFActivity extends AppCompatActivity {
     }
 
 
-    private Button mergeBtN, openPDF_FilesBtn, ShowMergePDFBtn;
+    private Button mergeBtN, openPDF_FilesBtn, ShowMergePDFBtn,
+            newProjectBtn;
 
     private LinearLayout selectedPdfsMergeLayout;
 
     private void init() {
         openPDF_FilesBtn = findViewById(R.id.openPDF_FilesBtn);
         ShowMergePDFBtn = findViewById(R.id.ShowMergePDFBtn);
+        newProjectBtn = findViewById(R.id.newProjectBtn);
+        newProjectBtn.setVisibility(View.GONE);
         selectedPdfsMergeLayout = findViewById(R.id.selectedPdfsMergeLayout);
 
         PDF_UriList = new ArrayList<>();
@@ -167,6 +164,7 @@ public class MergePDFActivity extends AppCompatActivity {
             progDailog.dismiss();
             showMegedFiles();
             Toast.makeText(MergePDFActivity.this, "done", Toast.LENGTH_SHORT).show();
+            newProjectBtn.setVisibility(View.VISIBLE);
         }
     }
 
@@ -283,6 +281,14 @@ public class MergePDFActivity extends AppCompatActivity {
                 PDF_UriList.clear();
             }
         });
+
+        newProjectBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finishingProject();
+                newProjectBtn.setVisibility(View.GONE);
+            }
+        });
     }
 
     private void preparePDFsAndMergeThem() {
@@ -335,45 +341,28 @@ public class MergePDFActivity extends AppCompatActivity {
         outputStream.close();
     }
 
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-     /*   try {
-            // When pdf is picked
-            if (requestCode == PICK_PDF_FILE_RC && resultCode == RESULT_OK) {
-                // Get the Image from data one image
-
-                if (data.getData() != null) {
-
-                    Uri mPdfUri = data.getData();
-                    PDF_list.add(mPdfUri);
-
-                    mFileList.add(new MyFile(mPdfUri.getLastPathSegment(), mPdfUri));
-                    opendPDF_filesRAdapter.notifyDataSetChanged();
-                } else {
-                    if (data.getClipData() != null) { // multi selection
-                        ClipData mClipData = data.getClipData();
-
-                        for (int i = 0; i < mClipData.getItemCount(); i++) {
-
-                            ClipData.Item item = mClipData.getItemAt(i);
-                            Uri mPdfUri = item.getUri();
-                            PDF_list.add(mPdfUri);
-                            mFileList.add(new MyFile(mPdfUri.getLastPathSegment(), mPdfUri));
-
-                        }
-                        opendPDF_filesRAdapter.notifyDataSetChanged();
-                    }
-                }
-            }
-
-        } catch (Exception e) {
-            Toast.makeText(this, "Something went wrong", Toast.LENGTH_LONG).show();
+    void finishingProject() {
+        if (mSelectedFileList != null) {
+            mSelectedFileList.clear();
+        }
+        if (PDF_UriList != null) {
+            PDF_UriList.clear();
         }
 
+        if (mFileList != null) {
+            mFileList.clear();
+        }
 
-      */
+        openPDF_FilesBtn.setVisibility(View.VISIBLE);
+        mergeBtN.setVisibility(View.GONE);
+        selectedPdfsMergeLayout.setVisibility(View.GONE);
 
-        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        finishingProject();
+        Toast.makeText(this, "onDestroy", Toast.LENGTH_SHORT).show();
     }
 }
