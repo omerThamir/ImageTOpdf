@@ -10,11 +10,11 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.NoActionBar"
 
-        android:requestLegacyExternalStorage="true">  <!-- This opts you into the legacy storage model, and your existing external storage code will work. -->
+        android:theme="@style/Theme.AppCompat.NoActionBar">  <!-- This opts you into the legacy storage model, and your existing external storage code will work. -->
 
 
         <provider
@@ -27,16 +27,14 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity
-            android:name=".SavingFolderActivity"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+        <activity android:name=".SavingFolderActivity" />
         <activity android:name=".MergePDFActivity" />
         <activity
             android:name=".ProcessingActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".MainActivity"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
+            android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

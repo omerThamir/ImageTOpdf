@@ -1,7 +1,9 @@
 package com.omar.myapps.imagetopdf;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -28,6 +30,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -55,6 +58,30 @@ public class MergePDFActivity extends AppCompatActivity {
     OpendPDF_FilesRAdapter opendPDF_filesRAdapter;
 
     View openingPDF_FilesLayout;
+
+    ItemTouchHelper.Callback ithCallback = new ItemTouchHelper.Callback() {
+        @Override
+        public int getMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
+            return makeFlag(ItemTouchHelper.ACTION_STATE_DRAG,
+                    ItemTouchHelper.DOWN | ItemTouchHelper.UP | ItemTouchHelper.START | ItemTouchHelper.END);
+        }
+
+        @Override
+        public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+            Collections.swap(PDF_UriList, viewHolder.getAdapterPosition(), target.getAdapterPosition());
+
+            // get the viewHolder's and target's positions in your adapter data, swap them
+            Collections.swap(mSelectedFileList, viewHolder.getAdapterPosition(), target.getAdapterPosition());
+            // and notify the adapter that its data set has changed
+            selectedPDF_toMergeRAdapter.notifyDataSetChanged();
+            return true;
+        }
+
+        @Override
+        public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+
+        }
+    };
 
 
     private void initRecyclerView() {
@@ -212,6 +239,10 @@ public class MergePDFActivity extends AppCompatActivity {
         setContentView(R.layout.activity_merge_p_d_f);
 
         init();
+
+        // Create an `ItemTouchHelper` and attach it to the `RecyclerView`
+        ItemTouchHelper ith = new ItemTouchHelper(ithCallback);
+        ith.attachToRecyclerView(selectedPDFtoMergeRecyclerView);
 
         openPDF_FilesBtn.setOnClickListener(new View.OnClickListener() {
             @Override
