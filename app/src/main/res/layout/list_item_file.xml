@@ -1,29 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="70dp"
-    android:layout_margin="5dp"
+    android:layout_height="60dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginBottom="10dp"
+    android:layout_marginRight="10dp"
     android:background="@drawable/rounded_changed_background_for_saved_files_recycler"
     android:orientation="horizontal">
 
     <ImageView
         android:id="@+id/imageViewfileItem"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_margin="5dp"
-        android:layout_gravity="left"
-        android:src="@drawable/pdf_icon"></ImageView>
+        android:src="@drawable/pdf_icon"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></ImageView>
 
     <TextView
         android:id="@+id/fileNameTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_margin="5dp"
-
         android:text="filename"
         android:textColor="#E3E4E4"
-        android:textSize="16dp"></TextView>
+        android:layout_margin="5dp"
+        android:textSize="16dp"
+   ></TextView>
 
 
-</FrameLayout>
+</LinearLayout>

@@ -17,36 +17,49 @@
         android:text="open files"
         android:textColor="#DBDDDF"></Button>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/selectedPdfsMergeLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
+        android:background="@drawable/rounded_black_background"
         android:orientation="vertical"
         android:visibility="gone">
 
         <TextView
+            android:id="@+id/selctedpdftv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="5dp"
             android:text="selected files"
             android:textColor="#E6E4E4"
-            android:textSize="17dp">
+            android:textSize="17dp"
+            app:layout_constraintBottom_toTopOf="@+id/selectedPDFtoMergeRecyclerView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
         </TextView>
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/selectedPDFtoMergeRecyclerView"
             android:layout_width="match_parent"
-            android:layout_height="200dp"></androidx.recyclerview.widget.RecyclerView>
-    </LinearLayout>
+            android:layout_height="wrap_content"
+            app:layout_constrainedHeight="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_max="280dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/selctedpdftv"></androidx.recyclerview.widget.RecyclerView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
         android:id="@+id/mergePDFBtn"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+
         android:layout_gravity="center"
         android:layout_margin="5dp"
         android:background="@drawable/rounded_changed_background_for_main_btn"
