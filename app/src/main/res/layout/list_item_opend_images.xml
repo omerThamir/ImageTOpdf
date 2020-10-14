@@ -4,12 +4,12 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="@drawable/rounded_black_background"
-    android:layout_margin="5dp">
+    android:layout_margin="3dp">
 
     <ImageView
         android:id="@+id/imageViewOpenlist"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:padding="1dp"
         android:scaleType="fitCenter"
         android:src="@mipmap/ic_launcher_round"

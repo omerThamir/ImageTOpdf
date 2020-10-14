@@ -2,6 +2,7 @@ package com.omar.myapps.imagetopdf;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -14,6 +15,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.ImageDecoder;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -24,9 +26,11 @@ import android.os.Handler;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
+import android.view.animation.AccelerateInterpolator;
 import android.widget.ImageView;
-import android.widget.ScrollView;
+import android.widget.LinearLayout;
+
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
@@ -57,13 +61,14 @@ import com.omar.myapps.imagetopdf.Model.MyImage;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
+import static android.view.View.INVISIBLE;
+
 
 public class ProcessingActivity extends AppCompatActivity {
     private static final int GALLERY_RC = 1;
     private static final int SHOW_SAVING_RC = 2;
 
 
-    ScrollView scrollView;
     public int IMAGE_PER_PAGE;
     public String IMAGE_LOCATION_IN_PAGE;
     View edit_image_layout;
@@ -81,10 +86,14 @@ public class ProcessingActivity extends AppCompatActivity {
     public List<Bitmap> bitmapList;
 
     private List<Uri> uriList;
+    LinearLayout parentViewLayout;
 
+    View openImagesLayout, startConvertingLayout, newProjectOrCloseLayout;
     CropImageView cropImageView;
 
     public View ImageViewConstraintLayout;
+
+    TextView selectTemplateTV, openImagesTV, startConvertingTV, newProjectOrCloseTV;
 
     Uri newImageUri;
 
@@ -122,28 +131,38 @@ public class ProcessingActivity extends AppCompatActivity {
         edit_image_layout = findViewById(R.id.edit_image_layout);
     }
 
-    private ImageView imageView, editImagesBTN,
-            selectTemplateImgView;
+    private ImageView imageView, editImagesBTN;
 
+    View selectTemplateLayout;
 
-    public Button openImagesBTN, selectNOfImagePerPage, convertToPdfBTN, showSavingFileBTN;
+    public ImageView openImagesBTN, selectNOfImagePerPage, convertToPdfBTN, newProjectOrCloseImageView;
+
 
     void init() {
         initRecyclerView();
         initTemplateRecyclerView();
 
+        parentViewLayout = findViewById(R.id.parentViewLayout);
+        openImagesLayout = findViewById(R.id.openImagesLayout);
+
         openImagesBTN = findViewById(R.id.openImageBtn);
         editImagesBTN = findViewById(R.id.EditImagefBTN);
         convertToPdfBTN = findViewById(R.id.convertToPdfBTN);
+        newProjectOrCloseImageView = findViewById(R.id.newProjectOrCloseImageView);
 
-        selectTemplateImgView = findViewById(R.id.selectTemplateImgView);
+        selectTemplateTV = findViewById(R.id.selectTemplateTV);
+        openImagesTV = findViewById(R.id.openImagesTV);
+        startConvertingTV = findViewById(R.id.startConvertingTV);
+        newProjectOrCloseTV = findViewById(R.id.newProjectOrCloseTV);
 
+        selectTemplateLayout = findViewById(R.id.selectTemplateLayout);
+        startConvertingLayout = findViewById(R.id.startConvertingLayout);
+        newProjectOrCloseLayout = findViewById(R.id.newProjectOrCloseLayout);
         editImagesBTN.setVisibility(View.GONE);
 
         selectNOfImagePerPage = findViewById(R.id.selectTemplateBTN);
-        showSavingFileBTN = findViewById(R.id.showSavingFileBTN);
 
-        scrollView = findViewById(R.id.scrollView);
+
         cropImageView = findViewById(R.id.cropImageView);
 
         uriList = new ArrayList<>();
@@ -211,13 +230,20 @@ public class ProcessingActivity extends AppCompatActivity {
         }
     }
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_processing);
 
         init();
+
+        Utils.zoom_in(openImagesBTN, getApplicationContext());
+
+        //animateViewHorizantally(openImagesBTN, openImagesLayout);
+        //   animateViewHorizantallyToView(openImagesTV, parentViewLayout, openImagesBTN);
+
+
+        //  selectTemplateLayout.setVisibility(View.VISIBLE);
 
         // Create an `ItemTouchHelper` and attach it to the `RecyclerView`
         ItemTouchHelper ith = new ItemTouchHelper(ithCallback);
@@ -227,8 +253,6 @@ public class ProcessingActivity extends AppCompatActivity {
         edit_image_layout.setVisibility(View.GONE);
 
         editImagesBTN.setEnabled(false);
-        selectNOfImagePerPage.setEnabled(false);
-        convertToPdfBTN.setEnabled(false);
 
         imageView = findViewById(R.id.imageView);
 
@@ -334,12 +358,23 @@ public class ProcessingActivity extends AppCompatActivity {
             }
         });
 
-        showSavingFileBTN.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showSavedFiles();
-            }
-        });
+    }
+
+    private void animateViewHorizantally(View viewTobeAnimated, View rootView) {
+        viewTobeAnimated.animate()
+                .translationX((rootView.getWidth() - viewTobeAnimated.getWidth()) / 2)
+                //   .translationY((root.getHeight() - animatedView.getHeight()) / 2)
+                .setInterpolator(new AccelerateInterpolator())
+                .setDuration(700);
+    }
+
+    public void animateViewHorizantallyToView(View viewTobeAnimated, View rootView, View viewToStopAt) {
+        viewTobeAnimated.animate()
+                .translationX((rootView.getWidth() - viewTobeAnimated.getWidth()) / 2 - viewToStopAt.getWidth() * 2)
+                //   .translationY((root.getHeight() - animatedView.getHeight()) / 2)
+                .setInterpolator(new AccelerateInterpolator())
+                .setDuration(500);
+
     }
 
     private Uri getUriFromBitmap(Context context, Bitmap ImgBitmap) {
@@ -391,7 +426,19 @@ public class ProcessingActivity extends AppCompatActivity {
 
     @Override
     protected void onResume() {
+
         super.onResume();
+        if (Utils.pdfConversionIsDone
+                && newProjectOrCloseLayout.getVisibility() != View.VISIBLE) {
+            showAndAnimateNewProjectOrCloseLayout();
+            Toast.makeText(this, "return to onResume ;;activity", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void showAndAnimateNewProjectOrCloseLayout() {
+        newProjectOrCloseLayout.setVisibility(View.VISIBLE);
+        animateViewHorizantally(newProjectOrCloseImageView, parentViewLayout);
+        animateViewHorizantallyToView(newProjectOrCloseTV, parentViewLayout, newProjectOrCloseImageView);
     }
 
     File savingfolder;
@@ -998,11 +1045,14 @@ public class ProcessingActivity extends AppCompatActivity {
                     recyclerAdapter.notifyDataSetChanged();
                     displayImageToEdit(0); // after opening the images select first image to display
 
-                    openImagesBTN.setVisibility(View.GONE);
+                    //   openImagesBTN.setVisibility(View.GONE);
 
+                    openImagesLayout.setVisibility(View.GONE);
                     editImagesBTN.setEnabled(true);
-                    selectNOfImagePerPage.setEnabled(true);
+                    //   selectNOfImagePerPage.setEnabled(true);
 
+
+                    showAndAnimateSelectTemplateLayout();
 
                 } else {
                     if (data.getClipData() != null) { // multi selection
@@ -1026,7 +1076,8 @@ public class ProcessingActivity extends AppCompatActivity {
                         openImagesBTN.setVisibility(View.GONE);
 
                         editImagesBTN.setEnabled(true);
-                        selectNOfImagePerPage.setEnabled(true);
+
+                        showAndAnimateSelectTemplateLayout();
 
                     }
                 }
@@ -1083,12 +1134,21 @@ public class ProcessingActivity extends AppCompatActivity {
         recyclerAdapter.notifyDataSetChanged();
     }
 
+    private void showAndAnimateSelectTemplateLayout() {
+        selectTemplateLayout.setVisibility(View.VISIBLE);
+        animateViewHorizantally(selectNOfImagePerPage, parentViewLayout);
+        animateViewHorizantallyToView(selectTemplateTV, parentViewLayout, selectNOfImagePerPage);
+
+
+    }
+
     public byte[] convertBitmapToArrayOfByte(Bitmap bitmap) {
         //convert bitmap to array of bytes (Image)
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
         return stream.toByteArray();
     }
+
 
     class MyAsyncTask extends AsyncTask<Object, String, Object> {
 
@@ -1105,9 +1165,11 @@ public class ProcessingActivity extends AppCompatActivity {
             progDailog.dismiss();
             Toast.makeText(ProcessingActivity.this, "done", Toast.LENGTH_SHORT).show();
             showSavedFiles();
+            Utils.pdfConversionIsDone = true;
             finishingProject();
         }
     }
+
 
     private void showSavedFiles() {
         Intent intent = new Intent(ProcessingActivity.this, SavingFolderActivity.class);
@@ -1170,6 +1232,13 @@ public class ProcessingActivity extends AppCompatActivity {
         }
     }
 
+    public void showAndAnimateStartConvertingLayout() {
+        startConvertingLayout.setVisibility(View.VISIBLE);
+        animateViewHorizantally(convertToPdfBTN, parentViewLayout);
+        animateViewHorizantallyToView(startConvertingTV, parentViewLayout, convertToPdfBTN);
+        selectTemplateTV.setTextColor(Color.DKGRAY);
+    }
+
     private void finishingProject() {
         deleteTempImages();
     }
@@ -1202,7 +1271,6 @@ public class ProcessingActivity extends AppCompatActivity {
     private void setTemplateRV_FoucusWithScrollView(View targetView) {
         targetView.getParent().requestChildFocus(targetView, targetView);
     }
-
 
 
 }

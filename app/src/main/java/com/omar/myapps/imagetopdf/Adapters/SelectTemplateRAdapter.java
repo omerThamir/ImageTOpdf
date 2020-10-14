@@ -58,7 +58,6 @@ public class SelectTemplateRAdapter extends RecyclerView.Adapter<SelectTemplateR
                     ((ProcessingActivity) mContext).templateRecycleView.setVisibility(View.GONE);
 
 
-
                     /** *************************************************************************************
                      *                                                                                      *
                      *        1 img fit                   1 img top left              1 img top_center      *
@@ -66,7 +65,7 @@ public class SelectTemplateRAdapter extends RecyclerView.Adapter<SelectTemplateR
                      *        2 img vertical center       2 img vertical right        4 img                 *
                      *                                                                                      *
                      * **************************************************************************************
-                      */
+                     */
 
                     if (position == 0) {
 
@@ -129,6 +128,7 @@ public class SelectTemplateRAdapter extends RecyclerView.Adapter<SelectTemplateR
 
                     Utils.zoom_out(((ProcessingActivity) mContext).templateRecycleView, mContext);
                     showWorkPlace();
+                    ((ProcessingActivity) mContext).showAndAnimateStartConvertingLayout();
 
                 }
             }

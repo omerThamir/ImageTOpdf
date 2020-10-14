@@ -1,42 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rootMainActLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/app_background"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <LinearLayout
+
+    <FrameLayout
+        android:id="@+id/openImagesLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:orientation="vertical">
+        android:orientation="horizontal">
 
-        <Button
+        <ImageView
             android:id="@+id/openConvertToPdfActivity"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
             android:layout_gravity="center"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
             android:background="@drawable/rounded_changed_background_for_main_btn"
-            android:text="convert image tp pdf"
-            android:textColor="#EBEDEF"></Button>
+            android:padding="6dp"
+            android:src="@drawable/ic_select_template_50"
+            android:textColor="#DBDDDF"></ImageView>
 
-        <Button
-            android:id="@+id/openMergePdfActivity"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
+        <TextView
+            android:id="@+id/openConvertToPdfActivityTV"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:text="convert image to pdf">
 
-            android:layout_gravity="center"
-            android:layout_margin="20dp"
-            android:background="@drawable/rounded_changed_background_for_main_btn"
-            android:text="Merge pdf"
-            android:textColor="#EBEDEF"></Button>
-
-    </LinearLayout>
+        </TextView>
+    </FrameLayout>
 
 
+    <Button
+        android:id="@+id/openMergePdfActivity"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+
+        android:layout_gravity="center"
+        android:layout_margin="20dp"
+        android:background="@drawable/rounded_changed_background_for_main_btn"
+        android:text="Merge pdf"
+        android:textColor="#EBEDEF"></Button>
 
 
     <include
@@ -49,4 +62,4 @@
 
     </include>
 
-</FrameLayout>
+</LinearLayout>

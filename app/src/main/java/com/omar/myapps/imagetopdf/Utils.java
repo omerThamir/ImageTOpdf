@@ -1,5 +1,7 @@
 package com.omar.myapps.imagetopdf;
 
+import android.animation.ObjectAnimator;
+import android.app.Activity;
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -12,11 +14,17 @@ import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
+
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.omar.myapps.imagetopdf.Model.MyImage;
 
@@ -26,6 +34,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class Utils {
+
+    public static boolean pdfConversionIsDone = false;
     private static Bitmap processingBitmap;
     public static float[] flipVertical = {1.0f, -1.0f};
     public static float[] flipHorizontal = {-1.0f, 1.0f};
@@ -55,10 +65,18 @@ public class Utils {
     public static void zoom_in(View v, Context c) {
         Animation animation = AnimationUtils.loadAnimation(c, R.anim.zoom_in);
         v.startAnimation(animation);
+        if(c instanceof ProcessingActivity){
+            ((ProcessingActivity) c).animateViewHorizantallyToView(((ProcessingActivity) c).openImagesTV,((ProcessingActivity) c).parentViewLayout,((ProcessingActivity) c).openImagesBTN);
+        }
     }
 
     public static void zoom_out(View v, Context c) {
         Animation animation = AnimationUtils.loadAnimation(c, R.anim.zoom_out);
+        v.startAnimation(animation);
+    }
+
+    public static void DoLeftToRightAnimation(View v, Context c) {
+        Animation animation = AnimationUtils.loadAnimation(c, R.anim.left_to_right);
         v.startAnimation(animation);
     }
 
@@ -239,6 +257,57 @@ public class Utils {
         }
 
         return inSampleSize;
+    }
+
+
+
+
+
+    public static void AnimateFromLeftToCenter(View viewTobeAnimated, LinearLayout ParentView, Context context) {
+
+
+        DisplayMetrics metrics = context.getResources().getDisplayMetrics();
+        ObjectAnimator translationX = ObjectAnimator.ofFloat(viewTobeAnimated,
+                "x",
+                ((metrics.widthPixels / 2) - viewTobeAnimated.getWidth() / 2)); // 55 view width
+        translationX.setDuration(1000);
+        translationX.start();
+
+        Toast.makeText(context, "" + (viewTobeAnimated.getWidth()), Toast.LENGTH_SHORT).show();
+
+/*
+        int layoutWidth = ParentView.getWidth();
+
+        layoutWidth = ((int) layoutWidth / 2) - (viewTobeAnimated.getWidth());
+
+        viewTobeAnimated.animate()
+                .translationX(-layoutWidth)
+                .translationY(0)
+                .setDuration(500)
+                .setInterpolator(new LinearInterpolator())
+                .start();
+
+
+
+ */
+        float parentCenterX = (ParentView.getX() + ParentView.getWidth());
+        //   float parentCenterY = ParentView.getY() + ParentView.getHeight() / 2;
+
+      /*  viewTobeAnimated.animate().
+                translationX(parentCenterX - viewTobeAnimated.getWidth() / 2 -viewTobeAnimated.getX());
+        // .translationY(parentCenterY - viewTobeAnimated.getHeight() / 2);
+
+
+       */
+
+      /*  ObjectAnimator animation = ObjectAnimator.ofFloat(viewTobeAnimated, "translationX",
+                200);
+        animation.setDuration(2000);
+        animation.start();
+
+       */
+        //   Toast.makeText(context, "" + (layoutWidth), Toast.LENGTH_SHORT).show();
+
     }
 
 }

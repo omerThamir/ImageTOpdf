@@ -11,12 +11,19 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.AccelerateInterpolator;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button openConvertToPdfActivity, openMergePdfActivity, givePermBtn;
+    ImageView openConvertToPdfActivity;
+    Button givePermBtn, openMergePdfActivity;
+    TextView openConvertToPdfActivityTV;
     private static final int PERMISSION_RC = 1;
+
+    private View rootView;
 
     String[] PERMISSIONS = {
             Manifest.permission.READ_EXTERNAL_STORAGE,
@@ -26,10 +33,13 @@ public class MainActivity extends AppCompatActivity {
     View permissionDeniedInclude;
 
     void init() {
+        rootView = findViewById(R.id.rootMainActLayout);
         openConvertToPdfActivity = findViewById(R.id.openConvertToPdfActivity);
         openMergePdfActivity = findViewById(R.id.openMergePdfActivity);
         permissionDeniedInclude = findViewById(R.id.permissionDeniedInclude);
         givePermBtn = findViewById(R.id.givePermBtn);
+
+        openConvertToPdfActivityTV = findViewById(R.id.openConvertToPdfActivityTV);
     }
 
     @Override
@@ -45,11 +55,15 @@ public class MainActivity extends AppCompatActivity {
             permissionDeniedInclude.setVisibility(View.VISIBLE);
         } else {
 
-            openConvertToPdfActivity.setVisibility(View.VISIBLE);
+
             permissionDeniedInclude.setVisibility(View.GONE);
 
-            Utils.zoom_in(openConvertToPdfActivity,getApplicationContext());
-            Utils.zoom_in(openMergePdfActivity,getApplicationContext());
+
+         //   animateViewHorizantally(openConvertToPdfActivity, rootView);
+           // animateViewHorizantallyToView(openConvertToPdfActivityTV, rootView, openConvertToPdfActivity);
+
+          Utils.zoom_in(openConvertToPdfActivity, getApplicationContext());
+           Utils.zoom_in(openConvertToPdfActivityTV, getApplicationContext());
         }
 
 
@@ -90,6 +104,15 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        animateViewHorizantally(openConvertToPdfActivity, rootView);
+        animateViewHorizantallyToView(openConvertToPdfActivityTV, rootView, openConvertToPdfActivity);
+
+    }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -114,5 +137,22 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         return true;
+    }
+
+    private void animateViewHorizantally(View viewTobeAnimated, View rootView) {
+        viewTobeAnimated.animate()
+                .translationX((rootView.getWidth() - viewTobeAnimated.getWidth()) / 2)
+                //   .translationY((root.getHeight() - animatedView.getHeight()) / 2)
+                .setInterpolator(new AccelerateInterpolator())
+                .setDuration(700);
+    }
+
+    private void animateViewHorizantallyToView(View viewTobeAnimated, View rootView, View viewToStopAt) {
+        viewTobeAnimated.animate()
+                .translationX((rootView.getWidth() - viewTobeAnimated.getWidth()) / 2 - viewToStopAt.getWidth() * 2)
+                //   .translationY((root.getHeight() - animatedView.getHeight()) / 2)
+                .setInterpolator(new AccelerateInterpolator())
+                .setDuration(500);
+
     }
 }

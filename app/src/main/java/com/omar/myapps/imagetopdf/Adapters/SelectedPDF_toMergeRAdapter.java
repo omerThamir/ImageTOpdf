@@ -60,7 +60,7 @@ public class SelectedPDF_toMergeRAdapter extends RecyclerView.Adapter<SelectedPD
     public void onBindViewHolder(@NonNull final SelectedPDF_toMergeRAdapter.ViewHolder holder, final int position) {
         final MySelectedFiles file = files.get(position);
         holder.fileName.setText(file.getName());
-        
+
     }
 
     @Override
