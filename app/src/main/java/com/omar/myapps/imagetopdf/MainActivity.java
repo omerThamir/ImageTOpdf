@@ -14,16 +14,16 @@ import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
     ImageView openConvertToPdfActivity;
-    Button givePermBtn, openMergePdfActivity;
-    TextView openConvertToPdfActivityTV;
+    Button givePermBtn;
+    ImageView openMergePdfActivity;
+
     private static final int PERMISSION_RC = 1;
 
-    private View rootView;
+    private View rootView, openImagesLayout, mergePdfActivityLayout;
 
     String[] PERMISSIONS = {
             Manifest.permission.READ_EXTERNAL_STORAGE,
@@ -34,12 +34,17 @@ public class MainActivity extends AppCompatActivity {
 
     void init() {
         rootView = findViewById(R.id.rootMainActLayout);
+        openImagesLayout = findViewById(R.id.openImagesLayout);
+
         openConvertToPdfActivity = findViewById(R.id.openConvertToPdfActivity);
-        openMergePdfActivity = findViewById(R.id.openMergePdfActivity);
+
+        mergePdfActivityLayout = findViewById(R.id.mergePdfActivityLayout);
+
+        openMergePdfActivity = findViewById(R.id.openMergePdfActivityIV);
+
         permissionDeniedInclude = findViewById(R.id.permissionDeniedInclude);
         givePermBtn = findViewById(R.id.givePermBtn);
 
-        openConvertToPdfActivityTV = findViewById(R.id.openConvertToPdfActivityTV);
     }
 
     @Override
@@ -58,12 +63,10 @@ public class MainActivity extends AppCompatActivity {
 
             permissionDeniedInclude.setVisibility(View.GONE);
 
+            Utils.zoom_in(openImagesLayout, getApplicationContext());
+            Utils.zoom_in(mergePdfActivityLayout, getApplicationContext());
 
-         //   animateViewHorizantally(openConvertToPdfActivity, rootView);
-           // animateViewHorizantallyToView(openConvertToPdfActivityTV, rootView, openConvertToPdfActivity);
 
-          Utils.zoom_in(openConvertToPdfActivity, getApplicationContext());
-           Utils.zoom_in(openConvertToPdfActivityTV, getApplicationContext());
         }
 
 
@@ -104,14 +107,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        animateViewHorizantally(openConvertToPdfActivity, rootView);
-        animateViewHorizantallyToView(openConvertToPdfActivityTV, rootView, openConvertToPdfActivity);
-
-    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {

@@ -237,13 +237,7 @@ public class ProcessingActivity extends AppCompatActivity {
 
         init();
 
-        Utils.zoom_in(openImagesBTN, getApplicationContext());
-
-        //animateViewHorizantally(openImagesBTN, openImagesLayout);
-        //   animateViewHorizantallyToView(openImagesTV, parentViewLayout, openImagesBTN);
-
-
-        //  selectTemplateLayout.setVisibility(View.VISIBLE);
+        Utils.zoom_in(openImagesLayout, getApplicationContext());
 
         // Create an `ItemTouchHelper` and attach it to the `RecyclerView`
         ItemTouchHelper ith = new ItemTouchHelper(ithCallback);
@@ -431,14 +425,13 @@ public class ProcessingActivity extends AppCompatActivity {
         if (Utils.pdfConversionIsDone
                 && newProjectOrCloseLayout.getVisibility() != View.VISIBLE) {
             showAndAnimateNewProjectOrCloseLayout();
-            Toast.makeText(this, "return to onResume ;;activity", Toast.LENGTH_SHORT).show();
         }
     }
 
     private void showAndAnimateNewProjectOrCloseLayout() {
         newProjectOrCloseLayout.setVisibility(View.VISIBLE);
-        animateViewHorizantally(newProjectOrCloseImageView, parentViewLayout);
-        animateViewHorizantallyToView(newProjectOrCloseTV, parentViewLayout, newProjectOrCloseImageView);
+        Utils.zoom_in(newProjectOrCloseLayout, getApplicationContext());
+        //and hide select and convert layouts
     }
 
     File savingfolder;
@@ -1136,10 +1129,7 @@ public class ProcessingActivity extends AppCompatActivity {
 
     private void showAndAnimateSelectTemplateLayout() {
         selectTemplateLayout.setVisibility(View.VISIBLE);
-        animateViewHorizantally(selectNOfImagePerPage, parentViewLayout);
-        animateViewHorizantallyToView(selectTemplateTV, parentViewLayout, selectNOfImagePerPage);
-
-
+        Utils.zoom_in(selectTemplateLayout, getApplicationContext());
     }
 
     public byte[] convertBitmapToArrayOfByte(Bitmap bitmap) {
@@ -1234,8 +1224,7 @@ public class ProcessingActivity extends AppCompatActivity {
 
     public void showAndAnimateStartConvertingLayout() {
         startConvertingLayout.setVisibility(View.VISIBLE);
-        animateViewHorizantally(convertToPdfBTN, parentViewLayout);
-        animateViewHorizantallyToView(startConvertingTV, parentViewLayout, convertToPdfBTN);
+        Utils.zoom_in(startConvertingLayout, getApplicationContext());
         selectTemplateTV.setTextColor(Color.DKGRAY);
     }
 

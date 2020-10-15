@@ -9,7 +9,7 @@
     android:orientation="vertical"
     tools:context=".ProcessingActivity">
 
-    <FrameLayout
+    <LinearLayout
         android:id="@+id/openImagesLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -20,8 +20,7 @@
             android:layout_width="55dp"
             android:layout_height="55dp"
             android:layout_gravity="center"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="5dp"
+            android:layout_margin="10dp"
             android:background="@drawable/rounded_changed_background_for_main_btn"
             android:padding="6dp"
             android:src="@drawable/ic_select_template_50"
@@ -37,7 +36,7 @@
             android:text="1- open image (s)">
 
         </TextView>
-    </FrameLayout>
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -133,18 +132,19 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <FrameLayout
+        <LinearLayout
             android:id="@+id/selectTemplateLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="horizontal"
             android:visibility="invisible">
 
             <ImageView
                 android:id="@+id/selectTemplateBTN"
                 android:layout_width="55dp"
                 android:layout_height="55dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="5dp"
+                android:layout_margin="10dp"
+
                 android:background="@drawable/rounded_changed_background_for_main_btn"
                 android:padding="6dp"
                 android:src="@drawable/ic_select_template_50"
@@ -160,7 +160,7 @@
                 android:text="2- select template">
 
             </TextView>
-        </FrameLayout>
+        </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/templateRecycleView"
@@ -172,18 +172,18 @@
             android:padding="5dp"
             android:visibility="gone" />
 
-        <FrameLayout
+        <LinearLayout
             android:id="@+id/startConvertingLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="horizontal"
             android:visibility="invisible">
 
             <ImageView
                 android:id="@+id/convertToPdfBTN"
                 android:layout_width="55dp"
                 android:layout_height="55dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="5dp"
+                android:layout_margin="10dp"
                 android:background="@drawable/rounded_changed_background_for_main_btn"
                 android:padding="6dp"
                 android:src="@drawable/ic_picture_as_pdf_50"
@@ -199,21 +199,21 @@
                 android:text="3- start converting">
 
             </TextView>
-        </FrameLayout>
+        </LinearLayout>
 
 
-        <FrameLayout
+        <LinearLayout
             android:id="@+id/newProjectOrCloseLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="horizontal"
             android:visibility="invisible">
 
             <ImageView
                 android:id="@+id/newProjectOrCloseImageView"
                 android:layout_width="55dp"
                 android:layout_height="55dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="5dp"
+                android:layout_margin="10dp"
                 android:background="@drawable/rounded_changed_background_for_main_btn"
                 android:padding="6dp"
                 android:src="@drawable/ic_new_or_close_50"
@@ -229,7 +229,7 @@
                 android:text="new project or close">
 
             </TextView>
-        </FrameLayout>
+        </LinearLayout>
 
 
         <include
