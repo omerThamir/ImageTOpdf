@@ -61,8 +61,6 @@ import com.omar.myapps.imagetopdf.Model.MyImage;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
-import static android.view.View.INVISIBLE;
-
 
 public class ProcessingActivity extends AppCompatActivity {
     private static final int GALLERY_RC = 1;
@@ -88,7 +86,7 @@ public class ProcessingActivity extends AppCompatActivity {
     private List<Uri> uriList;
     LinearLayout parentViewLayout;
 
-    View openImagesLayout, startConvertingLayout, newProjectOrCloseLayout;
+    View openImagesLayout, startConvertingLayout, newProjetLayout, savedPdfLayout;
     CropImageView cropImageView;
 
     public View ImageViewConstraintLayout;
@@ -131,7 +129,7 @@ public class ProcessingActivity extends AppCompatActivity {
         edit_image_layout = findViewById(R.id.edit_image_layout);
     }
 
-    private ImageView imageView, editImagesBTN;
+    private ImageView imageView, editImagesBTN, savedPdfImageView;
 
     View selectTemplateLayout;
 
@@ -148,16 +146,19 @@ public class ProcessingActivity extends AppCompatActivity {
         openImagesBTN = findViewById(R.id.openImageBtn);
         editImagesBTN = findViewById(R.id.EditImagefBTN);
         convertToPdfBTN = findViewById(R.id.convertToPdfBTN);
-        newProjectOrCloseImageView = findViewById(R.id.newProjectOrCloseImageView);
+        newProjectOrCloseImageView = findViewById(R.id.newProjectImageView);
+        savedPdfLayout = findViewById(R.id.savedPdfLayout);
+
+        savedPdfImageView = findViewById(R.id.savedPdfImageView);
 
         selectTemplateTV = findViewById(R.id.selectTemplateTV);
         openImagesTV = findViewById(R.id.openImagesTV);
         startConvertingTV = findViewById(R.id.startConvertingTV);
-        newProjectOrCloseTV = findViewById(R.id.newProjectOrCloseTV);
+        newProjectOrCloseTV = findViewById(R.id.newProjectTV);
 
         selectTemplateLayout = findViewById(R.id.selectTemplateLayout);
         startConvertingLayout = findViewById(R.id.startConvertingLayout);
-        newProjectOrCloseLayout = findViewById(R.id.newProjectOrCloseLayout);
+        newProjetLayout = findViewById(R.id.newProjectLayout);
         editImagesBTN.setVisibility(View.GONE);
 
         selectNOfImagePerPage = findViewById(R.id.selectTemplateBTN);
@@ -352,6 +353,15 @@ public class ProcessingActivity extends AppCompatActivity {
             }
         });
 
+        savedPdfImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ProcessingActivity.this, SavingFolderActivity.class);
+                intent.putExtra("FolderName", "Converted");
+                startActivity(intent);
+            }
+        });
+
     }
 
     private void animateViewHorizantally(View viewTobeAnimated, View rootView) {
@@ -423,14 +433,19 @@ public class ProcessingActivity extends AppCompatActivity {
 
         super.onResume();
         if (Utils.pdfConversionIsDone
-                && newProjectOrCloseLayout.getVisibility() != View.VISIBLE) {
-            showAndAnimateNewProjectOrCloseLayout();
+
+                && newProjetLayout.getVisibility() != View.VISIBLE) {
+            selectTemplateLayout.setVisibility(View.GONE);
+            startConvertingLayout.setVisibility(View.GONE);
+            showAndAnimateNewProjectAndShowSavedFileLayout();
         }
     }
 
-    private void showAndAnimateNewProjectOrCloseLayout() {
-        newProjectOrCloseLayout.setVisibility(View.VISIBLE);
-        Utils.zoom_in(newProjectOrCloseLayout, getApplicationContext());
+    private void showAndAnimateNewProjectAndShowSavedFileLayout() {
+        newProjetLayout.setVisibility(View.VISIBLE);
+        Utils.zoom_in(newProjetLayout, getApplicationContext());
+        savedPdfLayout.setVisibility(View.VISIBLE);
+        Utils.zoom_in(savedPdfLayout, getApplicationContext());
         //and hide select and convert layouts
     }
 

@@ -8,16 +8,35 @@
     android:orientation="vertical"
     tools:context=".MergePDFActivity">
 
-    <Button
-        android:id="@+id/openPDF_FilesBtn"
-        android:layout_width="150dp"
+    <LinearLayout
+        android:id="@+id/openPdfFileLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="5dp"
-        android:background="@drawable/rounded_changed_background_for_main_btn"
-        android:text="open files"
-        android:textColor="#DBDDDF"></Button>
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/openPDF_FilesBtn"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:background="@drawable/rounded_changed_background_for_main_btn"
+            android:padding="6dp"
+            android:src="@drawable/ic_add_file_50"
+            android:textColor="#DBDDDF"></ImageView>
+
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:text="1- open pdf files">
+
+        </TextView>
+    </LinearLayout>
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/selectedPdfsMergeLayout"
@@ -60,43 +79,97 @@
             app:layout_constraintTop_toBottomOf="@+id/selctedpdftv"></androidx.recyclerview.widget.RecyclerView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <Button
-        android:id="@+id/mergePDFBtn"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
 
-        android:layout_gravity="center"
-        android:layout_margin="5dp"
-        android:background="@drawable/rounded_changed_background_for_main_btn"
-        android:text="merge"
-        android:textColor="#DBDDDF"
+    <LinearLayout
+        android:id="@+id/mergePdfFileLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
         android:visibility="gone">
 
-    </Button>
 
-    <Button
-        android:id="@+id/ShowMergePDFBtn"
-        android:layout_width="150dp"
+        <ImageView
+            android:id="@+id/mergePDFBtn"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:background="@drawable/rounded_changed_background_for_main_btn"
+            android:padding="6dp"
+            android:src="@drawable/ic_baseline_merge_type_24"
+            android:textColor="#DBDDDF"></ImageView>
+
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:text="2- merge pdf files">
+
+        </TextView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/newProjectMergeLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="5dp"
-        android:background="@drawable/rounded_changed_background_for_main_btn"
-        android:text="show merged files"
-        android:textColor="#DBDDDF">
+        android:orientation="horizontal"
+        android:visibility="gone">
 
-    </Button>
+        <ImageView
+            android:id="@+id/newProjectBtn"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/rounded_changed_background_for_main_btn"
+            android:padding="6dp"
+            android:src="@drawable/ic_new_50"
+            android:textColor="#DBDDDF"></ImageView>
 
-    <Button
-        android:id="@+id/newProjectBtn"
-        android:layout_width="150dp"
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:text="start new project">
+
+        </TextView>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/savedPdfMergeLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="5dp"
-        android:background="@drawable/rounded_changed_background_for_main_btn"
-        android:text="new Project"
-        android:textColor="#DBDDDF">
+        android:orientation="horizontal"
+        android:visibility="gone">
 
-    </Button>
+        <ImageView
+            android:id="@+id/showMergePDFBtn"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/rounded_changed_background_for_main_btn"
+            android:padding="6dp"
+            android:src="@drawable/ic_saved_list_50"
+            android:textColor="#DBDDDF">
+            android:textColor="#DBDDDF"></ImageView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:text="show saved files">
+
+        </TextView>
+    </LinearLayout>
+
 
     <include
         android:id="@+id/opening_pdf_files_layout"

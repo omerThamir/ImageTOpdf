@@ -23,7 +23,7 @@
             android:layout_margin="10dp"
             android:background="@drawable/rounded_changed_background_for_main_btn"
             android:padding="6dp"
-            android:src="@drawable/ic_select_template_50"
+            android:src="@drawable/ic_add_photo_40"
             android:textColor="#DBDDDF"></ImageView>
 
         <TextView
@@ -203,30 +203,60 @@
 
 
         <LinearLayout
-            android:id="@+id/newProjectOrCloseLayout"
+            android:id="@+id/newProjectLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:visibility="invisible">
 
             <ImageView
-                android:id="@+id/newProjectOrCloseImageView"
+                android:id="@+id/newProjectImageView"
                 android:layout_width="55dp"
                 android:layout_height="55dp"
                 android:layout_margin="10dp"
                 android:background="@drawable/rounded_changed_background_for_main_btn"
                 android:padding="6dp"
-                android:src="@drawable/ic_new_or_close_50"
+                android:src="@drawable/ic_new_50"
                 android:textColor="#DBDDDF"></ImageView>
 
             <TextView
-                android:id="@+id/newProjectOrCloseTV"
+                android:id="@+id/newProjectTV"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:layout_gravity="center_vertical"
                 android:layout_margin="10dp"
                 android:gravity="center"
-                android:text="new project or close">
+                android:text="start new project">
+
+            </TextView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/savedPdfLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="invisible">
+
+            <ImageView
+                android:id="@+id/savedPdfImageView"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:layout_margin="10dp"
+                android:background="@drawable/rounded_changed_background_for_main_btn"
+                android:padding="6dp"
+                android:src="@drawable/ic_saved_list_50"
+                android:textColor="#DBDDDF">
+                android:textColor="#DBDDDF"></ImageView>
+
+            <TextView
+                android:id="@+id/savedPdfTV"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="10dp"
+                android:gravity="center"
+                android:text="show saved files">
 
             </TextView>
         </LinearLayout>

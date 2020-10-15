@@ -36,6 +36,7 @@ import java.io.IOException;
 public class Utils {
 
     public static boolean pdfConversionIsDone = false;
+    public static boolean pdfMergingIsDone=false;
     private static Bitmap processingBitmap;
     public static float[] flipVertical = {1.0f, -1.0f};
     public static float[] flipHorizontal = {-1.0f, 1.0f};

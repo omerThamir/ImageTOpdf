@@ -14,7 +14,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.itextpdf.text.DocumentException;
@@ -107,17 +107,22 @@ public class MergePDFActivity extends AppCompatActivity {
     }
 
 
-    private Button mergeBtN, openPDF_FilesBtn, ShowMergePDFBtn,
-            newProjectBtn;
+    ImageView openPDF_FilesBtn, mergeBtN, newProjectBtn, ShowMergePDFBtn;
+
+    View openPdfFileLayout, mergePdfFileLayout, newProjectMergeLayout, savedPdfMergeLayout;
 
     private ConstraintLayout selectedPdfsMergeLayout;
 
     private void init() {
         openPDF_FilesBtn = findViewById(R.id.openPDF_FilesBtn);
-        ShowMergePDFBtn = findViewById(R.id.ShowMergePDFBtn);
+        ShowMergePDFBtn = findViewById(R.id.showMergePDFBtn);
         newProjectBtn = findViewById(R.id.newProjectBtn);
-        newProjectBtn.setVisibility(View.GONE);
         selectedPdfsMergeLayout = findViewById(R.id.selectedPdfsMergeLayout);
+
+        openPdfFileLayout = findViewById(R.id.openPdfFileLayout);
+        mergePdfFileLayout = findViewById(R.id.mergePdfFileLayout);
+        newProjectMergeLayout = findViewById(R.id.newProjectMergeLayout);
+        savedPdfMergeLayout = findViewById(R.id.savedPdfMergeLayout);
 
         PDF_UriList = new ArrayList<>();
 
@@ -190,7 +195,7 @@ public class MergePDFActivity extends AppCompatActivity {
             progDailog.dismiss();
             showMegedFiles();
             Toast.makeText(MergePDFActivity.this, "done", Toast.LENGTH_SHORT).show();
-            newProjectBtn.setVisibility(View.VISIBLE);
+            Utils.pdfMergingIsDone = true;
         }
     }
 
@@ -240,6 +245,9 @@ public class MergePDFActivity extends AppCompatActivity {
 
         init();
 
+        Utils.zoom_in(openPdfFileLayout, getApplicationContext());
+
+
         // Create an `ItemTouchHelper` and attach it to the `RecyclerView`
         ItemTouchHelper ith = new ItemTouchHelper(ithCallback);
         ith.attachToRecyclerView(selectedPDFtoMergeRecyclerView);
@@ -252,10 +260,8 @@ public class MergePDFActivity extends AppCompatActivity {
                     reInitRecyclerView();
                 }
 
+                openPdfFileLayout.setVisibility(View.GONE);
                 openingPDF_FilesLayout.setVisibility(View.VISIBLE);
-                openPDF_FilesBtn.setVisibility(View.GONE);
-                mergeBtN.setVisibility(View.GONE);
-                ShowMergePDFBtn.setVisibility(View.GONE);
 
                 AsyncTaskForOpenPDS asyncTaskForOpenPDS = new AsyncTaskForOpenPDS();
                 initProgDailog();
@@ -293,8 +299,10 @@ public class MergePDFActivity extends AppCompatActivity {
                 } else {
                     openingPDF_FilesLayout.setVisibility(View.GONE);
                     openPDF_FilesBtn.setVisibility(View.GONE);
-                    mergeBtN.setVisibility(View.VISIBLE);
+
+                    mergePdfFileLayout.setVisibility(View.VISIBLE);
                     ShowMergePDFBtn.setVisibility(View.VISIBLE);
+                    Utils.zoom_in(mergePdfFileLayout, getApplicationContext());
 
                     selectedPdfsMergeLayout.setVisibility(View.VISIBLE);
                     selectedPDF_toMergeRAdapter.notifyDataSetChanged();
@@ -306,7 +314,7 @@ public class MergePDFActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 openingPDF_FilesLayout.setVisibility(View.GONE);
-                openPDF_FilesBtn.setVisibility(View.VISIBLE);
+                openPdfFileLayout.setVisibility(View.VISIBLE);
                 ShowMergePDFBtn.setVisibility(View.VISIBLE);
                 PDF_UriList.clear();
             }
@@ -316,7 +324,7 @@ public class MergePDFActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 finishingProject();
-                newProjectBtn.setVisibility(View.GONE);
+                newProjectMergeLayout.setVisibility(View.GONE);
             }
         });
     }
@@ -371,6 +379,28 @@ public class MergePDFActivity extends AppCompatActivity {
         outputStream.close();
     }
 
+
+    @Override
+    protected void onResume() {
+
+        super.onResume();
+        if (Utils.pdfMergingIsDone
+
+                && newProjectMergeLayout.getVisibility() != View.VISIBLE) {
+
+            mergePdfFileLayout.setVisibility(View.GONE);
+
+            showAndAnimateNewProjectAndShowSavedFileLayout();
+        }
+    }
+
+    private void showAndAnimateNewProjectAndShowSavedFileLayout() {
+        newProjectMergeLayout.setVisibility(View.VISIBLE);
+        Utils.zoom_in(newProjectMergeLayout, getApplicationContext());
+        savedPdfMergeLayout.setVisibility(View.VISIBLE);
+        Utils.zoom_in(savedPdfMergeLayout, getApplicationContext());
+    }
+
     void finishingProject() {
         if (mSelectedFileList != null) {
             mSelectedFileList.clear();
@@ -384,7 +414,7 @@ public class MergePDFActivity extends AppCompatActivity {
         }
 
         openPDF_FilesBtn.setVisibility(View.VISIBLE);
-        mergeBtN.setVisibility(View.GONE);
+        mergePdfFileLayout.setVisibility(View.GONE);
         selectedPdfsMergeLayout.setVisibility(View.GONE);
 
     }
