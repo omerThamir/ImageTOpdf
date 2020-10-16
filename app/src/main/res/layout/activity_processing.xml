@@ -21,7 +21,7 @@
             android:layout_height="55dp"
             android:layout_gravity="center"
             android:layout_margin="10dp"
-            android:background="@drawable/rounded_changed_background_for_main_btn"
+            android:background="@drawable/circular_changed_background_for_main_btn"
             android:padding="6dp"
             android:src="@drawable/ic_add_photo_40"
             android:textColor="#DBDDDF"></ImageView>
@@ -145,7 +145,7 @@
                 android:layout_height="55dp"
                 android:layout_margin="10dp"
 
-                android:background="@drawable/rounded_changed_background_for_main_btn"
+                android:background="@drawable/circular_changed_background_for_main_btn"
                 android:padding="6dp"
                 android:src="@drawable/ic_select_template_50"
                 android:textColor="#DBDDDF"></ImageView>
@@ -184,7 +184,7 @@
                 android:layout_width="55dp"
                 android:layout_height="55dp"
                 android:layout_margin="10dp"
-                android:background="@drawable/rounded_changed_background_for_main_btn"
+                android:background="@drawable/circular_changed_background_for_main_btn"
                 android:padding="6dp"
                 android:src="@drawable/ic_picture_as_pdf_50"
                 android:textColor="#DBDDDF"></ImageView>
@@ -214,7 +214,7 @@
                 android:layout_width="55dp"
                 android:layout_height="55dp"
                 android:layout_margin="10dp"
-                android:background="@drawable/rounded_changed_background_for_main_btn"
+                android:background="@drawable/circular_changed_background_for_main_btn"
                 android:padding="6dp"
                 android:src="@drawable/ic_new_50"
                 android:textColor="#DBDDDF"></ImageView>
@@ -243,14 +243,13 @@
                 android:layout_width="55dp"
                 android:layout_height="55dp"
                 android:layout_margin="10dp"
-                android:background="@drawable/rounded_changed_background_for_main_btn"
+                android:background="@drawable/circular_changed_background_for_main_btn"
                 android:padding="6dp"
                 android:src="@drawable/ic_saved_list_50"
                 android:textColor="#DBDDDF">
                 android:textColor="#DBDDDF"></ImageView>
 
             <TextView
-                android:id="@+id/savedPdfTV"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:layout_gravity="center_vertical"

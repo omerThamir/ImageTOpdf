@@ -19,7 +19,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_margin="5dp"
-            android:background="@drawable/rounded_changed_background_for_main_btn"
+            android:background="@drawable/circular_changed_background_for_main_btn"
             android:src="@drawable/ic_baseline_keyboard_backspace_24">
 
         </ImageButton>

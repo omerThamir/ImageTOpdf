@@ -25,33 +25,34 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_gravity="center"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="5dp"
         android:layout_weight="1"
+        android:background="@drawable/rounded_black_background"
         android:padding="5dp" />
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <Button
+        <ImageView
             android:id="@+id/selectPDFBtn"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_gravity="right"
             android:layout_margin="10dp"
-            android:background="@drawable/rounded_changed_background_for_main_btn"
-            android:text="select"
-            android:textColor="#DBDDDF"></Button>
+            android:background="@drawable/rounded_changed_black_background"
+            android:src="@drawable/ic_done_39"></ImageView>
 
-        <Button
+        <ImageView
             android:id="@+id/cancelPDFSelectionBtn"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_gravity="left"
             android:layout_margin="10dp"
-            android:background="@drawable/rounded_changed_background_for_main_btn"
-            android:text="cancel"
-            android:textColor="#DBDDDF"></Button>
+            android:background="@drawable/rounded_changed_black_background"
+            android:src="@drawable/ic_baseline_close_40"></ImageView>
     </FrameLayout>
-
 
 </LinearLayout>

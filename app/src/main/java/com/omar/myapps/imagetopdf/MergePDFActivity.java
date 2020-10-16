@@ -298,7 +298,7 @@ public class MergePDFActivity extends AppCompatActivity {
                     Toast.makeText(MergePDFActivity.this, "you have to select 2 files at least", Toast.LENGTH_SHORT).show();
                 } else {
                     openingPDF_FilesLayout.setVisibility(View.GONE);
-                    openPDF_FilesBtn.setVisibility(View.GONE);
+                    openPdfFileLayout.setVisibility(View.GONE);
 
                     mergePdfFileLayout.setVisibility(View.VISIBLE);
                     ShowMergePDFBtn.setVisibility(View.VISIBLE);
@@ -324,7 +324,7 @@ public class MergePDFActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 finishingProject();
-                newProjectMergeLayout.setVisibility(View.GONE);
+                showAndAnimateOpenPdfLayout();
             }
         });
     }
@@ -401,6 +401,12 @@ public class MergePDFActivity extends AppCompatActivity {
         Utils.zoom_in(savedPdfMergeLayout, getApplicationContext());
     }
 
+    private void showAndAnimateOpenPdfLayout() {
+        openPdfFileLayout.setVisibility(View.VISIBLE);
+        Utils.zoom_in(openPdfFileLayout, getApplicationContext());
+
+    }
+
     void finishingProject() {
         if (mSelectedFileList != null) {
             mSelectedFileList.clear();
@@ -412,8 +418,8 @@ public class MergePDFActivity extends AppCompatActivity {
         if (mFileList != null) {
             mFileList.clear();
         }
-
-        openPDF_FilesBtn.setVisibility(View.VISIBLE);
+        newProjectMergeLayout.setVisibility(View.GONE);
+        savedPdfMergeLayout.setVisibility(View.GONE);
         mergePdfFileLayout.setVisibility(View.GONE);
         selectedPdfsMergeLayout.setVisibility(View.GONE);
 

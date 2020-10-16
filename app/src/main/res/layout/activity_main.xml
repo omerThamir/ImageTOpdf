@@ -33,13 +33,12 @@
                     android:layout_height="55dp"
                     android:layout_gravity="center"
                     android:layout_margin="10dp"
-                    android:background="@drawable/rounded_changed_background_for_main_btn"
+                    android:background="@drawable/circular_changed_background_for_main_btn"
                     android:padding="6dp"
                     android:src="@drawable/ic_photo_50"
                     android:textColor="#DBDDDF"></ImageView>
 
                 <TextView
-                    android:id="@+id/openConvertToPdfActivityTV"
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
                     android:layout_gravity="center_vertical"
@@ -65,7 +64,7 @@
                     android:layout_height="55dp"
                     android:layout_gravity="center"
                     android:layout_margin="10dp"
-                    android:background="@drawable/rounded_changed_background_for_main_btn"
+                    android:background="@drawable/circular_changed_background_for_main_btn"
                     android:padding="6dp"
                     android:rotation="90"
                     android:src="@drawable/ic_baseline_merge_type_24"

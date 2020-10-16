@@ -3,8 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="60dp"
     android:layout_marginLeft="10dp"
-    android:layout_marginBottom="10dp"
     android:layout_marginRight="10dp"
+    android:layout_marginBottom="10dp"
     android:background="@drawable/rounded_changed_background_for_saved_files_recycler"
     android:orientation="horizontal">
 
@@ -12,10 +12,12 @@
         android:id="@+id/selectedPDFImageview"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:tag="NOT_SELECTED"
         android:layout_gravity="center"
-        android:layout_margin="5dp"
-        android:src="@drawable/ic_not_selected_24"></ImageView>
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:src="@drawable/ic_not_selected_24"
+        android:tag="NOT_SELECTED"></ImageView>
 
     <ImageView
         android:layout_width="50dp"
@@ -28,11 +30,11 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:padding="4dp"
         android:layout_toRightOf="@+id/filePathTV"
         android:layout_weight="1"
+        android:padding="4dp"
         android:text="filename"
-        android:textColor="#E3E4E4"
+        android:textColor="#EC0A25"
         android:textSize="16dp"></TextView>
 
 

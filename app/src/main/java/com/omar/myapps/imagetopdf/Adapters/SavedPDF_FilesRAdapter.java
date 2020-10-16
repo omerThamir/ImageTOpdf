@@ -19,6 +19,7 @@ public class SavedPDF_FilesRAdapter extends RecyclerView.Adapter<SavedPDF_FilesR
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView fileName;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             fileName = itemView.findViewById(R.id.fileNameTV);
@@ -54,6 +55,7 @@ public class SavedPDF_FilesRAdapter extends RecyclerView.Adapter<SavedPDF_FilesR
             }
         });
 
+
         return result;
     }
 
@@ -61,6 +63,11 @@ public class SavedPDF_FilesRAdapter extends RecyclerView.Adapter<SavedPDF_FilesR
     public void onBindViewHolder(@NonNull SavedPDF_FilesRAdapter.ViewHolder holder, final int position) {
         final MyFile file = files.get(position);
         holder.fileName.setText(file.getName());
+
+        if (position == files.size() - 1) {
+            holder.itemView.setBackground(mContext.getDrawable(R.drawable.rounded_selected_background_for_saved_files_recycler));
+        }
+
     }
 
     @Override

@@ -15,7 +15,6 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.graphics.ImageDecoder;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -73,7 +72,7 @@ public class ProcessingActivity extends AppCompatActivity {
 
     private RecyclerView OpenedImagesRecycleView;
     private OpenedImagesRAdapter recyclerAdapter;
-    private List<MyImage> mMyImageUrises;
+    private List<MyImage> myImages;
 
 
     public RecyclerView templateRecycleView;
@@ -97,8 +96,8 @@ public class ProcessingActivity extends AppCompatActivity {
 
     private void initRecyclerView() {
         OpenedImagesRecycleView = findViewById(R.id.OpenedImagesRecycleView);
-        mMyImageUrises = new ArrayList<>();
-        recyclerAdapter = new OpenedImagesRAdapter(ProcessingActivity.this, mMyImageUrises);
+        myImages = new ArrayList<>();
+        recyclerAdapter = new OpenedImagesRAdapter(ProcessingActivity.this, myImages);
         OpenedImagesRecycleView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         OpenedImagesRecycleView.setAdapter(recyclerAdapter);
     }
@@ -183,7 +182,7 @@ public class ProcessingActivity extends AppCompatActivity {
         @Override
         public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
             // get the viewHolder's and target's positions in your adapter data, swap them
-            Collections.swap(mMyImageUrises, viewHolder.getAdapterPosition(), target.getAdapterPosition());
+            Collections.swap(myImages, viewHolder.getAdapterPosition(), target.getAdapterPosition());
 
             //swap bitmap list to do processing on them
             Collections.swap(bitmapList, viewHolder.getAdapterPosition(), target.getAdapterPosition());
@@ -210,8 +209,8 @@ public class ProcessingActivity extends AppCompatActivity {
         bitmapList.remove(MyImage.currentImageIndex);
         bitmapList.add(MyImage.currentImageIndex, MyImage.workingBitmap);
 
-        mMyImageUrises.remove(MyImage.currentImageIndex);
-        mMyImageUrises.add(MyImage.currentImageIndex, new MyImage(MyImage.workingBitmap));
+        myImages.remove(MyImage.currentImageIndex);
+        myImages.add(MyImage.currentImageIndex, new MyImage(MyImage.workingBitmap));
         recyclerAdapter.notifyDataSetChanged();
 
         newImageUri = createTempBitmapAndGetItsUrl(MyImage.workingBitmap);
@@ -1049,7 +1048,7 @@ public class ProcessingActivity extends AppCompatActivity {
 
                     bitmapList.add(newBitmap);
 
-                    mMyImageUrises.add(new MyImage(newBitmap));
+                    myImages.add(new MyImage(newBitmap));
                     recyclerAdapter.notifyDataSetChanged();
                     displayImageToEdit(0); // after opening the images select first image to display
 
@@ -1076,7 +1075,7 @@ public class ProcessingActivity extends AppCompatActivity {
                             newBitmap = convertUriToBitmap(mImageUri);
 
                             bitmapList.add(newBitmap);
-                            mMyImageUrises.add(new MyImage(newBitmap));
+                            myImages.add(new MyImage(newBitmap));
                         }
                         recyclerAdapter.notifyDataSetChanged();
                         displayImageToEdit(0); // after opening the images select first image to display
@@ -1130,15 +1129,14 @@ public class ProcessingActivity extends AppCompatActivity {
     }
 
     private void updateStuffAfterCroppingImage(Uri resultUri, Bitmap newBitmap, byte currentImageIndex) {
-        // updating after crop image
         uriList.remove(currentImageIndex);
         uriList.add(currentImageIndex, resultUri);
 
         bitmapList.remove(currentImageIndex);
         bitmapList.add(currentImageIndex, newBitmap);
 
-        mMyImageUrises.remove(currentImageIndex);   // to update recycler view
-        mMyImageUrises.add(currentImageIndex, new MyImage(newBitmap));
+        myImages.remove(currentImageIndex);   // to update recycler view
+        myImages.add(currentImageIndex, new MyImage(newBitmap));
         recyclerAdapter.notifyDataSetChanged();
     }
 
@@ -1148,7 +1146,7 @@ public class ProcessingActivity extends AppCompatActivity {
     }
 
     public byte[] convertBitmapToArrayOfByte(Bitmap bitmap) {
-        //convert bitmap to array of bytes (Image)
+
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
         return stream.toByteArray();
@@ -1240,7 +1238,6 @@ public class ProcessingActivity extends AppCompatActivity {
     public void showAndAnimateStartConvertingLayout() {
         startConvertingLayout.setVisibility(View.VISIBLE);
         Utils.zoom_in(startConvertingLayout, getApplicationContext());
-        selectTemplateTV.setTextColor(Color.DKGRAY);
     }
 
     private void finishingProject() {
@@ -1249,9 +1246,9 @@ public class ProcessingActivity extends AppCompatActivity {
 
     private void deleteTempImages() {
         try {
-            File fdelete = new File(tempImgFolder.toURI());
-            if (fdelete.exists()) {
-                for (File file : fdelete.listFiles()) {
+            File fileDel = new File(tempImgFolder.toURI());
+            if (fileDel.exists()) {
+                for (File file : fileDel.listFiles()) {
 
                     if (file.delete()) {
                         Log.d("deleting image Uri", "file was Deleted !");
@@ -1278,3 +1275,44 @@ public class ProcessingActivity extends AppCompatActivity {
 
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
