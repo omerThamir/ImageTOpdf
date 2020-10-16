@@ -71,5 +71,10 @@ public class OpenedImagesRAdapter extends RecyclerView.Adapter<OpenedImagesRAdap
         return mMyImageUrises.size();
     }
 
+    @Override
+    public int getItemViewType(int position) {
+        return position;
+    }
+
 
 }

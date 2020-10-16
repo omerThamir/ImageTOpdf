@@ -75,4 +75,9 @@ public class SavedPDF_FilesRAdapter extends RecyclerView.Adapter<SavedPDF_FilesR
         return files.size();
     }
 
+    @Override
+    public int getItemViewType(int position) {
+        return position;
+    }
+
 }
