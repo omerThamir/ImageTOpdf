@@ -48,12 +48,14 @@
             android:id="@+id/OpenedImagesRecycleView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="2dp" />
+            android:padding="2dp"
+            android:visibility="invisible" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout"
+            android:id="@+id/ImageWorkPlaceLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:visibility="invisible">
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardview"
@@ -65,7 +67,6 @@
                 android:background="@drawable/rounded_black_background"
                 android:elevation="10dp"
                 android:innerRadius="15dp"
-                android:maxHeight="500dp"
                 android:shape="oval"
                 android:thicknessRatio="2"
                 app:cardCornerRadius="15dp"
@@ -78,10 +79,11 @@
                 <ImageView
                     android:id="@+id/imageView"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center"
-
                     android:adjustViewBounds="true"
+                    android:background="#80191516"
+                    android:maxHeight="430dp"
                     android:padding="1dp"
                     android:scaleType="fitCenter">
 
@@ -246,7 +248,6 @@
                 android:background="@drawable/circular_changed_background_for_main_btn"
                 android:padding="6dp"
                 android:src="@drawable/ic_saved_list_50"
-                android:textColor="#DBDDDF">
                 android:textColor="#DBDDDF"></ImageView>
 
             <TextView
@@ -255,11 +256,38 @@
                 android:layout_gravity="center_vertical"
                 android:layout_margin="10dp"
                 android:gravity="center"
-                android:text="show saved files">
+                android:text="show saved files"
+                android:textColor="#DBDDDF">
 
             </TextView>
         </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/returnToHomeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="invisible">
+
+            <ImageView
+                android:id="@+id/returnToHomeImageView"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:layout_margin="10dp"
+                android:background="@drawable/circular_changed_background_for_main_btn"
+                android:padding="6dp"
+                android:src="@drawable/ic_home_50"></ImageView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="10dp"
+                android:gravity="center"
+                android:text="return home">
+
+            </TextView>
+        </LinearLayout>
 
         <include
             layout="@layout/edit_image_layout"

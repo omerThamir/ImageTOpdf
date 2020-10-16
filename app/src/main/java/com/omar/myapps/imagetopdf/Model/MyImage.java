@@ -28,4 +28,10 @@ public class MyImage {
         return bitmap;
     }
 
+    public static void clearWorkingBitmap() {
+        if (workingBitmap != null) {
+            workingBitmap.recycle();
+        }
+    }
+
 }

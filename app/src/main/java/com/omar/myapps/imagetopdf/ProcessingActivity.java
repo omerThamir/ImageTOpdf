@@ -85,10 +85,10 @@ public class ProcessingActivity extends AppCompatActivity {
     private List<Uri> uriList;
     LinearLayout parentViewLayout;
 
-    View openImagesLayout, startConvertingLayout, newProjetLayout, savedPdfLayout;
+    View openImagesLayout, startConvertingLayout, newProjetLayout, savedPdfLayout, returnToHomeLayout;
     CropImageView cropImageView;
 
-    public View ImageViewConstraintLayout;
+    public View ImageWorkPlaceLayout;
 
     TextView selectTemplateTV, openImagesTV, startConvertingTV, newProjectOrCloseTV;
 
@@ -132,7 +132,7 @@ public class ProcessingActivity extends AppCompatActivity {
 
     View selectTemplateLayout;
 
-    public ImageView openImagesBTN, selectNOfImagePerPage, convertToPdfBTN, newProjectOrCloseImageView;
+    public ImageView openImagesBTN, selectNOfImagePerPage, convertToPdfBTN, newProjectImageView;
 
 
     void init() {
@@ -145,8 +145,9 @@ public class ProcessingActivity extends AppCompatActivity {
         openImagesBTN = findViewById(R.id.openImageBtn);
         editImagesBTN = findViewById(R.id.EditImagefBTN);
         convertToPdfBTN = findViewById(R.id.convertToPdfBTN);
-        newProjectOrCloseImageView = findViewById(R.id.newProjectImageView);
+        newProjectImageView = findViewById(R.id.newProjectImageView);
         savedPdfLayout = findViewById(R.id.savedPdfLayout);
+        returnToHomeLayout = findViewById(R.id.returnToHomeLayout);
 
         savedPdfImageView = findViewById(R.id.savedPdfImageView);
 
@@ -168,7 +169,7 @@ public class ProcessingActivity extends AppCompatActivity {
         uriList = new ArrayList<>();
         bitmapList = new ArrayList<>();
 
-        ImageViewConstraintLayout = findViewById(R.id.constraintLayout);
+        ImageWorkPlaceLayout = findViewById(R.id.ImageWorkPlaceLayout);
 
     }
 
@@ -259,6 +260,12 @@ public class ProcessingActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 PickImageFromGallary();
+
+                if (ImageWorkPlaceLayout.getVisibility() != View.VISIBLE
+                        && OpenedImagesRecycleView.getVisibility() != View.VISIBLE) {
+                    OpenedImagesRecycleView.setVisibility(View.VISIBLE);
+                    ImageWorkPlaceLayout.setVisibility(View.VISIBLE);
+                }
             }
         });
 
@@ -267,9 +274,8 @@ public class ProcessingActivity extends AppCompatActivity {
             public void onClick(View view) {
                 selectNOfImagePerPage.setVisibility(View.GONE);
                 templateRecycleView.setVisibility(View.VISIBLE);
-                ImageViewConstraintLayout.setVisibility(View.GONE);
+                ImageWorkPlaceLayout.setVisibility(View.GONE);
 
-                setTemplateRV_FoucusWithScrollView(templateRecycleView);
                 Utils.zoom_in(templateRecycleView, ProcessingActivity.this); // animate edit template view
             }
         });
@@ -300,7 +306,6 @@ public class ProcessingActivity extends AppCompatActivity {
                     }
                 }, 5000);
                 edit_image_layout.setVisibility(View.VISIBLE);
-                setImageFoucusWithScrollView();
                 Utils.zoom_in(edit_image_layout, ProcessingActivity.this); // animate edit image layout
 
             }
@@ -361,6 +366,28 @@ public class ProcessingActivity extends AppCompatActivity {
             }
         });
 
+        newProjectImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Utils.pdfConversionIsDone = false;
+                finishingProject();// previoues preject if any
+
+                showAndAnimateOpenImagesLayout();
+                startConvertingLayout.setVisibility(View.GONE);
+                savedPdfLayout.setVisibility(View.GONE);
+                newProjetLayout.setVisibility(View.GONE);
+            }
+        });
+
+
+        findViewById(R.id.returnToHomeImageView).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ProcessingActivity.this, MainActivity.class));
+                finish();
+                Utils.pdfConversionIsDone = false;
+            }
+        });
     }
 
     private void animateViewHorizantally(View viewTobeAnimated, View rootView) {
@@ -436,15 +463,19 @@ public class ProcessingActivity extends AppCompatActivity {
                 && newProjetLayout.getVisibility() != View.VISIBLE) {
             selectTemplateLayout.setVisibility(View.GONE);
             startConvertingLayout.setVisibility(View.GONE);
-            showAndAnimateNewProjectAndShowSavedFileLayout();
+            showAndAnimate_New_Saved_Home_Layout();
         }
     }
 
-    private void showAndAnimateNewProjectAndShowSavedFileLayout() {
+    private void showAndAnimate_New_Saved_Home_Layout() {
         newProjetLayout.setVisibility(View.VISIBLE);
         Utils.zoom_in(newProjetLayout, getApplicationContext());
+
         savedPdfLayout.setVisibility(View.VISIBLE);
         Utils.zoom_in(savedPdfLayout, getApplicationContext());
+
+        returnToHomeLayout.setVisibility(View.VISIBLE);
+        Utils.zoom_in(returnToHomeLayout, getApplicationContext());
         //and hide select and convert layouts
     }
 
@@ -1242,6 +1273,31 @@ public class ProcessingActivity extends AppCompatActivity {
 
     private void finishingProject() {
         deleteTempImages();
+        clearResources();
+        ImageWorkPlaceLayout.setVisibility(View.GONE);
+        OpenedImagesRecycleView.setVisibility(View.GONE);
+    }
+
+    private void clearResources() {
+        MyImage.clearWorkingBitmap();
+
+        if (myImages != null) {
+            myImages.clear();
+        }
+        if (uriList != null) {
+            uriList.clear();
+        }
+
+        if (bitmapList != null) {
+            bitmapList.clear();
+        }
+
+        Utils.clearProcessingBitmap();
+    }
+
+    private void showAndAnimateOpenImagesLayout() {
+        openImagesLayout.setVisibility(View.VISIBLE);
+        Utils.zoom_in(openImagesLayout, getApplicationContext());
     }
 
     private void deleteTempImages() {
@@ -1261,16 +1317,6 @@ public class ProcessingActivity extends AppCompatActivity {
             npe.printStackTrace();
         }
 
-
-    }
-
-    public void setImageFoucusWithScrollView() {
-        View targetView = findViewById(R.id.constraintLayout);
-        targetView.getParent().requestChildFocus(targetView, targetView);
-    }
-
-    private void setTemplateRV_FoucusWithScrollView(View targetView) {
-        targetView.getParent().requestChildFocus(targetView, targetView);
     }
 
 

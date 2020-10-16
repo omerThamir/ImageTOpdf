@@ -138,8 +138,7 @@ public class SelectTemplateRAdapter extends RecyclerView.Adapter<SelectTemplateR
     }
 
     private void showWorkPlace() {
-        ((ProcessingActivity) mContext).ImageViewConstraintLayout.setVisibility(View.VISIBLE);
-        ((ProcessingActivity) mContext).convertToPdfBTN.setEnabled(true);
+        ((ProcessingActivity) mContext).ImageWorkPlaceLayout.setVisibility(View.VISIBLE);
     }
 
     private void setNofImagePerPageAndlocation(int i, String imageLocationInPage) {

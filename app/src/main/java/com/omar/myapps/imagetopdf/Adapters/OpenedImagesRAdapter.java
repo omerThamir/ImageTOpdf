@@ -59,8 +59,6 @@ public class OpenedImagesRAdapter extends RecyclerView.Adapter<OpenedImagesRAdap
             @Override
             public void onClick(View view) {
                 ((ProcessingActivity) mContext).displayImageToEdit(position);
-
-                ((ProcessingActivity) mContext).setImageFoucusWithScrollView();
                 MyImage.currentImageIndex = (byte) position;
 
             }
