@@ -57,7 +57,7 @@ public class MergePDFActivity extends AppCompatActivity {
     RecyclerView mergeRecycleView, selectedPDFtoMergeRecyclerView;
     OpendPDF_FilesRAdapter opendPDF_filesRAdapter;
 
-    View openingPDF_FilesLayout;
+    View openingPDF_FilesLayout, returnToHomeLayoutFromMerge;
 
     ItemTouchHelper.Callback ithCallback = new ItemTouchHelper.Callback() {
         @Override
@@ -107,7 +107,7 @@ public class MergePDFActivity extends AppCompatActivity {
     }
 
 
-    ImageView openPDF_FilesBtn, mergeBtN, newProjectBtn, ShowMergePDFBtn;
+    ImageView openPDF_FilesBtn, mergeBtN, newProjectBtn, ShowMergePDFBtn, returnToHomeImageViewFromMerge;
 
     View openPdfFileLayout, mergePdfFileLayout, newProjectMergeLayout, savedPdfMergeLayout;
 
@@ -123,6 +123,9 @@ public class MergePDFActivity extends AppCompatActivity {
         mergePdfFileLayout = findViewById(R.id.mergePdfFileLayout);
         newProjectMergeLayout = findViewById(R.id.newProjectMergeLayout);
         savedPdfMergeLayout = findViewById(R.id.savedPdfMergeLayout);
+        returnToHomeLayoutFromMerge = findViewById(R.id.returnToHomeLayoutFromMerge);
+
+        returnToHomeImageViewFromMerge = findViewById(R.id.returnToHomeImageViewFromMerge);
 
         PDF_UriList = new ArrayList<>();
 
@@ -196,6 +199,7 @@ public class MergePDFActivity extends AppCompatActivity {
             showMegedFiles();
             Toast.makeText(MergePDFActivity.this, "done", Toast.LENGTH_SHORT).show();
             Utils.pdfMergingIsDone = true;
+            finishingProject();
         }
     }
 
@@ -325,6 +329,16 @@ public class MergePDFActivity extends AppCompatActivity {
             public void onClick(View view) {
                 finishingProject();
                 showAndAnimateOpenPdfLayout();
+                returnToHomeLayoutFromMerge.setVisibility(View.GONE);
+            }
+        });
+
+        returnToHomeImageViewFromMerge.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MergePDFActivity.this, MainActivity.class));
+                finish();
+                Utils.pdfMergingIsDone = false;
             }
         });
     }
@@ -390,24 +404,37 @@ public class MergePDFActivity extends AppCompatActivity {
 
             mergePdfFileLayout.setVisibility(View.GONE);
 
-            showAndAnimateNewProjectAndShowSavedFileLayout();
+            showAndAnimate_New_Saved_homeLayout();
         }
     }
 
-    private void showAndAnimateNewProjectAndShowSavedFileLayout() {
+    private void showAndAnimate_New_Saved_homeLayout() {
         newProjectMergeLayout.setVisibility(View.VISIBLE);
         Utils.zoom_in(newProjectMergeLayout, getApplicationContext());
         savedPdfMergeLayout.setVisibility(View.VISIBLE);
         Utils.zoom_in(savedPdfMergeLayout, getApplicationContext());
+
+        returnToHomeLayoutFromMerge.setVisibility(View.VISIBLE);
+        Utils.zoom_in(returnToHomeLayoutFromMerge, getApplicationContext());
     }
 
     private void showAndAnimateOpenPdfLayout() {
         openPdfFileLayout.setVisibility(View.VISIBLE);
         Utils.zoom_in(openPdfFileLayout, getApplicationContext());
+    }
+
+    private void finishingProject() {
+
+        clearResources();
+        newProjectMergeLayout.setVisibility(View.GONE);
+        savedPdfMergeLayout.setVisibility(View.GONE);
+        mergePdfFileLayout.setVisibility(View.GONE);
+        selectedPdfsMergeLayout.setVisibility(View.GONE);
 
     }
 
-    void finishingProject() {
+    private void clearResources() {
+
         if (mSelectedFileList != null) {
             mSelectedFileList.clear();
         }
@@ -418,17 +445,8 @@ public class MergePDFActivity extends AppCompatActivity {
         if (mFileList != null) {
             mFileList.clear();
         }
-        newProjectMergeLayout.setVisibility(View.GONE);
-        savedPdfMergeLayout.setVisibility(View.GONE);
-        mergePdfFileLayout.setVisibility(View.GONE);
-        selectedPdfsMergeLayout.setVisibility(View.GONE);
 
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        finishingProject();
-        Toast.makeText(this, "onDestroy", Toast.LENGTH_SHORT).show();
-    }
+
 }

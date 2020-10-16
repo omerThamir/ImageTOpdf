@@ -170,6 +170,33 @@
         </TextView>
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/returnToHomeLayoutFromMerge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:visibility="invisible">
+
+        <ImageView
+            android:id="@+id/returnToHomeImageViewFromMerge"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/circular_changed_background_for_main_btn"
+            android:padding="6dp"
+            android:src="@drawable/ic_home_50"></ImageView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:text="return home">
+
+        </TextView>
+    </LinearLayout>
+
 
     <include
         android:id="@+id/opening_pdf_files_layout"
