@@ -1073,52 +1073,22 @@ public class ProcessingActivity extends AppCompatActivity {
                 if (data.getData() != null) {
 
                     Uri mImageUri = data.getData();
-                    uriList.add(mImageUri);
 
-                    newBitmap = convertUriToBitmap(mImageUri);
-
-                    bitmapList.add(newBitmap);
-
-                    myImages.add(new MyImage(newBitmap));
-                    recyclerAdapter.notifyDataSetChanged();
-                    displayImageToEdit(0); // after opening the images select first image to display
-
-                    //   openImagesBTN.setVisibility(View.GONE);
-
-                    openImagesLayout.setVisibility(View.GONE);
-                    editImagesBTN.setEnabled(true);
-                    //   selectNOfImagePerPage.setEnabled(true);
-
-
-                    showAndAnimateSelectTemplateLayout();
+                    OpenImagesAsyncTask openImagesAsyncTask = new OpenImagesAsyncTask("Single", mImageUri);
+                    initProgDailog("Opening Images...");
+                    openImagesAsyncTask.execute();
 
                 } else {
                     if (data.getClipData() != null) { // multi selection
                         ClipData mClipData = data.getClipData();
 
-                        for (int i = 0; i < mClipData.getItemCount(); i++) {
-
-                            ClipData.Item item = mClipData.getItemAt(i);
-                            Uri mImageUri = item.getUri();
-
-                            uriList.add(mImageUri);
-
-                            newBitmap = convertUriToBitmap(mImageUri);
-
-                            bitmapList.add(newBitmap);
-                            myImages.add(new MyImage(newBitmap));
-                        }
-                        recyclerAdapter.notifyDataSetChanged();
-                        displayImageToEdit(0); // after opening the images select first image to display
-
-                        openImagesBTN.setVisibility(View.GONE);
-
-                        editImagesBTN.setEnabled(true);
-
-                        showAndAnimateSelectTemplateLayout();
+                        OpenImagesAsyncTask openImagesAsyncTask = new OpenImagesAsyncTask("Multi", mClipData);
+                        initProgDailog("Opening Images...");
+                        openImagesAsyncTask.execute();
 
                     }
                 }
+
             } else if (requestCode == SHOW_SAVING_RC) {// show saving activity dir
 
                 Toast.makeText(this, "file must be shown", Toast.LENGTH_LONG).show();
@@ -1159,6 +1129,50 @@ public class ProcessingActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
     }
 
+    private void openSingleImage(Uri mImageUri) {
+        try {
+
+            uriList.add(mImageUri);
+
+            Bitmap newBitmap = convertUriToBitmap(mImageUri);
+
+            bitmapList.add(newBitmap);
+
+            myImages.add(new MyImage(newBitmap));
+        } catch (IOException io) {
+            Toast.makeText(this, "some thing went wromg", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private void doStuffAfterOpeningImages() {
+        displayImageToEdit(0); // after opening the images select first image to display
+        openImagesLayout.setVisibility(View.GONE);
+        editImagesBTN.setEnabled(true);
+        recyclerAdapter.notifyDataSetChanged();
+    }
+
+    private void OpenImageMultiSelection(ClipData mClipData) {
+        try {
+            Bitmap newBitmap;
+            for (int i = 0; i < mClipData.getItemCount(); i++) {
+
+                ClipData.Item item = mClipData.getItemAt(i);
+                Uri mImageUri = item.getUri();
+
+                uriList.add(mImageUri);
+
+                newBitmap = convertUriToBitmap(mImageUri);
+                bitmapList.add(newBitmap);
+                myImages.add(new MyImage(newBitmap));
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+
+        }
+    }
+
+
     private void updateStuffAfterCroppingImage(Uri resultUri, Bitmap newBitmap, byte currentImageIndex) {
         uriList.remove(currentImageIndex);
         uriList.add(currentImageIndex, resultUri);
@@ -1184,6 +1198,44 @@ public class ProcessingActivity extends AppCompatActivity {
     }
 
 
+    class OpenImagesAsyncTask extends AsyncTask<Object, String, Object> {
+
+        String selectionType;
+        ClipData mclipData;
+        Uri imageUri;
+
+        public OpenImagesAsyncTask(String SelectionType, ClipData mClipData) {
+            selectionType = SelectionType;
+            mclipData = mClipData;
+
+        }
+
+        public OpenImagesAsyncTask(String SelectionType, Uri mImageUri) {
+            selectionType = SelectionType;
+            imageUri = mImageUri;
+        }
+
+
+        @Override
+        protected Object doInBackground(Object... params) {
+
+            if (selectionType.equals("Multi")) {
+                OpenImageMultiSelection(mclipData);
+            } else if (selectionType.equals("Single")) {
+                openSingleImage(imageUri);
+            }
+
+            return params;
+        }
+
+        @Override
+        protected void onPostExecute(Object result) {
+            progDailog.dismiss();
+            doStuffAfterOpeningImages();
+            showAndAnimateSelectTemplateLayout();
+        }
+    }
+
     class MyAsyncTask extends AsyncTask<Object, String, Object> {
 
         @Override
@@ -1202,6 +1254,16 @@ public class ProcessingActivity extends AppCompatActivity {
             Utils.pdfConversionIsDone = true;
             finishingProject();
         }
+
+    }
+
+    private void initProgDailog(String Message) {
+        progDailog = new ProgressDialog(ProcessingActivity.this, R.style.AppCompatAlertDialogStyle);
+        progDailog.setMessage(Message);
+        progDailog.setIndeterminate(false);
+        progDailog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progDailog.setCancelable(false);
+        progDailog.show();
     }
 
 
